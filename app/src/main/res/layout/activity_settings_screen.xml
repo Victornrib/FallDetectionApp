@@ -21,7 +21,7 @@
         <TextView
             android:id="@+id/textViewSettings"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="65dp"
             android:text="@string/settings"
             android:textAlignment="center"
             android:textSize="50sp"
@@ -57,7 +57,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="220dp" />
+            android:layout_height="210dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
