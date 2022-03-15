@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:text="@string/fall_detected"
             android:textAlignment="center"
-            android:textColor="#FF0000"
+            android:textColor="#D50000"
             android:textSize="50sp"
             android:textStyle="bold" />
 
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:text="@string/time_xx_xx"
             android:textAlignment="center"
-            android:textColor="#7A7A7A"
+            android:textColor="#546E7A"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -61,7 +61,7 @@
             android:layout_height="50sp"
             android:text="@string/alert_was_sent"
             android:textAlignment="center"
-            android:textColor="#7A7A7A"
+            android:textColor="#546E7A"
             android:textSize="30sp"
             android:textStyle="bold" />
 
