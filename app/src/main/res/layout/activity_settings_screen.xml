@@ -19,45 +19,45 @@
             android:layout_height="102dp" />
 
         <TextView
-            android:id="@+id/textViewFallDetectionApp"
+            android:id="@+id/textViewSettings"
             android:layout_width="match_parent"
-            android:layout_height="53dp"
-            android:text="@string/fall_detection_app"
+            android:layout_height="60dp"
+            android:text="@string/settings"
             android:textAlignment="center"
-            android:textSize="40sp"
+            android:textSize="50sp"
             android:textStyle="bold" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="150dp" />
+            android:layout_height="140dp" />
 
         <Button
             android:id="@+id/buttonEC1"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:text="@string/sign_in"
+            android:text="@string/add_emergency_contact_1"
             android:textSize="20sp" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_height="50dp" />
 
         <Button
-            android:id="@+id/buttonLogOut"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:id="@+id/buttonEC2"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:text="@string/sign_up"
+            android:text="@string/add_emergency_contact_2"
             android:textSize="20sp" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="220dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
