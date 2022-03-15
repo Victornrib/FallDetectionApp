@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">FallDetectionApp</string>
+    <string name="settings">Settings</string>
+    <string name="connect_nbracelet">Connect\nbracelet</string>
+    <string name="log_out">Log out</string>
+    <string name="image_connect">image connect</string>
+    <string name="fall_detection_app">Fall Detection App</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
 </resources>
