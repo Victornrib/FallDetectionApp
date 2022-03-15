@@ -12,4 +12,5 @@
     <string name="fall_detected">Fall detected!</string>
     <string name="time_xx_xx">Time: XX XX</string>
     <string name="alert_was_sent">Alert was sent</string>
+    <string name="home">Home</string>
 </resources>
