@@ -40,7 +40,7 @@
             app:srcCompat="@drawable/connect_bracelet_icon" />
 
         <Button
-            android:id="@+id/buttonConnect"
+            android:id="@+id/buttonConnectDevice"
             android:layout_width="190dp"
             android:layout_height="96dp"
             android:layout_gravity="center"
@@ -55,13 +55,13 @@
             android:layout_height="195dp" />
 
         <Button
-            android:id="@+id/buttonLogOut"
+            android:id="@+id/buttonSignOut"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_gravity="end"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:text="@string/log_out"
+            android:text="Sign Out"
             android:textSize="20sp" />
 
     </LinearLayout>

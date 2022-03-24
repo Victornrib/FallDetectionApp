@@ -28,7 +28,7 @@
             android:layout_height="200dp" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textViewFallDetected"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/fall_detected"
@@ -42,7 +42,7 @@
             android:layout_height="20dp" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textViewTimeFall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/time_xx_xx"
@@ -56,7 +56,7 @@
             android:layout_height="20dp" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textViewAlertSent"
             android:layout_width="match_parent"
             android:layout_height="50sp"
             android:text="@string/alert_was_sent"
@@ -70,14 +70,15 @@
             android:layout_height="235dp" />
 
         <Button
-            android:id="@+id/buttonLogOut"
+            android:id="@+id/buttonSignOut"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_gravity="end"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:text="@string/log_out"
+            android:text="Sign Out"
             android:textSize="20sp" />
+
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
