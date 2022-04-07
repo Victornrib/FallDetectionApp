@@ -1,4 +1,4 @@
-package com.example.falldetectionapp;
+package com.example.falldetectionapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 

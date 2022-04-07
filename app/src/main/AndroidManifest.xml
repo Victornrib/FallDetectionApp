@@ -10,19 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FallDetectionApp">
         <activity
-            android:name=".SettingsScreenActivity"
+            android:name=".view.SettingsScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".ConnectDeviceScreenActivity"
+            android:name=".view.ConnectDeviceScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".InitialScreenActivity"
+            android:name=".view.InitialScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".SignInScreenActivity"
+            android:name=".view.SignInScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
