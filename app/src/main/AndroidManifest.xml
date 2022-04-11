@@ -13,7 +13,7 @@
             android:name=".view.SettingsScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".view.ConnectDeviceScreenActivity"
+            android:name=".view.AddDeviceScreenActivity"
             android:exported="false" />
         <activity
             android:name=".view.InitialScreenActivity"

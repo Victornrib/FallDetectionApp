@@ -20,7 +20,8 @@
         <Button
             android:id="@+id/buttonSettings"
             android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.08"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="@string/settings"
@@ -28,37 +29,42 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="195dp" />
+            android:layout_height="0dp"
+            android:layout_weight="0.3" />
 
         <ImageView
             android:id="@+id/connectBraceletIcon"
             android:layout_width="195dp"
-            android:layout_height="144dp"
+            android:layout_height="0dp"
             android:layout_gravity="center"
+            android:layout_weight="0.215"
             android:background="#00FFFFFF"
             android:contentDescription="@string/image_connect"
             app:srcCompat="@drawable/connect_bracelet_icon" />
 
         <Button
-            android:id="@+id/buttonConnectDevice"
+            android:id="@+id/buttonAddDevice"
             android:layout_width="190dp"
-            android:layout_height="96dp"
+            android:layout_height="0dp"
             android:layout_gravity="center"
+            android:layout_weight="0.12"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:text="@string/connect_nbracelet"
+            android:text="Add\nBracelet"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="195dp" />
+            android:layout_height="0dp"
+            android:layout_weight="0.3" />
 
         <Button
             android:id="@+id/buttonSignOut"
             android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
             android:layout_gravity="end"
+            android:layout_weight="0.08"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="Sign Out"

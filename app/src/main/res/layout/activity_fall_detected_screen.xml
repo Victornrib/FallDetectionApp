@@ -17,7 +17,8 @@
         <Button
             android:id="@+id/buttonSettings"
             android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.08"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="@string/settings"
@@ -25,12 +26,14 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="0dp"
+            android:layout_weight="0.3" />
 
         <TextView
             android:id="@+id/textViewFallDetected"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
             android:text="@string/fall_detected"
             android:textAlignment="center"
             android:textColor="#D50000"
@@ -39,12 +42,14 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            android:layout_height="0dp"
+            android:layout_weight="0.05" />
 
         <TextView
             android:id="@+id/textViewTimeFall"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.07"
             android:text="@string/time_xx_xx"
             android:textAlignment="center"
             android:textColor="#546E7A"
@@ -53,12 +58,14 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            android:layout_height="0dp"
+            android:layout_weight="0.05" />
 
         <TextView
             android:id="@+id/textViewAlertSent"
             android:layout_width="match_parent"
-            android:layout_height="50sp"
+            android:layout_height="0dp"
+            android:layout_weight="0.07"
             android:text="@string/alert_was_sent"
             android:textAlignment="center"
             android:textColor="#546E7A"
@@ -67,13 +74,15 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="235dp" />
+            android:layout_height="0dp"
+            android:layout_weight="0.3" />
 
         <Button
             android:id="@+id/buttonSignOut"
             android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
             android:layout_gravity="end"
+            android:layout_weight="0.08"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="Sign Out"

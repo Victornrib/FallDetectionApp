@@ -5,8 +5,9 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="410dp"
-        android:layout_height="733dp"
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="#93D0EC"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -17,7 +18,8 @@
         <Button
             android:id="@+id/buttonHome"
             android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.07"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="@string/home"
@@ -25,7 +27,8 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="70dp" />
+            android:layout_height="0dp"
+            android:layout_weight="0.12" />
 
         <TextView
             android:id="@+id/textViewSettings"
@@ -38,28 +41,32 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="120dp" />
+            android:layout_height="0dp"
+            android:layout_weight="0.15" />
 
         <Button
             android:id="@+id/buttonEC1"
             android:layout_width="250dp"
-            android:layout_height="80dp"
+            android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
+            android:layout_weight="0.12"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="@string/add_emergency_contact_1"
             android:textSize="20sp" />
-            android:text="Button" />
+        android:text="Button" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="0dp"
+            android:layout_weight="0.08" />
 
         <Button
             android:id="@+id/buttonEC2"
             android:layout_width="250dp"
-            android:layout_height="80dp"
+            android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
+            android:layout_weight="0.12"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="@string/add_emergency_contact_2"
@@ -67,13 +74,15 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="168dp" />
+            android:layout_height="0dp"
+            android:layout_weight="0.25" />
 
         <Button
             android:id="@+id/buttonSignOut"
             android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
             android:layout_gravity="end"
+            android:layout_weight="0.07"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="Sign Out"

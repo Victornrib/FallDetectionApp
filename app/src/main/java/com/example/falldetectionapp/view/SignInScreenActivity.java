@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.falldetectionapp.R;
-import com.example.falldetectionapp.view.ConnectDeviceScreenActivity;
 
 public class SignInScreenActivity extends AppCompatActivity {
     private Button buttonLogin;
@@ -28,7 +27,7 @@ public class SignInScreenActivity extends AppCompatActivity {
     }
 
     private void openFallDetectedScreenActivity() {
-        Intent intent = new Intent(this, ConnectDeviceScreenActivity.class);
+        Intent intent = new Intent(this, AddDeviceScreenActivity.class);
         startActivity(intent);
     }
 

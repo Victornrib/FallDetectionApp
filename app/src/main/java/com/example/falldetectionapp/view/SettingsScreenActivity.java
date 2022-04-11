@@ -37,7 +37,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
     }
 
     private void openConnectDeviceScreenActivity() {
-        Intent intent = new Intent(this, ConnectDeviceScreenActivity.class);
+        Intent intent = new Intent(this, AddDeviceScreenActivity.class);
         startActivity(intent);
     }
 
