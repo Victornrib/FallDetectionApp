@@ -26,10 +26,23 @@ public class InitialScreenActivity extends AppCompatActivity {
                 openSignInScreenActivity();
             }
         });
+
+        buttonSignUp = (Button) findViewById(R.id.buttonSignUp);
+        buttonSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openSignUpScreenActivity();
+            }
+        });
     }
 
     private void openSignInScreenActivity() {
         Intent intent = new Intent(this, SignInScreenActivity.class);
+        startActivity(intent);
+    }
+
+    private void openSignUpScreenActivity() {
+        Intent intent = new Intent(this, SignUpScreenActivity.class);
         startActivity(intent);
     }
 }
