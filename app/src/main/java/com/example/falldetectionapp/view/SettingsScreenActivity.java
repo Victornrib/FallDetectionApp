@@ -64,7 +64,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private  void openEmergencyContactScreenActivity() {
+    private void openEmergencyContactScreenActivity() {
         Intent intent = new Intent(this, EmergencyContactScreenActivity.class);
         startActivity(intent);
     }

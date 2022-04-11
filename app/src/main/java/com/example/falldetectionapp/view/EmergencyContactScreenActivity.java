@@ -17,31 +17,5 @@ public class EmergencyContactScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency_contact);
-
-        buttonBack = (Button) findViewById(R.id.buttonBack);
-        buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openAddDeviceScreenActivity();
-            }
-        });
-
-        buttonAddUser = (Button) findViewById(R.id.buttonAddEmergencyContact);
-        buttonAddUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openSettingsScreenActivity();
-            }
-        });
-    }
-
-    private void openAddDeviceScreenActivity() {
-        Intent intent = new Intent(this, AddDeviceScreenActivity.class);
-        startActivity(intent);
-    }
-
-    private void openSettingsScreenActivity() {
-        Intent intent = new Intent(this, SettingsScreenActivity.class);
-        startActivity(intent);
     }
 }

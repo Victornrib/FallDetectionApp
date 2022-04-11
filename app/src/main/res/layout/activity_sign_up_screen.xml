@@ -40,7 +40,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1"
+            android:layout_weight="0.12"
             android:orientation="horizontal">
 
             <TextView
@@ -82,7 +82,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1"
+            android:layout_weight="0.12"
             android:orientation="horizontal">
 
             <TextView
@@ -124,7 +124,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1"
+            android:layout_weight="0.12"
             android:orientation="horizontal">
 
             <TextView
@@ -144,7 +144,8 @@
                 android:ems="10"
                 android:inputType="textEmailAddress"
                 android:minHeight="48dp"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck"
+                android:autofillHints="" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -166,7 +167,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1"
+            android:layout_weight="0.12"
             android:orientation="horizontal">
 
             <TextView
@@ -205,7 +206,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1"
+            android:layout_weight="0.12"
             android:orientation="horizontal">
 
             <TextView
@@ -239,14 +240,14 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.2" />
+            android:layout_weight="0.15" />
 
         <Button
             android:id="@+id/buttonRegisterUser"
             android:layout_width="200dp"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.1"
+            android:layout_weight="0.12"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="Register"
