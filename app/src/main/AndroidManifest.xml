@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FallDetectionApp">
         <activity
+            android:name=".view.SignUpScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.EmergencyContactScreenActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.SettingsScreenActivity"
             android:exported="false" />
         <activity

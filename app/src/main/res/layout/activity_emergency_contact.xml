@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="410dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#93D0EC"
         android:orientation="vertical"
@@ -22,7 +22,10 @@
             android:layout_width="150dp"
             android:layout_height="0dp"
             android:layout_weight="0.15"
-            android:text="Back" />
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Back"
+            android:textSize="20sp" />
 
         <Space
             android:layout_width="match_parent"

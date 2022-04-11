@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="410dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="#93D0EC"
         android:orientation="vertical"
@@ -141,11 +141,11 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:autofillHints=""
                 android:ems="10"
                 android:inputType="textEmailAddress"
                 android:minHeight="48dp"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:autofillHints="" />
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <Space
                 android:layout_width="wrap_content"
