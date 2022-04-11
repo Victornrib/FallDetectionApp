@@ -20,7 +20,7 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1" />
+            android:layout_weight="0.15" />
 
         <TextView
             android:id="@+id/textViewSignUp"
@@ -35,7 +35,7 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.2" />
+            android:layout_weight="0.15" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,7 +44,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textViewRegisterName"
+                android:id="@+id/textViewRegisterUserName"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -53,12 +53,12 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editTextRegisterName"
+                android:id="@+id/editTextRegisterUserName"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textEmailAddress"
+                android:inputType="textPersonName"
                 android:minHeight="48dp"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -86,7 +86,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textViewRegisterTelephone"
+                android:id="@+id/textViewRegisterUserTelephone"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -95,12 +95,12 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editTextRegisterTelephone"
+                android:id="@+id/editTextRegisterUserTelephone"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textEmailAddress"
+                android:inputType="phone"
                 android:minHeight="48dp"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -128,7 +128,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textViewRegisterEmail"
+                android:id="@+id/textViewRegisterUserEmail"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -137,7 +137,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editTextRegisterEmail"
+                android:id="@+id/editTextRegisterUserEmail"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -170,7 +170,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textViewRegisterPassword"
+                android:id="@+id/textViewRegisterUserPassword"
                 android:layout_width="77dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -179,7 +179,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editTextRegisterPassword"
+                android:id="@+id/editTextRegisterUserPassword"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -209,7 +209,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textViewRegisterRepeatedPassword"
+                android:id="@+id/textViewRegisterUserRepeatedPassword"
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -218,7 +218,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editTextRegisterRepeatedPassword"
+                android:id="@+id/editTextRegisterUserRepeatedPassword"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -242,7 +242,7 @@
             android:layout_weight="0.2" />
 
         <Button
-            android:id="@+id/buttonRegister"
+            android:id="@+id/buttonRegisterUser"
             android:layout_width="200dp"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
@@ -255,7 +255,7 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1" />
+            android:layout_weight="0.15" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

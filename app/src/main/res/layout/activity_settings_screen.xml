@@ -45,7 +45,7 @@
             android:layout_weight="0.15" />
 
         <Button
-            android:id="@+id/buttonEC1"
+            android:id="@+id/buttonAddEC1"
             android:layout_width="250dp"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
@@ -62,7 +62,7 @@
             android:layout_weight="0.08" />
 
         <Button
-            android:id="@+id/buttonEC2"
+            android:id="@+id/buttonAddEC2"
             android:layout_width="250dp"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"

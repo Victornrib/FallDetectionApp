@@ -12,7 +12,7 @@ import com.example.falldetectionapp.R;
 public class AddDeviceScreenActivity extends AppCompatActivity {
     private Button buttonSignOut;
     private Button buttonSettings;
-    private Button buttonConnectDevice;
+    private Button buttonAddDevice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
