@@ -11,11 +11,32 @@ import com.example.falldetectionapp.R;
 
 public class EmergencyContactScreenActivity extends AppCompatActivity {
     private Button buttonBack;
-    private Button buttonAddUser;
+    private Button buttonAddEmergencyContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency_contact);
+
+        buttonBack = (Button) findViewById(R.id.buttonBack);
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openSettingsScreenActivity();
+            }
+        });
+
+        buttonAddEmergencyContact = (Button) findViewById(R.id.buttonAddEmergencyContact);
+        buttonAddEmergencyContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openSettingsScreenActivity();
+            }
+        });
+    }
+
+    private void openSettingsScreenActivity() {
+        Intent intent = new Intent(this, SettingsScreenActivity.class);
+        startActivity(intent);
     }
 }

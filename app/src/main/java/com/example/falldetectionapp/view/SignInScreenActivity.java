@@ -21,12 +21,12 @@ public class SignInScreenActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openFallDetectedScreenActivity();
+                openAddDeviceScreenActivity();
             }
         });
     }
 
-    private void openFallDetectedScreenActivity() {
+    private void openAddDeviceScreenActivity() {
         Intent intent = new Intent(this, AddDeviceScreenActivity.class);
         startActivity(intent);
     }
