@@ -35,6 +35,14 @@ public class AddDeviceScreenActivity extends AppCompatActivity {
                 openSettingsScreenActivity();
             }
         });
+
+        buttonAddDevice = (Button) findViewById(R.id.buttonAddDevice);
+        buttonAddDevice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openPairDeviceScreenActivity();
+            }
+        });
     }
 
     private void openInitialScreenActivity() {
@@ -44,6 +52,11 @@ public class AddDeviceScreenActivity extends AppCompatActivity {
 
     private void openSettingsScreenActivity() {
         Intent intent = new Intent(this, SettingsScreenActivity.class);
+        startActivity(intent);
+    }
+
+    private void openPairDeviceScreenActivity() {
+        Intent intent = new Intent(this, PairDeviceScreenActivity.class);
         startActivity(intent);
     }
 }

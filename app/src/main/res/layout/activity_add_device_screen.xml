@@ -50,7 +50,7 @@
             android:layout_weight="0.12"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:text="Add\nBracelet"
+            android:text="Add\nDevice"
             android:textSize="24sp"
             android:textStyle="bold" />
 
