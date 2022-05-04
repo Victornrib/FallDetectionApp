@@ -7,7 +7,7 @@ public class SharedPrefs {
     public static SharedPreferences localDiskEditor;
 
     public void startLocalDisk() {
-        localDisk = PreferenceManager.getDefaultSharedPreferences(this);
+        //localDisk = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor localDiskEditor = localDisk.edit();
     }
 }
