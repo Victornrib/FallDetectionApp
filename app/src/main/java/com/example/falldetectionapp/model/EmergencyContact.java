@@ -6,7 +6,7 @@ public class EmergencyContact {
     String name;
     String telephone;
     String email;
-    int emContactID;
+    public int emContactID;
 
     public EmergencyContact(String name, String telephone, String email){
         this.name = name;
