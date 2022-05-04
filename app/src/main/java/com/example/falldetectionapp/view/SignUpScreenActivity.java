@@ -48,7 +48,7 @@ public class SignUpScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_screen);
 
         buttonRegisterUser = (Button) findViewById(R.id.buttonRegisterUser);
-        buttonRegisterUser.setOnClickListener(new View.OnClickListener() {
+        buttonRegisterUser.setOnClickListener(new View.OnClickListener() { // why is't this closed?
 
             //Before create, check if user already exists, and also if fields are valid
             @Override
