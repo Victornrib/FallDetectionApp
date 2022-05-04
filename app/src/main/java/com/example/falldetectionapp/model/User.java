@@ -5,7 +5,7 @@ import java.util.Random;
 
 
 public class User {
-    int userID;
+    public int userID;
     String name;
     String telephone;
     String email;
@@ -22,6 +22,7 @@ public class User {
         this.email = email;
         this.password = password;
 
+        //Check in the system all ID's and guarantee it is a unique ID
         Random random = new Random();
         this.userID = random.nextInt(1000);
     }
