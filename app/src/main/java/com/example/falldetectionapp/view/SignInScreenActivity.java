@@ -3,6 +3,7 @@ package com.example.falldetectionapp.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 
 import com.example.falldetectionapp.R;
 
+import com.example.falldetectionapp.model.SharedPrefs;
 import com.example.falldetectionapp.model.User;
 
 import com.google.gson.Gson;
@@ -59,19 +61,36 @@ public class SignInScreenActivity extends AppCompatActivity {
         //If both passwords are equal, user is validated and returned
         //If not, opens popup "Password invalid"
 
-        //IGNORE THAT FOR NOW
-        System.out.println("Get User");
-        return new User("aaa","12345678","bbb","123");
+        Gson gson = new Gson();
+        String jsonRet = SharedPrefs.getString("User", email,null);
+
+        if (jsonRet != null) {
+            //System.out.println("\n\n\n"+jsonRet+"\n\n\n");
+            User currentUser = gson.fromJson(jsonRet, User.class);
+
+            if (currentUser.password.equals(password)) {
+                System.out.println("\n\n\n"+currentUser.userID+"\n\n\n");
+                return currentUser;
+            }
+            else {
+                System.out.println("Password wrong");
+                return null;
+            }
+        }
+        else {
+            System.out.println("Email not found");
+            return null;
+        }
     }
 
 
     private void initializeSignIn() {
 
-        //User currentUser = getUser(email, password)
         //Pass all the user fields to all necessary activities
-        openAddDeviceScreenActivity();
-
-
+        User currentUser = getUser(email, password);
+        if (currentUser != null) {
+            openAddDeviceScreenActivity();
+        }
     }
 
     private void openAddDeviceScreenActivity() {

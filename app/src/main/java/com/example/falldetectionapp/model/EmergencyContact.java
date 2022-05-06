@@ -5,7 +5,7 @@ import java.util.Random;
 public class EmergencyContact {
     String name;
     String telephone;
-    String email;
+    public String email;
     public int emContactID;
 
     public EmergencyContact(String name, String telephone, String email){

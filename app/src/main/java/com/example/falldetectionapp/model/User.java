@@ -8,13 +8,14 @@ public class User {
     public int userID;
     String name;
     String telephone;
-    String email;
-    String password;
+    public String email;
+    public String password;
     String wifiSSID;
     String wifiPassword;
     Time timeOfFall;
     boolean isConnected;
     boolean isEmContactVerified; //
+    ArrayList<Integer> EmContactsIDs;
 
     public User(String name, String telephone, String email, String password) {
         this.name = name;

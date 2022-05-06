@@ -119,7 +119,7 @@ public class SignUpScreenActivity extends AppCompatActivity {
             String json = gson.toJson(newUser);
 
             //Passing the userID as the key value from the 'user' field inside the json
-            SharedPrefs.putString("User", Integer.toString(newUser.userID), json);
+            SharedPrefs.putString("User", newUser.email, json);
 
 
             //---Testing to retrieve the user--- (Working) ------------------------

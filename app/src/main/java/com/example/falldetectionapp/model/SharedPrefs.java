@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 public class SharedPrefs {
 
     private static SharedPreferences sharedPreferencesUser;
