@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,8 +39,6 @@ public class SignUpScreenActivity extends AppCompatActivity {
     String password;
     String repeatedPassword;
 
-    SharedPreferences prefs;
-
     //Button buttonForgottenPassword;
 
     @Override
@@ -49,7 +46,6 @@ public class SignUpScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_screen);
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         buttonRegisterUser = (Button) findViewById(R.id.buttonRegisterUser);
         buttonRegisterUser.setOnClickListener(new View.OnClickListener() { // why is't this closed?
 
@@ -104,7 +100,7 @@ public class SignUpScreenActivity extends AppCompatActivity {
                 allValid = false;
             }
             if (!repeatedPassword.equals(password)) {
-                System.out.println("Password invalid");
+                System.out.println("Passwords do not match");
             }
 
             //Creating User
@@ -123,16 +119,16 @@ public class SignUpScreenActivity extends AppCompatActivity {
             String json = gson.toJson(newUser);
 
             //Passing the userID as the key value from the 'user' field inside the json
-            prefs.edit().putString(Integer.toString(newUser.userID), json).apply();
+            SharedPrefs.putString("User", Integer.toString(newUser.userID), json);
 
 
             //---Testing to retrieve the user--- (Working) ------------------------
             //Need to adapt from this part and put in the SignIn activity
             //Need to create a global variable of shared preferences that can be accessed in all project
-            String jsonRet = prefs.getString(Integer.toString(newUser.userID),"") ;
-            User currentUser = gson.fromJson(jsonRet, User.class);
+            //String jsonRet = SharedPrefs.getString("User", Integer.toString(newUser.userID),"") ;
+            //User currentUser = gson.fromJson(jsonRet, User.class);
 
-            System.out.println("\n\n\n"+currentUser.userID+"\n\n\n");
+            //System.out.println("\n\n\n"+currentUser.userID+"\n\n\n");
             //---------------------------------------------------------------------
 
 

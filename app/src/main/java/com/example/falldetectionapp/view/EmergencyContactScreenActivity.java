@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.example.falldetectionapp.R;
 import com.example.falldetectionapp.model.EmergencyContact;
 import com.example.falldetectionapp.model.SharedPrefs;
+import com.example.falldetectionapp.model.User;
 import com.google.gson.Gson;
 
 public class EmergencyContactScreenActivity extends AppCompatActivity {
@@ -93,28 +94,21 @@ public class EmergencyContactScreenActivity extends AppCompatActivity {
     }
 
     private void storeNewEmergencyContact() {
-        EmergencyContact newContact = new EmergencyContact(name, telephone, email);
+        EmergencyContact newEmContact = new EmergencyContact(name, telephone, email);
 
         //Passing values to Shared Preferences
         Gson gsonContact = new Gson();
-        String jsonContact = gsonContact.toJson(newContact);
+        String jsonContact = gsonContact.toJson(newEmContact);
 
-        //Passing the userID as the key value from the 'user' field inside the json
-        SharedPrefs.localDiskEditor.putString(Integer.toString(newContact.emContactID), jsonContact);
-        SharedPrefs.localDiskEditor.commit();
+        //Passing the emContactID as the key value from the 'emContact' field inside the json
+        SharedPrefs.putString("EmergencyContact", Integer.toString(newEmContact.emContactID), jsonContact);
 
+        //String jsonRet = SharedPrefs.getString("EmergencyContact", Integer.toString(newEmContact.emContactID),"") ;
+        //EmergencyContact currentEmContact = gsonContact.fromJson(jsonRet, EmergencyContact.class);
 
-        //---Testing to retrieve the user--- (Working) ------------------------
-        //Need to adapt from this part and put in the SignIn activity
-        //Need to create a global variable of shared preferences that can be accessed in all project
-        String jsonGetContact = SharedPrefs.localDisk.getString(Integer.toString(newContact.emContactID),"") ;
-        EmergencyContact currentContact = gsonContact.fromJson(jsonGetContact, EmergencyContact.class);
-
-        System.out.println("\n\n\n"+currentContact.emContactID+"\n\n\n");
-        //---------------------------------------------------------------------
-//
+        //System.out.println("\n\n\n"+currentEmContact.emContactID+"\n\n\n");
 
         //Switch to next activity
-        //openAddDeviceScreenActivity();
+        openSettingsScreenActivity();
     }
 }
