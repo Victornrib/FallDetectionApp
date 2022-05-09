@@ -13,15 +13,11 @@ import com.example.falldetectionapp.model.SharedPrefs;
 import com.example.falldetectionapp.model.User;
 import com.google.gson.Gson;
 
-
-
 public class SettingsScreenActivity extends AppCompatActivity {
     private Button buttonHome;
     private Button buttonSignOut;
     private Button buttonAddEC1;
     private Button buttonAddEC2;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +25,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_screen);
 
+        //click home --> add device
         buttonHome = (Button) findViewById(R.id.buttonHome);
         buttonHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +34,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
             }
         });
 
+        //click sign out --> initial screen
         buttonSignOut = (Button) findViewById(R.id.buttonSignOut);
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +43,7 @@ public class SettingsScreenActivity extends AppCompatActivity {
             }
         });
 
+        //click add emcontact 1/2 --> emcontact information (same screen)
         buttonAddEC1 = (Button) findViewById(R.id.buttonAddEC1);
         buttonAddEC1.setOnClickListener(new View.OnClickListener() {
             @Override

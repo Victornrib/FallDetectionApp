@@ -16,7 +16,6 @@ import com.example.falldetectionapp.model.User;
 
 import com.google.gson.Gson;
 
-
 public class SignInScreenActivity extends AppCompatActivity {
 
     private Button buttonLogin;
@@ -26,7 +25,6 @@ public class SignInScreenActivity extends AppCompatActivity {
 
     private String email;
     private String password;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +50,7 @@ public class SignInScreenActivity extends AppCompatActivity {
         });
     }
 
-
+    //move to controller?
     private User getUser(String email, String password) {
 
         //Scrolls trough all Users in the database checking their emails
@@ -63,9 +61,11 @@ public class SignInScreenActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
         String jsonRet = SharedPrefs.getString("User", email,null);
+        //does jsonRet get all the users??? or what does it get? -gwen
 
+        //if database is not empty... not sure how this exactly works.
         if (jsonRet != null) {
-            //System.out.println("\n\n\n"+jsonRet+"\n\n\n");
+            //System.out.println("\n\n\n"+jsonRet+"\n\n\n"); //this print does not work for me! -gwen
             User currentUser = gson.fromJson(jsonRet, User.class);
 
             if (currentUser.password.equals(password)) {
@@ -83,11 +83,12 @@ public class SignInScreenActivity extends AppCompatActivity {
         }
     }
 
-
+    //should change name to checkSignInFields()
     private void initializeSignIn() {
 
         //Pass all the user fields to all necessary activities
         User currentUser = getUser(email, password);
+        //if current user exists/not null --> add device screen
         if (currentUser != null) {
             openAddDeviceScreenActivity();
         }

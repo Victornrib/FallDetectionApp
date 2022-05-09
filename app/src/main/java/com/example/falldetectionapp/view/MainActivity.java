@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPrefs.init(this);
-        changeToSpecifiedActivity();
+        changeToSpecifiedActivity(); //why do we need this instead of just straight to initial screen?
     }
 
     public void changeToSpecifiedActivity() {

@@ -35,9 +35,9 @@
         <TextView
             android:id="@+id/textViewEmergencyContact"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="38dp"
             android:layout_weight="0.33"
-            android:text="Emergency\nContact 1"
+            android:text="Emergency\nContact\nInformation"
             android:textAlignment="center"
             android:textSize="40sp"
             android:textStyle="bold" />

@@ -19,6 +19,7 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pair_device_screen);
 
+        //click back --> goes back to add device
         buttonBack = (Button) findViewById(R.id.buttonBack);
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,6 +28,8 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
             }
         });
 
+        //click pair --> also goes back to add device.
+        // This is not the intention right? -gwen
         buttonPairDevice = (Button) findViewById(R.id.buttonPairDevice);
         buttonPairDevice.setOnClickListener(new View.OnClickListener() {
             @Override

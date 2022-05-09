@@ -1,6 +1,5 @@
 package com.example.falldetectionapp.view;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -20,12 +19,9 @@ import com.example.falldetectionapp.model.SharedPrefs;
 
 import com.google.gson.Gson;
 
-
-
 public class SignUpScreenActivity extends AppCompatActivity {
     private Button buttonRegisterUser;
     boolean signUpValidated;
-
 
     EditText editTextRegisterUserName;
     EditText editTextRegisterUserTelephone;
@@ -47,7 +43,8 @@ public class SignUpScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_screen);
 
         buttonRegisterUser = (Button) findViewById(R.id.buttonRegisterUser);
-        buttonRegisterUser.setOnClickListener(new View.OnClickListener() { // why is't this closed?
+        //why does the method below not have a closed bracket before the curly bracket opens?
+        buttonRegisterUser.setOnClickListener(new View.OnClickListener() {
 
             //Before create, check if user already exists, and also if fields are valid
             @Override

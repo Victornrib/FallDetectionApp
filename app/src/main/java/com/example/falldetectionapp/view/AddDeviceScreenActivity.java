@@ -14,12 +14,14 @@ public class AddDeviceScreenActivity extends AppCompatActivity {
     private Button buttonSettings;
     private Button buttonAddDevice;
 
+    //why protected not private? (protected = can be accessed in its own package) - gwen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_device_screen);
 
+        //when you click sign out, you go back to initial screen
         buttonSignOut = (Button) findViewById(R.id.buttonSignOut);
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,6 +30,7 @@ public class AddDeviceScreenActivity extends AppCompatActivity {
             }
         });
 
+        //click settings --> settings screen
         buttonSettings = (Button) findViewById(R.id.buttonSettings);
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +39,7 @@ public class AddDeviceScreenActivity extends AppCompatActivity {
             }
         });
 
+        //click add device --> pair device screen
         buttonAddDevice = (Button) findViewById(R.id.buttonAddDevice);
         buttonAddDevice.setOnClickListener(new View.OnClickListener() {
             @Override
