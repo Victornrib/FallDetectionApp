@@ -5,8 +5,8 @@ import java.util.Random;
 
 
 public class User {
-    public int userID;
-    String name;
+    public int userID; //would be nice to have a string so it is specific "user4053"
+    String name; //may need to make these variables more specific? fx userName
     String telephone;
     public String email;
     public String password;
@@ -23,16 +23,22 @@ public class User {
         this.email = email;
         this.password = password;
 
-        //Check in the system all ID's and guarantee it is a unique ID
+        //need to add check in the system all ID's and guarantee it is a unique ID
         Random random = new Random();
         this.userID = random.nextInt(1000);
     }
 
     //activated when fall is detected
-    public void receiveAlert(Time timeOfFall) {};
+    //activated by controller right? -Gwen
+    public void receiveAlert(Time timeOfFall) {
+        //if (Device.fallDetected == true) { putString(Device, date, time) }
+    };
 
     //connects specific EmContact to specific user
-    public void setEmContact(String name, String telephone, String email) {};
+    public void setEmContact(String name, String telephone, String email) {
+        //adds emContact to user arraylist
+        //returns new list?
+    };
 
     //calls all methods needed to send data to firebase
     public void generateLog(Time timeOfFall) {};
@@ -46,9 +52,11 @@ public class User {
     };
 
     //getter???
+    //need this in order to contact the emContact
     public void EmContactDetails() {};
 
     //calls/texts the specific emcontact of a specific user
+    //Could be EMAIL?? is that easier? -gwen
     public void alertEmContact() {};
 
 

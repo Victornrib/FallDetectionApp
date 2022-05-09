@@ -26,9 +26,9 @@ public class SharedPrefs {
         if (sharedPreferencesDevice == null)
             sharedPreferencesDevice = context.getSharedPreferences(context.getPackageName()+"_device_preferences", Activity.MODE_PRIVATE);
     }
+    //are these if/else statements? and is package name fx "model"? - gwen
 
-
-    public static String getString(String entity, String key, String defValue) {
+    public static String getString(String entity, String key, String defValue) { //defValue is "default" or "defined"? -gwen
 
         switch (entity) {
 
@@ -70,12 +70,14 @@ public class SharedPrefs {
                 prefsEditorDevice.putString(key, value);
                 prefsEditorDevice.apply();
                 break;
+            //why no default in this method? -gwen
             }
         }
     }
 
 
     //// Clear Preference ////
+    //this is to erase all current data in the database right? why do we want this? -Gwen
     public static void clearPreference(String entity, Context context) {
 
         switch (entity) {
@@ -98,6 +100,7 @@ public class SharedPrefs {
     }
 
     //// Remove ////
+    //for example to remove a user who has stopped with the device, or remove emergency contacts...
     public static void removePreference(String entity, String Key){
 
         switch (entity) {
