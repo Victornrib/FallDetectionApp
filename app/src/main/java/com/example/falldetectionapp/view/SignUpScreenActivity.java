@@ -1,6 +1,8 @@
 package com.example.falldetectionapp.view;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.DialogInterface;
 
 import android.content.Context;
 import android.content.Intent;
@@ -35,6 +37,8 @@ public class SignUpScreenActivity extends AppCompatActivity {
     String password;
     String repeatedPassword;
 
+
+
     //Button buttonForgottenPassword;
 
     @Override
@@ -53,6 +57,7 @@ public class SignUpScreenActivity extends AppCompatActivity {
                 //Getting name
                 editTextRegisterUserName = (EditText) findViewById(R.id.editTextRegisterUserName);
                 name = editTextRegisterUserName.getText().toString();
+                //if (name.length()==0) {editTextRegisterUserName.setError("Field cannot be left blank");
 
                 //Getting telephone
                 editTextRegisterUserTelephone = (EditText) findViewById(R.id.editTextRegisterUserTelephone);
@@ -104,6 +109,8 @@ public class SignUpScreenActivity extends AppCompatActivity {
             if (allValid) {
                 storingNewUser();
             }
+            //if cannot create user, alert should show up
+            //else {alertDialog.show();}
 
         }
 
@@ -133,11 +140,21 @@ public class SignUpScreenActivity extends AppCompatActivity {
             openAddDeviceScreenActivity();
         }
 
-    
+
         private void openAddDeviceScreenActivity() {
             Intent intent = new Intent(this, AddDeviceScreenActivity.class);
             startActivity(intent);
         }
+
+//        AlertDialog alertDialog = new AlertDialog.Builder(SignUpScreenActivity.this).create();
+//            alertDialog.setTitle("Error");
+//            alertDialog.setMessage("Registration invalid. Please check the fields and try again.");
+//            alertDialog.setButton("OK",
+//                new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//            }
+//        });
 }
 
 //how to save json files to shared prefs https://stackoverflow.com/questions/7145606/how-do-you-save-store-objects-in-sharedpreferences-on-android
