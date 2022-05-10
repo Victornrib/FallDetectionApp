@@ -71,14 +71,12 @@ public class SharedPrefs {
                 prefsEditorDevice.putString(key, value);
                 prefsEditorDevice.apply();
                 break;
-            //why no default in this method? -gwen -- Because the function don't have return, so it doesn't make difference
             }
         }
     }
 
 
     //// Clear Preference ////
-    //this is to erase all current data in the database right? why do we want this? -Gwen --- I let just in case, we never know.
     public static void clearPreference(String entity, Context context) {
 
         switch (entity) {

@@ -43,4 +43,6 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddDeviceScreenActivity.class);
         startActivity(intent);
     }
+
+    //we will need an AlertDialog here to say if connection is successful or not.
 }

@@ -55,7 +55,6 @@ public class SignInScreenActivity extends AppCompatActivity {
     }
 
 
-    //should change name to checkSignInFields() -- Agreed. Done.
     private void checkSignInFields() {
 
         //Pass all the user fields to all necessary activities

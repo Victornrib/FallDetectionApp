@@ -47,4 +47,6 @@ public class InitialScreenActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SignUpScreenActivity.class);
         startActivity(intent);
     }
+
+    //may need an alert dialog here for if the previous login is not remembered/stored properly for some reason?
 }

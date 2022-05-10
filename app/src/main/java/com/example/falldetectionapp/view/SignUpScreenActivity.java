@@ -113,6 +113,7 @@ public class SignUpScreenActivity extends AppCompatActivity {
 
         String errorMessage = "";
 
+        //we should make this a boolean method and call it :)
         signUpValidated = true;
 
         if (name.equals("")) {

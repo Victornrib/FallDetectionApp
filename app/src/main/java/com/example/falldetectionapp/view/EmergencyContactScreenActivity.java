@@ -107,6 +107,7 @@ public class EmergencyContactScreenActivity extends AppCompatActivity {
         String errorMessage = "";
 
         if (name.equals("")) {
+            //cant it just be errorMessage = "invalid name \n"
             errorMessage = errorMessage + "Invalid name.\n";
             emergencyContactValidated = false;
         }
@@ -134,7 +135,7 @@ public class EmergencyContactScreenActivity extends AppCompatActivity {
             alertDialog.setMessage(errorMessage);
         }
         alertDialog.show();
-
+        //possibly we need the emergency contact to validate the registration from their side?
     }
 
     private void storeNewEmergencyContact() {
