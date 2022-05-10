@@ -2,13 +2,14 @@ package com.example.falldetectionapp.view;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Dialog;
 import android.content.DialogInterface;
 
-import android.content.Context;
 import android.content.Intent;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import java.util.regex.*;
 
 import android.view.View;
 import android.widget.Button;
@@ -37,9 +38,8 @@ public class SignUpScreenActivity extends AppCompatActivity {
     String password;
     String repeatedPassword;
 
-
-
     //Button buttonForgottenPassword;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class SignUpScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_screen);
 
         buttonRegisterUser = (Button) findViewById(R.id.buttonRegisterUser);
-        //why does the method below not have a closed bracket before the curly bracket opens?
+        //why does the method below not have a closed bracket before the curly bracket opens? - Because clickListener needs a View. Since you are creating one right away, you need to also declare its scope, even being inside of another function.
         buttonRegisterUser.setOnClickListener(new View.OnClickListener() {
 
             //Before create, check if user already exists, and also if fields are valid
@@ -57,7 +57,7 @@ public class SignUpScreenActivity extends AppCompatActivity {
                 //Getting name
                 editTextRegisterUserName = (EditText) findViewById(R.id.editTextRegisterUserName);
                 name = editTextRegisterUserName.getText().toString();
-                //if (name.length()==0) {editTextRegisterUserName.setError("Field cannot be left blank");
+                //if (name.length()==0) {editTextRegisterUserName.setError("Field cannot be left blank"); -- I took care of that before, check how is it bellow --- name.equals("")
 
                 //Getting telephone
                 editTextRegisterUserTelephone = (EditText) findViewById(R.id.editTextRegisterUserTelephone);
@@ -73,88 +73,115 @@ public class SignUpScreenActivity extends AppCompatActivity {
 
                 //Getting repeated password
                 editTextRegisterUserRepeatedPassword = (EditText) findViewById(R.id.editTextRegisterUserRepeatedPassword);
-                repeatedPassword = editTextRegisterUserPassword.getText().toString();
+                repeatedPassword = editTextRegisterUserRepeatedPassword.getText().toString();
 
                 checkSignUpFields();
-                //openAddDeviceScreenActivity();
             }
         });
     }
 
-        private void checkSignUpFields() {
+    private void checkSignUpFields() {
+        //Setting up alert error dialog
+        AlertDialog alertDialog = new AlertDialog.Builder(SignUpScreenActivity.this).create();
 
-            boolean allValid = true;
+        //Cancelable set to false to only dismiss popup when clicking in 'Ok' button
+        alertDialog.setCancelable(false);
+        alertDialog.setButton(Dialog.BUTTON_NEUTRAL, "Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (signUpValidated) {
+                    storeNewUser();
+                }
+                else {
+                    alertDialog.cancel();
+                }
+            }
+        });
 
-            if (name.equals("")) {
-                System.out.println("Invalid name");
-                allValid = false;
-            }
-            if (telephone.length() != 8) {
-                System.out.println("Invalid telephone");
-                allValid = false;
-            }
-            if (email.equals("")) {
-                System.out.println("Invalid email");
-                allValid = false;
-            }
-            if (password.equals("")) {
-                System.out.println("Invalid password");
-                allValid = false;
-            }
-            if (!repeatedPassword.equals(password)) {
-                System.out.println("Passwords do not match");
-            }
+        //Regular expression to validate telephone
+        //  "^[0-9]{8,9}$" -- For standard format (ex: 12345678 or 123456789)
+        //  "^\+(?:[0-9] ?){6,14}[0-9]$" -- For international format (ex: +0133557799)
+        String telephoneRegex = "(^\\+(?:[0-9] ?){6,14}[0-9]$)|(^[0-9]{8,9}$)";
+        Pattern telephonePattern = Pattern.compile(telephoneRegex);
+        Matcher telephoneMatcher = telephonePattern.matcher(telephone);
 
-            //Creating User
-            if (allValid) {
-                storingNewUser();
-            }
-            //if cannot create user, alert should show up
-            //else {alertDialog.show();}
+        //Regular expression to validate email
+        //Format "XXX@YYY.ZZZ"
+        String emailRegex = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+        Pattern emailPattern = Pattern.compile(emailRegex);
+        Matcher emailMatcher = emailPattern.matcher(email);
 
+        String errorMessage = "";
+
+        signUpValidated = true;
+
+        if (name.equals("")) {
+            errorMessage = errorMessage + "Registration invalid. Invalid name.\n";
+            signUpValidated = false;
+        }
+        if (!telephoneMatcher.matches()) {
+            errorMessage = errorMessage + "Registration invalid. Invalid telephone.\n";
+            signUpValidated = false;
+        }
+        if (!emailMatcher.matches()) {
+            errorMessage = errorMessage + "Registration invalid. Invalid email.\n";
+            signUpValidated = false;
+        }
+        if (SharedPrefs.getString("User", email,null) != null) {
+            errorMessage = errorMessage + "Registration invalid. User with this email already exists.\n";
+            signUpValidated = false;
+        }
+        if (password.equals("")) {
+            errorMessage = errorMessage + "Registration invalid. Invalid password.\n";
+            signUpValidated = false;
+        }
+        if (!repeatedPassword.equals(password)) {
+            errorMessage = errorMessage + "Registration invalid. Passwords do not match.\n";
+            signUpValidated = false;
         }
 
-
-        private void storingNewUser() {
-            User newUser = new User(name, telephone, email, password);
-
-            //Passing values to Shared Preferences
-            Gson gson = new Gson();
-            String json = gson.toJson(newUser);
-
-            //Passing the userID as the key value from the 'user' field inside the json
-            SharedPrefs.putString("User", newUser.email, json);
-
-
-            //---Testing to retrieve the user--- (Working) ------------------------
-            //Need to adapt from this part and put in the SignIn activity
-            //Need to create a global variable of shared preferences that can be accessed in all project
-            //String jsonRet = SharedPrefs.getString("User", Integer.toString(newUser.userID),"") ;
-            //User currentUser = gson.fromJson(jsonRet, User.class);
-
-            //System.out.println("\n\n\n"+currentUser.userID+"\n\n\n");
-            //---------------------------------------------------------------------
-
-
-            //Switch to next activity
-            openAddDeviceScreenActivity();
+        //Displaying success alert
+        if (signUpValidated) {
+            alertDialog.setTitle("Registration successful");
+            alertDialog.setMessage("The user " + name + " has been successfully registered on the system.");
+        }
+        //if cannot create user, error alert should show up
+        else {
+            alertDialog.setTitle("Error");
+            alertDialog.setMessage(errorMessage);
         }
 
+        //If all fields are valid, the "Ok" button on the alertDialog will call the 'storeNewUser' function
+        alertDialog.show();
+    }
 
-        private void openAddDeviceScreenActivity() {
-            Intent intent = new Intent(this, AddDeviceScreenActivity.class);
-            startActivity(intent);
-        }
 
-//        AlertDialog alertDialog = new AlertDialog.Builder(SignUpScreenActivity.this).create();
-//            alertDialog.setTitle("Error");
-//            alertDialog.setMessage("Registration invalid. Please check the fields and try again.");
-//            alertDialog.setButton("OK",
-//                new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//            }
-//        });
+    private void storeNewUser() {
+        User newUser = new User(name, telephone, email, password);
+
+        //Passing values to Shared Preferences
+        Gson gson = new Gson();
+        String json = gson.toJson(newUser);
+
+        //Passing the userID as the key value from the 'user' field inside the json
+        SharedPrefs.putString("User", newUser.email, json);
+
+        //Switch to next activity
+        openInitialScreenActivity();
+    }
+
+
+    private void openInitialScreenActivity() {
+        Intent intent = new Intent(this, InitialScreenActivity.class);
+        startActivity(intent);
+    }
+
 }
 
 //how to save json files to shared prefs https://stackoverflow.com/questions/7145606/how-do-you-save-store-objects-in-sharedpreferences-on-android
+//regex1: https://stackoverflow.com/questions/37114166/regex-for-8-digit-phone-number-singapore-number-length
+//regex2: https://howtodoinjava.com/java/regex/java-regex-validate-international-phone-numbers/
+//regex3: https://stackoverflow.com/questions/8204680/java-regex-email
+//regex4: https://www.javatpoint.com/java-email-validation
+//alertDialog: https://stackoverflow.com/questions/37984723/alert-dialog-was-disappearing-when-user-clicks-out-side
+//alertDialog2: https://stackoverflow.com/questions/30018587/alertdialog-setbutton-was-deprecated

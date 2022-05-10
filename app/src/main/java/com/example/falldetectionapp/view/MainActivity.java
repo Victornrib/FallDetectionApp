@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPrefs.init(this);
-        changeToSpecifiedActivity(); //why do we need this instead of just straight to initial screen?
+        changeToSpecifiedActivity(); //why do we need this instead of just straight to initial screen? -- Cause we will probably have the remember login function
     }
 
     public void changeToSpecifiedActivity() {

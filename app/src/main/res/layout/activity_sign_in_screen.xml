@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.06"
-            android:text="@string/fall_detection_app"
+            android:text="Sign In"
             android:textAlignment="center"
             android:textSize="40sp"
             android:textStyle="bold" />

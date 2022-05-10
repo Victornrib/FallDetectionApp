@@ -6,8 +6,8 @@ import java.util.Random;
 
 public class User {
     public int userID; //would be nice to have a string so it is specific "user4053"
-    String name; //may need to make these variables more specific? fx userName
-    String telephone;
+    public String name; //may need to make these variables more specific? fx userName
+    public String telephone;
     public String email;
     public String password;
     String wifiSSID;

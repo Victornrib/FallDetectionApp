@@ -28,7 +28,8 @@ public class SharedPrefs {
     }
     //are these if/else statements? and is package name fx "model"? - gwen
 
-    public static String getString(String entity, String key, String defValue) { //defValue is "default" or "defined"? -gwen
+
+    public static String getString(String entity, String key, String defValue) { //defValue is "default" or "defined"? -gwen -- It is the default value. I explained in a comment in the SignInScreenActivity class
 
         switch (entity) {
 
@@ -70,14 +71,14 @@ public class SharedPrefs {
                 prefsEditorDevice.putString(key, value);
                 prefsEditorDevice.apply();
                 break;
-            //why no default in this method? -gwen
+            //why no default in this method? -gwen -- Because the function don't have return, so it doesn't make difference
             }
         }
     }
 
 
     //// Clear Preference ////
-    //this is to erase all current data in the database right? why do we want this? -Gwen
+    //this is to erase all current data in the database right? why do we want this? -Gwen --- I let just in case, we never know.
     public static void clearPreference(String entity, Context context) {
 
         switch (entity) {
@@ -100,7 +101,7 @@ public class SharedPrefs {
     }
 
     //// Remove ////
-    //for example to remove a user who has stopped with the device, or remove emergency contacts...
+    //for example to remove a user who has stopped with the device, or remove emergency contacts... -- Something like that...
     public static void removePreference(String entity, String Key){
 
         switch (entity) {
