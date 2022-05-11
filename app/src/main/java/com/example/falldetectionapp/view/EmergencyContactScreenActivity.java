@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.falldetectionapp.R;
+import com.example.falldetectionapp.controller.EmergencyContactController;
 import com.example.falldetectionapp.model.EmergencyContact;
 import com.example.falldetectionapp.model.SharedPrefs;
 import com.example.falldetectionapp.model.User;
@@ -30,7 +31,9 @@ public class EmergencyContactScreenActivity extends AppCompatActivity {
     EditText editTextRegisterContactTel;
     EditText editTextRegisterContactEmail;
 
-    boolean emergencyContactValidated;
+    EmergencyContactController emergencyContactController;
+
+    AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +52,7 @@ public class EmergencyContactScreenActivity extends AppCompatActivity {
         buttonAddEmergencyContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //openSettingsScreenActivity(); Is this needed? because you click the app emergency button
+
                 //Getting name
                 editTextRegisterContactName = (EditText) findViewById(R.id.editTextRegisterEmergencyContactName);
                 name = editTextRegisterContactName.getText().toString();
@@ -62,26 +65,39 @@ public class EmergencyContactScreenActivity extends AppCompatActivity {
                 editTextRegisterContactEmail = (EditText) findViewById(R.id.editTextRegisterEmergencyContactEmail);
                 email = editTextRegisterContactEmail.getText().toString();
 
-                checkContactFields();
+                emergencyContactController = new EmergencyContactController(name, telephone, email);
+
+                generateDialog();
             }
         });
     }
 
-    private void openSettingsScreenActivity() {
-        Intent intent = new Intent(this, SettingsScreenActivity.class);
-        startActivity(intent);
-    }
 
-    private void checkContactFields() {
+    private void generateDialog() {
 
         //Create error alert dialog
-        AlertDialog alertDialog = new AlertDialog.Builder(EmergencyContactScreenActivity.this).create();
+        alertDialog = new AlertDialog.Builder(EmergencyContactScreenActivity.this).create();
         alertDialog.setCancelable(false);
+
+        boolean registrationValid = emergencyContactController.checkContactFields();
+
+        if (registrationValid) {
+            alertDialog.setTitle("Registration successful");
+        }
+        else {
+            alertDialog.setTitle("Error");
+        }
+
+        alertDialog.setMessage(emergencyContactController.getAlertDialogMessage());
+
         alertDialog.setButton(Dialog.BUTTON_NEUTRAL, "Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (emergencyContactValidated) {
-                    storeNewEmergencyContact();
+
+                if (registrationValid) {
+
+                    emergencyContactController.storeNewEmergencyContact();
+                    openSettingsScreenActivity();
                 }
                 else {
                     alertDialog.cancel();
@@ -89,66 +105,12 @@ public class EmergencyContactScreenActivity extends AppCompatActivity {
             }
         });
 
-        //Regular expression to validate telephone
-        //  "^[0-9]{8,9}$" -- For standard format (ex: 12345678 or 123456789)
-        //  "^\+(?:[0-9] ?){6,14}[0-9]$" -- For international format (ex: +0133557799)
-        String telephoneRegex = "(^\\+(?:[0-9] ?){6,14}[0-9]$)|(^[0-9]{8,9}$)";
-        Pattern telephonePattern = Pattern.compile(telephoneRegex);
-        Matcher telephoneMatcher = telephonePattern.matcher(telephone);
-
-        //Regular expression to validate email
-        //Format "XXX@YYY.ZZZ"
-        String emailRegex = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
-        Pattern emailPattern = Pattern.compile(emailRegex);
-        Matcher emailMatcher = emailPattern.matcher(email);
-
-        emergencyContactValidated = true;
-
-        String errorMessage = "";
-
-        if (name.equals("")) {
-            //cant it just be errorMessage = "invalid name \n"
-            errorMessage = errorMessage + "Invalid name.\n";
-            emergencyContactValidated = false;
-        }
-        if (!telephoneMatcher.matches()) {
-            errorMessage = errorMessage + "Invalid telephone.\n";
-            emergencyContactValidated = false;
-        }
-        if (SharedPrefs.getString("EmergencyContact", email,null) != null) {
-            errorMessage = errorMessage + "Registration invalid. Emergency Contact with this email already exists.\n";
-            emergencyContactValidated = false;
-        }
-        if (!emailMatcher.matches()) {
-            errorMessage = errorMessage + "Invalid email.\n";
-            emergencyContactValidated = false;
-        }
-
-
-        //Creating Emergency Contact
-        if (emergencyContactValidated) {
-            alertDialog.setTitle("Registration successful");
-            alertDialog.setMessage("The emergency contact " + name + " has been successfully registered on the system.");
-        }
-        else {
-            alertDialog.setTitle("Error");
-            alertDialog.setMessage(errorMessage);
-        }
         alertDialog.show();
-        //possibly we need the emergency contact to validate the registration from their side?
     }
 
-    private void storeNewEmergencyContact() {
-        EmergencyContact newEmContact = new EmergencyContact(name, telephone, email);
 
-        //Passing values to Shared Preferences
-        Gson gsonContact = new Gson();
-        String jsonContact = gsonContact.toJson(newEmContact);
-
-        //Passing the emContactID as the key value from the 'emContact' field inside the json
-        SharedPrefs.putString("EmergencyContact", newEmContact.email, jsonContact);
-
-        //Switch to next activity
-        openSettingsScreenActivity();
+    private void openSettingsScreenActivity() {
+        Intent intent = new Intent(this, SettingsScreenActivity.class);
+        startActivity(intent);
     }
 }

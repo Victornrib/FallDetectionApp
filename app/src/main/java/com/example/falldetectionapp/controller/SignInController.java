@@ -1,11 +1,8 @@
 package com.example.falldetectionapp.controller;
 
-
-
 import com.example.falldetectionapp.model.SharedPrefs;
 import com.example.falldetectionapp.model.User;
 import com.google.gson.Gson;
-
 
 
 public class SignInController {
@@ -27,7 +24,7 @@ public class SignInController {
     public boolean checkSignInFields() {
         currentUser = getUser();
 
-        //Will pass the current user to the 'Singleton'
+        //Will pass the current user to the 'Program' class
 
         return currentUser != null;
     }
@@ -59,8 +56,5 @@ public class SignInController {
             return null;
         }
     }
-
-
-
 
 }
