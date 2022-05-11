@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.os.Bundle;
-import java.util.regex.*;
 
 import android.view.View;
 import android.widget.Button;
@@ -17,14 +16,9 @@ import android.widget.EditText;
 
 import com.example.falldetectionapp.R;
 
-import com.example.falldetectionapp.model.User;
-import com.example.falldetectionapp.model.SharedPrefs;
-
-import com.google.gson.Gson;
-
 public class SignUpScreenActivity extends AppCompatActivity {
-    private Button buttonRegisterUser;
 
+    Button buttonRegisterUser;
 
     EditText editTextRegisterUserName;
     EditText editTextRegisterUserTelephone;
@@ -38,10 +32,8 @@ public class SignUpScreenActivity extends AppCompatActivity {
     String password;
     String repeatedPassword;
 
-    //Setting up alert error dialog
-    public AlertDialog alertDialog = new AlertDialog.Builder(SignUpScreenActivity.this).create();
-
-
+    AlertDialog alertDialog;
+    SignUpController signUpController;
 
     //Button buttonForgottenPassword;
 
@@ -80,31 +72,58 @@ public class SignUpScreenActivity extends AppCompatActivity {
                 editTextRegisterUserRepeatedPassword = (EditText) findViewById(R.id.editTextRegisterUserRepeatedPassword);
                 repeatedPassword = editTextRegisterUserRepeatedPassword.getText().toString();
 
+                //Needs to be instantiated on the onClick function because it has to get all the fields at the specific time of the click
+                signUpController = new SignUpController(name, telephone, email, password, repeatedPassword); //Can pass the context as well
 
-                SignUpController signUpController = new SignUpController(name, telephone, email, password, repeatedPassword);
-                signUpController.checkSignUpFields();
+                generateDialog();
             }
         });
-
     }
 
 
-    public void displayDialog(boolean signUpValidated) {
+    public void generateDialog() {
+
+        //Setting up alert error dialog
+        alertDialog = new AlertDialog.Builder(SignUpScreenActivity.this).create();
 
         //Cancelable set to false to only dismiss popup when clicking in 'Ok' button
         alertDialog.setCancelable(false);
+
+        boolean registrationValid = signUpController.checkSignUpFields();
+
+        if (registrationValid) {
+            alertDialog.setTitle("Registration successful");
+        }
+        else {
+            alertDialog.setTitle("Error");
+        }
+
+        //Setting dynamically generated message from the controller in dialog
+        alertDialog.setMessage(signUpController.getAlertDialogMessage());
+
+        //Defining button functionality
         alertDialog.setButton(Dialog.BUTTON_NEUTRAL, "Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (signUpValidated) {
-                    SignUpController.storeNewUser();
+
+                //If all fields are valid
+                if (registrationValid) {
+
+                    //Store new user
+                    signUpController.storeNewUser();
+
+                    //Switch to next activity
+                    openInitialScreenActivity();
                 }
                 else {
                     alertDialog.cancel();
                 }
             }
         });
+
+        alertDialog.show();
     }
+
 
     public void openInitialScreenActivity() {
         Intent intent = new Intent(this, InitialScreenActivity.class);
