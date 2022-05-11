@@ -17,7 +17,7 @@ public class User {
     boolean isConnected;
     boolean isEmContactVerified; //
     //ArrayList<Integer> EmContactsIDs;
-    ArrayList<String> emContactEmails;
+    public ArrayList<String> emContactEmails;
 
     public User(String name, String telephone, String email, String password) {
         this.name = name;
@@ -49,21 +49,21 @@ public class User {
     public void connectToDevice() {};
 
     //check the list of emcontacts for specific user
-    public ArrayList<EmergencyContact> checkEmContacts() {
-        ArrayList<EmergencyContact> emContactsList = new ArrayList<EmergencyContact>();
-        Gson gson = new Gson();
-
-        for (int i; i < emContactEmails.size(); i ++) {
-            String jsonRet = SharedPrefs.getString("EmergencyContact", emContactEmails.get(i), null);
-            if (jsonRet != null) {
-                EmergencyContact currentEmContact = gson.fromJson(jsonRet, EmergencyContact.class);
-                emContactsList.add(currentEmContact);
-            }
-        }
-
-        return emContactsList;
-
-    };
+//    public ArrayList<EmergencyContact> checkEmContacts() {
+//        ArrayList<EmergencyContact> emContactsList = new ArrayList<EmergencyContact>();
+//        Gson gson = new Gson();
+//
+//        for (int i; i < emContactEmails.size(); i ++) {
+//            String jsonRet = SharedPrefs.getString("EmergencyContact", emContactEmails.get(i), null);
+//            if (jsonRet != null) {
+//                EmergencyContact currentEmContact = gson.fromJson(jsonRet, EmergencyContact.class);
+//                emContactsList.add(currentEmContact);
+//            }
+//        }
+//
+//        return emContactsList;
+//
+//    };
 
     //getter???
     //need this in order to contact the emContact
