@@ -38,7 +38,7 @@ public class SignInController {
     private User getUser() {
 
         Gson gson = new Gson();
-        String jsonRet = SharedPrefs.getString("User", email,null);
+        String jsonRet = SharedPrefs.getString(email,null);
 
         if (jsonRet != null) {
             currentUser = gson.fromJson(jsonRet, User.class);

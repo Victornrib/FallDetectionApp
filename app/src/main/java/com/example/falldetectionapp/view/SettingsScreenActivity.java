@@ -25,7 +25,6 @@ public class SettingsScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_screen);
 
-        //click home --> add device
         buttonHome = (Button) findViewById(R.id.buttonHome);
         buttonHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,7 +33,6 @@ public class SettingsScreenActivity extends AppCompatActivity {
             }
         });
 
-        //click sign out --> initial screen
         buttonSignOut = (Button) findViewById(R.id.buttonSignOut);
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +41,6 @@ public class SettingsScreenActivity extends AppCompatActivity {
             }
         });
 
-        //click add emcontact 1/2 --> emcontact information (same screen)
         buttonAddEC1 = (Button) findViewById(R.id.buttonAddEC1);
         buttonAddEC1.setOnClickListener(new View.OnClickListener() {
             @Override

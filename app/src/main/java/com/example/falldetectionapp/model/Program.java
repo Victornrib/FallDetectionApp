@@ -2,6 +2,8 @@ package com.example.falldetectionapp.model;
 
 import com.google.gson.Gson;
 
+import java.sql.Time;
+
 public class Program {
     static Program program;
     private User currentUser;
@@ -20,6 +22,7 @@ public class Program {
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }
+
 
     public User getCurrentUser() {
         return currentUser;
@@ -47,4 +50,16 @@ public class Program {
 //        }
 //    }
 
+
+    //calls all methods needed to send data to firebase
+    //public void generateLog(Time timeOfFall) {};
+
+    //connects app to device
+    //public void connectToDevice() {};
+
+    //activated when fall is detected
+    //activated by controller right? -Gwen
+    public void receiveAlert(Time timeOfFall) {
+        //if (Device.fallDetected == true) { putString(Device, date, time) }
+    };
 }

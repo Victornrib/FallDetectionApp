@@ -1,9 +1,10 @@
 package com.example.falldetectionapp.model;
+import com.google.gson.Gson;
+
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Random;
-import com.example.falldetectionapp.model.SharedPrefs;
-import com.google.gson.Gson;
+
 
 public class User {
     public int userID; //would be nice to have a string so it is specific "user4053"
@@ -16,61 +17,37 @@ public class User {
     Time timeOfFall;
     boolean isConnected;
     boolean isEmContactVerified; //
-    //ArrayList<Integer> EmContactsIDs;
-    public ArrayList<String> emContactEmails;
+    private ArrayList<EmergencyContact> emContacts;
 
     public User(String name, String telephone, String email, String password) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;
         this.password = password;
+        this.emContacts = new ArrayList<EmergencyContact>();
 
         //need to add check in the system all ID's and guarantee it is a unique ID
         Random random = new Random();
         this.userID = random.nextInt(1000);
     }
 
-    //activated when fall is detected
-    //activated by controller right? -Gwen
-    public void receiveAlert(Time timeOfFall) {
-        //if (Device.fallDetected == true) { putString(Device, date, time) }
-    };
-
     //connects specific EmContact to specific user
-    public void setEmContact(String name, String telephone, String email) {
-        //adds emContact to user arraylist
-        //returns new list?
+    public void addEmContact(String name, String telephone, String email) {
+        EmergencyContact newEmContact = new EmergencyContact(name, telephone, email);
+        emContacts.add(newEmContact);
+
+        //Passing values to Shared Preferences
+        Gson gson = new Gson();
+        String json = gson.toJson(this);
+        SharedPrefs.putString(this.email,json);
     };
 
-    //calls all methods needed to send data to firebase
-    public void generateLog(Time timeOfFall) {};
+    //check the list of emContacts for specific user
+    public ArrayList<EmergencyContact> getEmContacts() {
+        return emContacts;
+    };
 
-    //connects app to device
-    public void connectToDevice() {};
 
-    //check the list of emcontacts for specific user
-//    public ArrayList<EmergencyContact> checkEmContacts() {
-//        ArrayList<EmergencyContact> emContactsList = new ArrayList<EmergencyContact>();
-//        Gson gson = new Gson();
-//
-//        for (int i; i < emContactEmails.size(); i ++) {
-//            String jsonRet = SharedPrefs.getString("EmergencyContact", emContactEmails.get(i), null);
-//            if (jsonRet != null) {
-//                EmergencyContact currentEmContact = gson.fromJson(jsonRet, EmergencyContact.class);
-//                emContactsList.add(currentEmContact);
-//            }
-//        }
-//
-//        return emContactsList;
-//
-//    };
-
-    //getter???
-    //need this in order to contact the emContact
-    public void EmContactDetails() {};
-
-    //calls/texts the specific emcontact of a specific user
-    //Could be EMAIL?? is that easier? -gwen
     public void alertEmContact() {};
 
 

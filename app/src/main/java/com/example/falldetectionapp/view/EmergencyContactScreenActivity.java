@@ -96,7 +96,7 @@ public class EmergencyContactScreenActivity extends AppCompatActivity {
 
                 if (registrationValid) {
 
-                    emergencyContactController.storeNewEmergencyContact();
+                    emergencyContactController.addNewEmergencyContact();
                     openSettingsScreenActivity();
                 }
                 else {

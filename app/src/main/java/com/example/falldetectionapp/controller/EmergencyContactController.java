@@ -2,7 +2,9 @@ package com.example.falldetectionapp.controller;
 
 
 import com.example.falldetectionapp.model.EmergencyContact;
+import com.example.falldetectionapp.model.Program;
 import com.example.falldetectionapp.model.SharedPrefs;
+import com.example.falldetectionapp.model.User;
 import com.google.gson.Gson;
 
 import java.util.regex.Matcher;
@@ -53,10 +55,13 @@ public class EmergencyContactController {
             alertDialogMessage = alertDialogMessage + "Invalid telephone.\n";
             emergencyContactValidated = false;
         }
+        /*
         if (SharedPrefs.getString("EmergencyContact", email,null) != null) {
             alertDialogMessage = alertDialogMessage + "Registration invalid. Emergency Contact with this email already exists.\n";
             emergencyContactValidated = false;
         }
+        /*
+         */
         if (!emailMatcher.matches()) {
             alertDialogMessage = alertDialogMessage + "Invalid email.\n";
             emergencyContactValidated = false;
@@ -74,16 +79,10 @@ public class EmergencyContactController {
     }
 
 
-
-    public void storeNewEmergencyContact() {
-        EmergencyContact newEmContact = new EmergencyContact(name, telephone, email);
-
-        //Passing values to Shared Preferences
-        Gson gsonContact = new Gson();
-        String jsonContact = gsonContact.toJson(newEmContact);
-
-        //Passing the emContactID as the key value from the 'emContact' field inside the json
-        SharedPrefs.putString("EmergencyContact", newEmContact.email, jsonContact);
+    public void addNewEmergencyContact() {
+        Program program = Program.getInstance();
+        User currentUser = program.getCurrentUser();
+        currentUser.addEmContact(name, telephone, email);
     }
 
 

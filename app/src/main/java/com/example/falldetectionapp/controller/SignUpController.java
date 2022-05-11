@@ -61,7 +61,7 @@ public class SignUpController {
             alertDialogMessage = alertDialogMessage + "Registration invalid. Invalid email.\n";
             signUpValidated = false;
         }
-        if (SharedPrefs.getString("User", email,null) != null) {
+        if (SharedPrefs.getString(email,null) != null) {
             alertDialogMessage = alertDialogMessage + "Registration invalid. User with this email already exists.\n";
             signUpValidated = false;
         }
@@ -96,7 +96,7 @@ public class SignUpController {
         String json = gson.toJson(newUser);
 
         //Passing the user email as the key value from the 'user' field inside the json
-        SharedPrefs.putString("User", newUser.email, json);
+        SharedPrefs.putString(newUser.email, json);
     }
 
 }

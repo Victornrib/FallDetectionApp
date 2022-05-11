@@ -10,8 +10,6 @@ import java.util.Map;
 public class SharedPrefs {
 
     private static SharedPreferences sharedPreferencesUser;
-    private static SharedPreferences sharedPreferencesEmContact;
-    private static SharedPreferences sharedPreferencesDevice;
 
 
     //Needs to declare a custom constructor cause it has to be static
@@ -19,108 +17,36 @@ public class SharedPrefs {
     {
         if (sharedPreferencesUser == null)
             sharedPreferencesUser = context.getSharedPreferences(context.getPackageName()+"_user_preferences", Activity.MODE_PRIVATE);
-
-        if (sharedPreferencesEmContact == null)
-            sharedPreferencesEmContact = context.getSharedPreferences(context.getPackageName()+"_emergency_contact_preferences", Activity.MODE_PRIVATE);
-
-        if (sharedPreferencesDevice == null)
-            sharedPreferencesDevice = context.getSharedPreferences(context.getPackageName()+"_device_preferences", Activity.MODE_PRIVATE);
-    }
-    //are these if/else statements? and is package name fx "model"? - gwen
-
-
-    public static String getString(String entity, String key, String defValue) {
-
-        switch (entity) {
-
-            case ("User"):
-                return sharedPreferencesUser.getString(key, defValue);
-
-            case ("EmergencyContact"):
-                return sharedPreferencesEmContact.getString(key, defValue);
-
-            case ("Device"):
-                return sharedPreferencesDevice.getString(key, defValue);
-
-            default:
-                return null;
-        }
     }
 
 
-    public static void putString(String entity, String key, String value) {
+    public static String getString(String key, String defValue) {
+        return sharedPreferencesUser.getString(key, defValue);
+    }
 
-        switch (entity) {
 
-            case ("User"): {
-                SharedPreferences.Editor prefsEditorUser = sharedPreferencesUser.edit();
-                prefsEditorUser.putString(key, value);
-                prefsEditorUser.apply();
-                break;
-            }
-
-            case ("EmergencyContact"): {
-                SharedPreferences.Editor prefsEditorEmContact = sharedPreferencesEmContact.edit();
-                prefsEditorEmContact.putString(key, value);
-                prefsEditorEmContact.apply();
-                break;
-            }
-
-            case ("Device"): {
-                SharedPreferences.Editor prefsEditorDevice = sharedPreferencesDevice.edit();
-                prefsEditorDevice.putString(key, value);
-                prefsEditorDevice.apply();
-                break;
-            }
-        }
+    public static void putString(String key, String value) {
+        SharedPreferences.Editor prefsEditorUser = sharedPreferencesUser.edit();
+        prefsEditorUser.putString(key, value);
+        prefsEditorUser.apply();
     }
 
 
     //// Clear Preference ////
-    public static void clearPreference(String entity, Context context) {
-
-        switch (entity) {
-
-            case ("User"): {
-                sharedPreferencesUser.edit().clear().apply();
-                break;
-            }
-
-            case ("EmergencyContact"): {
-                sharedPreferencesEmContact.edit().clear().apply();
-                break;
-            }
-
-            case ("Device"): {
-                sharedPreferencesDevice.edit().clear().apply();
-                break;
-            }
-        }
+    public static void clearPreference(Context context) {
+        sharedPreferencesUser.edit().clear().apply();
     }
 
     //// Remove ////
     //for example to remove a user who has stopped with the device, or remove emergency contacts... -- Something like that...
     public static void removePreference(String entity, String Key){
-
-        switch (entity) {
-
-            case ("User"): {
-                sharedPreferencesUser.edit().remove(Key).apply();
-                break;
-            }
-
-            case ("EmergencyContact"): {
-                sharedPreferencesEmContact.edit().remove(Key).apply();
-                break;
-            }
-
-            case ("Device"): {
-                sharedPreferencesDevice.edit().remove(Key).apply();
-                break;
-            }
-        }
+        sharedPreferencesUser.edit().remove(Key).apply();
     }
 }
+
+
+
+
 
 
 
