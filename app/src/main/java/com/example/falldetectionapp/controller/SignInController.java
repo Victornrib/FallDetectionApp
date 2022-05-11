@@ -3,7 +3,7 @@ package com.example.falldetectionapp.controller;
 import com.example.falldetectionapp.model.SharedPrefs;
 import com.example.falldetectionapp.model.User;
 import com.google.gson.Gson;
-
+import com.example.falldetectionapp.model.Program;
 
 public class SignInController {
 
@@ -23,9 +23,9 @@ public class SignInController {
 
     public boolean checkSignInFields() {
         currentUser = getUser();
-
-        //Will pass the current user to the 'Program' class
-
+        Program program = Program.getInstance();
+        program.setCurrentUser(currentUser);
+        //returns true if sign in was valid.
         return currentUser != null;
     }
 

@@ -29,7 +29,7 @@ public class SharedPrefs {
     //are these if/else statements? and is package name fx "model"? - gwen
 
 
-    public static String getString(String entity, String key, String defValue) { //defValue is "default" or "defined"? -gwen -- It is the default value. I explained in a comment in the SignInScreenActivity class
+    public static String getString(String entity, String key, String defValue) {
 
         switch (entity) {
 

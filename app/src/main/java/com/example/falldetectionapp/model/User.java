@@ -2,7 +2,8 @@ package com.example.falldetectionapp.model;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Random;
-
+import com.example.falldetectionapp.model.SharedPrefs;
+import com.google.gson.Gson;
 
 public class User {
     public int userID; //would be nice to have a string so it is specific "user4053"
@@ -15,7 +16,8 @@ public class User {
     Time timeOfFall;
     boolean isConnected;
     boolean isEmContactVerified; //
-    ArrayList<Integer> EmContactsIDs;
+    //ArrayList<Integer> EmContactsIDs;
+    ArrayList<String> emContactEmails;
 
     public User(String name, String telephone, String email, String password) {
         this.name = name;
@@ -48,7 +50,19 @@ public class User {
 
     //check the list of emcontacts for specific user
     public ArrayList<EmergencyContact> checkEmContacts() {
-        return null;
+        ArrayList<EmergencyContact> emContactsList = new ArrayList<EmergencyContact>();
+        Gson gson = new Gson();
+
+        for (int i; i < emContactEmails.size(); i ++) {
+            String jsonRet = SharedPrefs.getString("EmergencyContact", emContactEmails.get(i), null);
+            if (jsonRet != null) {
+                EmergencyContact currentEmContact = gson.fromJson(jsonRet, EmergencyContact.class);
+                emContactsList.add(currentEmContact);
+            }
+        }
+
+        return emContactsList;
+
     };
 
     //getter???
