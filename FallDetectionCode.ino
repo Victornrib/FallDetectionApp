@@ -1,7 +1,39 @@
+//-----To set MPU6050-----
+//To see how to connect MPU to ESP32, see this link: https://www.electrorules.com/esp32-with-mpu6050-accelerometer-gyroscope-and-temperature-sensor-arduino-ide/
+
+//-----To configure blynk-----
+//Download the arduino ESP32 library from "Tools -> Manage Libraries..."
+//Then download the Blynk library from "Tools -> Manage Libraries..." or from this link https://github.com/blynkkk/blynk-library
+//Put the library folder inside the libraries folder from arduino
+//Download the blynk legacy app in your phone and create an account
+//Create a project and get the project token which will be sent to your email
+//Paste the authentication code inside the char auth[] string in the arduino code
+//In your phone, open your project add a notification and email receiver
+//Run your project in your phone
+
+//-----To set WiFi-----
+//Create a hotspot in your phone with a ssid and a password (Dont use spaces!)
+//Paste both of them in the ssid and pass strings in the arduino code
+
+//-----To run-----
+//Set the board to ESP32 Dev Module
+//Set your COM port (Whatever one is available)
+//Set Serial to 115200
+//Compile to your ESP32
+
+//-----To monitor-----
+//Open your Serial monitor
+//Open the 115200 baud
+//OBS: If nothing appears, press the reset (EN) button on the arduino
+
 #include <Wire.h>
 #define BLYNK_PRINT Serial
-#include <ESP8266WiFi.h>
-#include <BlynkSimpleEsp8266.h>
+#include <WiFi.h>
+#include <BlynkSimpleEsp32.h>
+
+//Code for making it work on the ESP8266
+//#include <ESP8266WiFi.h>
+//#include <BlynkSimpleEsp8266.h>
 
 const int MPU_addr = 0x68; // I2C address of the MPU-6050
 int16_t AcX, AcY, AcZ, Tmp, GyX, GyY, GyZ;
@@ -19,7 +51,11 @@ byte trigger3count = 0; //stores the counts past since trigger 3 was set true
 int angleChange = 0;
 
 // WiFi network info.
-char auth[] = "04lT0Ozxj2yIMh8MuyIphOnVucm8vArB"; //Auth code sent via Email
+
+//ESP-8266 Victor Token:04lT0Ozxj2yIMh8MuyIphOnVucm8vArB
+
+//ESP-32 Victor Token
+char auth[] = "YsSBnNK04as8fl0IVMJIiRERnBUpyIYd"; //Auth code sent via Email
 const char *ssid = "testXiaomi"; // Enter your Wi-Fi Name
 const char *pass = "Viniri00"; // Enter your Wi-Fi Password
 
