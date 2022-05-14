@@ -45,6 +45,8 @@ public class FallDetectedScreenActivity extends AppCompatActivity {
             }
         });
 
+        sendSMS(phoneNumber, message);
+
     }
 
     private void openInitialScreenActivity() {
