@@ -7,11 +7,14 @@ import org.junit.jupiter.api.Test;
 class UserTest {
 
 
-    @Test
-    void getEmContacts() {
-        //assertEquals(expected, result);
-
-    }
+//    @Test
+//    void getEmContacts() {
+//        User a = User(name, )
+//                a.alertEmContact();
+//
+//        //assertEquals(expected, result);
+//
+//    }
 
     @Test
     void getEmContactsError() {

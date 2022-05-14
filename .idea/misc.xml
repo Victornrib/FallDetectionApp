@@ -21,6 +21,7 @@
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/recycler_view_item.xml" value="0.22916666666666666" />
         <entry key="app/src/main/res/layout/activity_add_device_screen.xml" value="0.21105072463768115" />
         <entry key="app/src/main/res/layout/activity_emergency_contact.xml" value="0.21105072463768115" />
+        <entry key="app/src/main/res/layout/activity_fall_detected_screen.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/layout/activity_initial_screen.xml" value="0.21105072463768115" />
         <entry key="app/src/main/res/layout/activity_pair_device_screen.xml" value="0.21105072463768115" />
         <entry key="app/src/main/res/layout/activity_settings_screen.xml" value="0.25" />
