@@ -14,12 +14,12 @@ import java.util.regex.Pattern;
 
 public class EmergencyContactController {
 
-    String name;
-    String telephone;
-    String email;
+    public String name;
+    public String telephone;
+    public String email;
 
-    boolean emergencyContactValidated;
-    String alertDialogMessage = "";
+    public boolean emergencyContactValidated;
+    public String alertDialogMessage = "";
 
 
     public EmergencyContactController(String name, String telephone, String email) {

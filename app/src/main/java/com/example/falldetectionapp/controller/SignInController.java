@@ -7,9 +7,9 @@ import com.example.falldetectionapp.model.Program;
 
 public class SignInController {
 
-    String email;
-    String password;
-    User currentUser;
+    public String email;
+    public String password;
+    public User currentUser;
 
     private String alertDialogErrorMessage;
 
