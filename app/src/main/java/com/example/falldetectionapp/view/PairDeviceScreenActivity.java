@@ -11,8 +11,8 @@ import com.example.falldetectionapp.R;
 
 
 public class PairDeviceScreenActivity extends AppCompatActivity {
-    Button buttonBack;
-    Button buttonPairDevice;
+    private Button buttonBack;
+    private Button buttonPairDevice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

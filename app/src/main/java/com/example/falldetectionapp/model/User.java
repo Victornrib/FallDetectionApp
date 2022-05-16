@@ -12,8 +12,8 @@ public class User {
     public String telephone;
     public String email;
     public String password;
-    String wifiSSID;
-    String wifiPassword;
+//    String wifiSSID;
+//    String wifiPassword;
     Time timeOfFall;
     boolean isConnected;
     boolean isEmContactVerified; //

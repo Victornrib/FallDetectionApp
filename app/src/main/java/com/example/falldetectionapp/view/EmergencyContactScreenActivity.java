@@ -27,13 +27,13 @@ public class EmergencyContactScreenActivity extends AppCompatActivity {
     String name;
     String telephone;
     String email;
-    EditText editTextRegisterContactName;
-    EditText editTextRegisterContactTel;
-    EditText editTextRegisterContactEmail;
+    private EditText editTextRegisterContactName;
+    private EditText editTextRegisterContactTel;
+    private EditText editTextRegisterContactEmail;
 
     EmergencyContactController emergencyContactController;
 
-    AlertDialog alertDialog;
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
