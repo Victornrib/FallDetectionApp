@@ -240,7 +240,7 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
             try {
                 mmOutStream.write(msgBuffer);
             } catch (IOException e) {
-
+                //write error msgs
             }
         }
     }
