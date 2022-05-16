@@ -13,7 +13,9 @@ import android.widget.EditText;
 
 import com.example.falldetectionapp.R;
 import com.example.falldetectionapp.controller.SignInController;
-
+import com.example.falldetectionapp.model.User;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class SignInScreenActivity extends AppCompatActivity {
@@ -30,6 +32,7 @@ public class SignInScreenActivity extends AppCompatActivity {
     private AlertDialog alertDialog;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +42,8 @@ public class SignInScreenActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
 
                 //Getting email
                 editTextEmail = (EditText) findViewById(R.id.editTextEmail);
@@ -61,6 +66,7 @@ public class SignInScreenActivity extends AppCompatActivity {
             }
         });
     }
+
 
 
     private void generateErrorDialog() {

@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.falldetectionapp.R;
+import com.example.falldetectionapp.model.User;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpScreenActivity extends AppCompatActivity {
 
@@ -34,6 +37,9 @@ public class SignUpScreenActivity extends AppCompatActivity {
 
     AlertDialog alertDialog;
     SignUpController signUpController;
+
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
 
     //Button buttonForgottenPassword;
 
@@ -72,10 +78,18 @@ public class SignUpScreenActivity extends AppCompatActivity {
                 editTextRegisterUserRepeatedPassword = (EditText) findViewById(R.id.editTextRegisterUserRepeatedPassword);
                 repeatedPassword = editTextRegisterUserRepeatedPassword.getText().toString();
 
+                rootNode = FirebaseDatabase.getInstance();
+                reference = rootNode.getReference("Users");
+
                 //Needs to be instantiated on the onClick function because it has to get all the fields at the specific time of the click
                 signUpController = new SignUpController(name, telephone, email, password, repeatedPassword); //Can pass the context as well
 
                 generateDialog();
+
+
+                reference.setValue(signUpController);
+
+
             }
         });
     }

@@ -31,6 +31,10 @@ public class User {
         this.userID = random.nextInt(1000);
     }
 
+    public User(String email, String password) {
+
+    }
+
     //connects specific EmContact to specific user
     public void addEmContact(String name, String telephone, String email) {
         EmergencyContact newEmContact = new EmergencyContact(name, telephone, email);
@@ -51,16 +55,37 @@ public class User {
     public void alertEmContact() {};
 
 
+    public int getUserID() {
+        return userID;
+    }
 
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public String getTelephone() {
+        return telephone;
+    }
 
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 
+    public String getEmail() {
+        return email;
+    }
 
-
-
-
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
 
 }
