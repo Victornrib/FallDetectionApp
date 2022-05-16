@@ -219,12 +219,11 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
             while (true) {
                 try {
                     numBytes = mmInStream.read(mmBuffer);
-                    Message readMsg = handler.obtainMessage(
-                            0, numBytes, -1,
-                            mmBuffer);
-                    String message = readMsg.toString();
+                    Message readMsg = handler.obtainMessage(0, numBytes, -1,mmBuffer);
+                    //String message = readMsg.toString();
+                    //System.out.println(message);
                     //if (message.equals("0")) {
-                        System.out.println("\n\n\nFALL DETECTED\n\n\n");
+                        //System.out.println("\n\n\nFALL DETECTED\n\n\n");
                         //Toast.makeText(getApplicationContext(), "Fall Detected!", Toast.LENGTH_LONG).show();
                     //}
 
