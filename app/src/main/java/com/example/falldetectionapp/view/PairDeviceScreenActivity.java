@@ -15,6 +15,7 @@ import android.content.Intent;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
@@ -186,6 +187,7 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
         private final InputStream mmInStream;
         private final OutputStream mmOutStream;
         private byte[] mmBuffer; // mmBuffer store for the stream
+        private Handler handler;
 
         public ConnectedThread(BluetoothSocket socket) {
             //bluetoothSocket = socket;
@@ -217,6 +219,14 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
             while (true) {
                 try {
                     numBytes = mmInStream.read(mmBuffer);
+                    Message readMsg = handler.obtainMessage(
+                            0, numBytes, -1,
+                            mmBuffer);
+                    String message = readMsg.toString();
+                    //if (message.equals("0")) {
+                        System.out.println("\n\n\nFALL DETECTED\n\n\n");
+                        //Toast.makeText(getApplicationContext(), "Fall Detected!", Toast.LENGTH_LONG).show();
+                    //}
 
                 } catch (IOException e) {
                     break;
