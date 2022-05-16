@@ -1,6 +1,10 @@
 {
   "project_info": {
     "project_number": "867903176192",
+<<<<<<< Updated upstream
+=======
+    "firebase_url": "https://fall-detection-83eed-default-rtdb.europe-west1.firebasedatabase.app",
+>>>>>>> Stashed changes
     "project_id": "fall-detection-83eed",
     "storage_bucket": "fall-detection-83eed.appspot.com"
   },
