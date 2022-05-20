@@ -2,6 +2,8 @@ package com.example.falldetectionapp.controller;
 
 import com.example.falldetectionapp.model.SharedPrefs;
 import com.example.falldetectionapp.model.User;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.example.falldetectionapp.model.Program;
 
@@ -38,7 +40,10 @@ public class SignInController {
     private User getUser() {
 
         Gson gson = new Gson();
+
         String jsonRet = SharedPrefs.getString(email,null);
+
+
 
         if (jsonRet != null) {
             currentUser = gson.fromJson(jsonRet, User.class);

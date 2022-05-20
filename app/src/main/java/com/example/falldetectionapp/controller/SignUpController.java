@@ -2,6 +2,8 @@ package com.example.falldetectionapp.controller;
 
 import com.example.falldetectionapp.model.SharedPrefs;
 import com.example.falldetectionapp.model.User;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 import java.util.regex.Matcher;
@@ -14,6 +16,8 @@ public class SignUpController {
     private String email;
     private String password;
     private String repeatedPassword;
+    FirebaseDatabase rodeNode;
+    DatabaseReference reference;
 
     private boolean signUpValidated;
 
@@ -91,9 +95,15 @@ public class SignUpController {
     public void storeNewUser() {
         User newUser = new User(name, telephone, email, password);
 
+
         //Passing values to Shared Preferences
         Gson gson = new Gson();
         String json = gson.toJson(newUser);
+
+        rodeNode = FirebaseDatabase.getInstance();
+        reference = rodeNode.getReference();
+        reference.setValue(json);
+        
 
         //Passing the user email as the key value from the 'user' field inside the json
         SharedPrefs.putString(newUser.email, json);

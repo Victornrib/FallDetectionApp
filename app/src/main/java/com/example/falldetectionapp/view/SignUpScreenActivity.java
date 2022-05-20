@@ -15,14 +15,15 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.falldetectionapp.R;
+<<<<<<< Updated upstream
 import com.example.falldetectionapp.model.User;
+=======
+>>>>>>> Stashed changes
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpScreenActivity extends AppCompatActivity {
-
     Button buttonRegisterUser;
-
     EditText editTextRegisterUserName;
     EditText editTextRegisterUserTelephone;
     EditText editTextRegisterUserEmail;
