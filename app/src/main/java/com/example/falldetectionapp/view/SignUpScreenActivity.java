@@ -78,16 +78,12 @@ public class SignUpScreenActivity extends AppCompatActivity {
                 editTextRegisterUserRepeatedPassword = (EditText) findViewById(R.id.editTextRegisterUserRepeatedPassword);
                 repeatedPassword = editTextRegisterUserRepeatedPassword.getText().toString();
 
-                rootNode = FirebaseDatabase.getInstance();
-                reference = rootNode.getReference("Users");
-
-                //Needs to be instantiated on the onClick function because it has to get all the fields at the specific time of the click
-                signUpController = new SignUpController(name, telephone, email, password, repeatedPassword); //Can pass the context as well
-
                 generateDialog();
 
 
-                reference.setValue(signUpController);
+
+                //Needs to be instantiated on the onClick function because it has to get all the fields at the specific time of the click
+                signUpController = new SignUpController(name, telephone, email, password, repeatedPassword); //Can pass the context as well
 
 
             }
