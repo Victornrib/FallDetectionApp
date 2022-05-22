@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
@@ -39,6 +40,9 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
     private static final int REQUEST_BLUETOOTH_CONNECTION = 2;
 
     ConnectedThread connectedThread;
+
+    private static final String TAG = "Error";
+    private Handler handler; // handler that gets info from Bluetooth service
 
     private static String MAC_ADDRESS = null;
     UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
@@ -101,6 +105,13 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
                 }
             }
         });
+
+        handler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message message) {
+                Toast.makeText(getApplicationContext(), "Fall Detected", Toast.LENGTH_LONG).show();
+            }
+        };
 
         startBluetooth();
     }
@@ -183,14 +194,22 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
         }
     }
 
+    private interface MessageConstants {
+        public static final int MESSAGE_READ = 0;
+        public static final int MESSAGE_WRITE = 1;
+        public static final int MESSAGE_TOAST = 2;
+
+        // ... (Add other message types here as needed.)
+    }
+
     private class ConnectedThread extends Thread {
+        private final BluetoothSocket mmSocket;
         private final InputStream mmInStream;
         private final OutputStream mmOutStream;
         private byte[] mmBuffer; // mmBuffer store for the stream
-        private Handler handler;
 
         public ConnectedThread(BluetoothSocket socket) {
-            //bluetoothSocket = socket;
+            mmSocket = socket;
             InputStream tmpIn = null;
             OutputStream tmpOut = null;
 
@@ -199,12 +218,12 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
             try {
                 tmpIn = socket.getInputStream();
             } catch (IOException e) {
-
+                Log.e(TAG, "Error occurred when creating input stream", e);
             }
             try {
                 tmpOut = socket.getOutputStream();
             } catch (IOException e) {
-
+                Log.e(TAG, "Error occurred when creating output stream", e);
             }
 
             mmInStream = tmpIn;
@@ -218,28 +237,50 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
             // Keep listening to the InputStream until an exception occurs.
             while (true) {
                 try {
+                    // Read from the InputStream.
                     numBytes = mmInStream.read(mmBuffer);
-                    Message readMsg = handler.obtainMessage(0, numBytes, -1,mmBuffer);
-                    //String message = readMsg.toString();
-                    //System.out.println(message);
-                    //if (message.equals("0")) {
-                        //System.out.println("\n\n\nFALL DETECTED\n\n\n");
-                        //Toast.makeText(getApplicationContext(), "Fall Detected!", Toast.LENGTH_LONG).show();
-                    //}
-
+                    // Send the obtained bytes to the UI activity.
+                    Message readMsg = handler.obtainMessage(
+                            MessageConstants.MESSAGE_READ, numBytes, -1,
+                            mmBuffer);
+                    readMsg.sendToTarget();
                 } catch (IOException e) {
+                    Log.d(TAG, "Input stream was disconnected", e);
                     break;
                 }
             }
         }
 
         // Call this from the main activity to send data to the remote device.
-        public void write(String input) {
-            byte[] msgBuffer = input.getBytes();
+        public void write(String msg) {
             try {
-                mmOutStream.write(msgBuffer);
+                byte[] bytesMsg = msg.getBytes();
+                mmOutStream.write(bytesMsg);
+
+                // Share the sent message with the UI activity.
+                Message writtenMsg = handler.obtainMessage(
+                        MessageConstants.MESSAGE_WRITE, -1, -1, mmBuffer);
+                writtenMsg.sendToTarget();
             } catch (IOException e) {
-                //write error msgs
+                Log.e(TAG, "Error occurred when sending data", e);
+
+                // Send a failure message back to the activity.
+                Message writeErrorMsg =
+                        handler.obtainMessage(MessageConstants.MESSAGE_TOAST);
+                Bundle bundle = new Bundle();
+                bundle.putString("toast",
+                        "Couldn't send data to the other device");
+                writeErrorMsg.setData(bundle);
+                handler.sendMessage(writeErrorMsg);
+            }
+        }
+
+        // Call this method from the main activity to shut down the connection.
+        public void cancel() {
+            try {
+                mmSocket.close();
+            } catch (IOException e) {
+                Log.e(TAG, "Could not close the connect socket", e);
             }
         }
     }
