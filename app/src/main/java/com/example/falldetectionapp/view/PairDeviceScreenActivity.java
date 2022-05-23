@@ -36,7 +36,7 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
     Button buttonTestConnection;
 
     //Create alert dialog
-    AlertDialog alertDialog = new AlertDialog.Builder(PairDeviceScreenActivity.this).create();
+    AlertDialog alertDialog;
 
     private static final int REQUEST_BLUETOOTH_ACTIVATION = 1;
     private static final int REQUEST_BLUETOOTH_CONNECTION = 2;
@@ -51,6 +51,8 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pair_device_screen);
+
+        alertDialog = new AlertDialog.Builder(PairDeviceScreenActivity.this).create();
 
         pairDeviceController = new PairDeviceController(this, handler);
 
@@ -144,9 +146,9 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
                     try {
                         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
                             //All of this functions need to be in the view and not in controller, because they need the permission above, which has to be done in a view
-                            pairDeviceController.connectDevice();
                             buttonPairDevice.setText("Unpair");
                             pairDeviceController.bluetoothSocket = pairDeviceController.bluetoothDevice.createRfcommSocketToServiceRecord(pairDeviceController.uuid);
+                            pairDeviceController.connectDevice();
                             Toast.makeText(getApplicationContext(), "You have been connected with:\n" + pairDeviceController.MAC_ADDRESS, Toast.LENGTH_LONG).show();
                         }
                     } catch (IOException error) {

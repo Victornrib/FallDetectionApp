@@ -122,7 +122,7 @@ public class PairDeviceController {
                             MessageConstants.MESSAGE_READ, numBytes, -1,
                             mmBuffer);
                     readMsg.sendToTarget();
-                } catch (IOException e) {
+                } catch (IOException | NullPointerException e) {
                     Log.d(TAG, "Input stream was disconnected", e);
                     break;
                 }
