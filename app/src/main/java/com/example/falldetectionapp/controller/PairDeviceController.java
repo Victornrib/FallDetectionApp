@@ -57,7 +57,7 @@ public class PairDeviceController {
 
     public void connectDevice() {
         connected = true;
-        connectedThread = new PairDeviceController.ConnectedThread(bluetoothSocket);
+        connectedThread = new ConnectedThread(bluetoothSocket);
         connectedThread.start();
     }
 

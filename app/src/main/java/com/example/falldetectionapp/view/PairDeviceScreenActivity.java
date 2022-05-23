@@ -54,6 +54,16 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
 
         alertDialog = new AlertDialog.Builder(PairDeviceScreenActivity.this).create();
 
+        handler = new Handler(Looper.getMainLooper()) {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void handleMessage(Message message) {
+                Program program = Program.getInstance();
+                program.receiveAlert();
+                openFallDetectedScreenActivity();
+            }
+        };
+
         pairDeviceController = new PairDeviceController(this, handler);
 
         if (pairDeviceController.startBluetooth()) {
@@ -108,16 +118,6 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
                 }
             }
         });
-
-        handler = new Handler(Looper.getMainLooper()) {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void handleMessage(Message message) {
-                Program program = Program.getInstance();
-                program.receiveAlert();
-                openFallDetectedScreenActivity();
-            }
-        };
     }
 
 
@@ -148,6 +148,7 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
                             //All of this functions need to be in the view and not in controller, because they need the permission above, which has to be done in a view
                             buttonPairDevice.setText("Unpair");
                             pairDeviceController.bluetoothSocket = pairDeviceController.bluetoothDevice.createRfcommSocketToServiceRecord(pairDeviceController.uuid);
+                            pairDeviceController.bluetoothSocket.connect();
                             pairDeviceController.connectDevice();
                             Toast.makeText(getApplicationContext(), "You have been connected with:\n" + pairDeviceController.MAC_ADDRESS, Toast.LENGTH_LONG).show();
                         }
