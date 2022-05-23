@@ -74,18 +74,4 @@ public class User {
         String json = gson.toJson(this);
         SharedPrefs.putString(this.email,json);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "482816253238",
+    "project_id": "fallertapp",
+    "storage_bucket": "fallertapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482816253238:android:a3e2652e9c0d7878506797",
+        "android_client_info": {
+          "package_name": "com.example.falldetectionapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482816253238-kiirkflsum5juhnjj7nmaos9843dluam.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVQMrCdbRISBOwSmTvnBYMm5EzrFpKJyw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482816253238-kiirkflsum5juhnjj7nmaos9843dluam.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
