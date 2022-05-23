@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     //need to add remember login function
     public void changeToSpecifiedActivity() {
-        Intent intent = new Intent(this, PairDeviceScreenActivity.class);
+        Intent intent = new Intent(this, InitialScreenActivity.class);
         startActivity(intent);
     }
 

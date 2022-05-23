@@ -1,9 +1,14 @@
 package com.example.falldetectionapp.controller;
 
+import android.util.Log;
+
 import com.example.falldetectionapp.model.SharedPrefs;
 import com.example.falldetectionapp.model.User;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -90,13 +95,7 @@ public class SignUpController {
     //Send signal to view. Find a way to communicate both ways.
     public void storeNewUser() {
         User newUser = new User(name, telephone, email, password);
-
-        //Passing values to Shared Preferences
-        Gson gson = new Gson();
-        String json = gson.toJson(newUser);
-
-        //Passing the user email as the key value from the 'user' field inside the json
-        SharedPrefs.putString(newUser.email, json);
+        newUser.storeUser();
     }
 
 }

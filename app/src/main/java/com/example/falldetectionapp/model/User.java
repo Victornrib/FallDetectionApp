@@ -1,4 +1,6 @@
 package com.example.falldetectionapp.model;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 import java.sql.Time;
@@ -12,12 +14,10 @@ public class User {
     public String telephone;
     public String email;
     public String password;
-//    String wifiSSID;
-//    String wifiPassword;
-    Time timeOfFall;
     boolean isConnected;
-    boolean isEmContactVerified; //
+    boolean isEmContactVerified;
     private ArrayList<EmergencyContact> emContacts;
+    protected ArrayList<Device> pairedDevices;
 
     public User(String name, String telephone, String email, String password) {
         this.name = name;
@@ -31,15 +31,14 @@ public class User {
         this.userID = random.nextInt(1000);
     }
 
+
+    //-----Emergency Contact-----
+
     //connects specific EmContact to specific user
     public void addEmContact(String name, String telephone, String email) {
         EmergencyContact newEmContact = new EmergencyContact(name, telephone, email);
         emContacts.add(newEmContact);
-
-        //Passing values to Shared Preferences
-        Gson gson = new Gson();
-        String json = gson.toJson(this);
-        SharedPrefs.putString(this.email,json);
+        storeUser();
     };
 
     //check the list of emContacts for specific user
@@ -47,8 +46,34 @@ public class User {
         return emContacts;
     };
 
+    public void alertEmContact(String emContactEmail) {};
 
-    public void alertEmContact() {};
+
+    //-----Device-----
+
+    public void addDevice(String DeviceName, String MAC_ADDRESS) {
+        Device newDevice = new Device(DeviceName, MAC_ADDRESS);
+        pairedDevices.add(newDevice);
+        storeUser();
+    }
+
+    public ArrayList<Device> returnPairedDevices() { return pairedDevices; }
+
+
+    //-----User-----
+
+    public void storeUser() {
+        //Getting reference to firebase
+        DatabaseReference firebaseReference = FirebaseDatabase.getInstance().getReference();
+
+        //Adding to firebase (Replacing "." with "," because firebase doesn't allow child names with ".")
+        firebaseReference.child("Users").child(this.email.replace(".",",")).setValue(this);
+
+        //Passing values to Shared Preferences
+        Gson gson = new Gson();
+        String json = gson.toJson(this);
+        SharedPrefs.putString(this.email,json);
+    }
 
 
 

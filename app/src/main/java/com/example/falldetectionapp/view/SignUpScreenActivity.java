@@ -93,6 +93,8 @@ public class SignUpScreenActivity extends AppCompatActivity {
 
         if (registrationValid) {
             alertDialog.setTitle("Registration successful");
+            //Store new user
+            signUpController.storeNewUser();
         }
         else {
             alertDialog.setTitle("Error");
@@ -108,9 +110,6 @@ public class SignUpScreenActivity extends AppCompatActivity {
 
                 //If all fields are valid
                 if (registrationValid) {
-
-                    //Store new user
-                    signUpController.storeNewUser();
 
                     //Switch to next activity
                     openInitialScreenActivity();

@@ -38,6 +38,9 @@
             android:name=".view.SignInScreenActivity"
             android:exported="false" />
         <activity
+            android:name=".view.FallDetectedScreenActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.DeviceListActivity"
             android:exported="false"
             android:theme="@android:style/Theme.Dialog"

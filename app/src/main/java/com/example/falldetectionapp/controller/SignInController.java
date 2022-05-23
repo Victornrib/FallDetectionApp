@@ -1,7 +1,14 @@
 package com.example.falldetectionapp.controller;
 
+import androidx.annotation.NonNull;
+
 import com.example.falldetectionapp.model.SharedPrefs;
 import com.example.falldetectionapp.model.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.example.falldetectionapp.model.Program;
 
@@ -36,6 +43,20 @@ public class SignInController {
 
 
     private User getUser() {
+
+        /*
+        DatabaseReference firebaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        firebaseReference.addChildEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String potentialUser = snapshot.getValue().toString();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+         */
 
         Gson gson = new Gson();
         String jsonRet = SharedPrefs.getString(email,null);

@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.falldetectionapp.R;
+import com.example.falldetectionapp.model.EmergencyContact;
+import com.example.falldetectionapp.model.Program;
 
 public class FallDetectedScreenActivity extends AppCompatActivity {
 
@@ -83,12 +85,17 @@ public class FallDetectedScreenActivity extends AppCompatActivity {
     }
 
     private void sendSMS() {
-        String phoneNumber = "004528213929";
-        String message = "you sent an sms!";
-
+        Program program = Program.getInstance();
         SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(phoneNumber, null, message, null, null);
-        Toast.makeText(this, "SMS sent", Toast.LENGTH_LONG).show();
+
+        for (int i = 0; i < program.getCurrentUser().getEmContacts().size(); i++) {
+            EmergencyContact currentEmContact = program.getCurrentUser().getEmContacts().get(i);
+            String emContactPhoneNumber = currentEmContact.telephone;
+            String message = "Attention " + currentEmContact.name + ": " + program.getCurrentUser().name + " felt!\nPlease take action now!";
+            smsManager.sendTextMessage(emContactPhoneNumber, null, message, null, null);
+        }
+
+        Toast.makeText(this, "SMS sent to all emergency contacts", Toast.LENGTH_LONG).show();
     }
 }
 

@@ -1,12 +1,18 @@
 package com.example.falldetectionapp.model;
 
-import com.google.gson.Gson;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 import java.sql.Time;
 
 public class Program {
-    static Program program;
+    private static Program program;
     private User currentUser;
+    private boolean fallDetected = false;
 
     private Program() {
 
@@ -59,7 +65,15 @@ public class Program {
 
     //activated when fall is detected
     //activated by controller right? -Gwen
-    public void receiveAlert(Time timeOfFall) {
-        //if (Device.fallDetected == true) { putString(Device, date, time) }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void receiveAlert() {
+        fallDetected = true;
+
+        //Get time
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime currentTime = LocalDateTime.now();
+        System.out.println(dtf.format(currentTime));
     };
 }

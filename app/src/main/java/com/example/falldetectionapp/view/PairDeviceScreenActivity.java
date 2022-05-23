@@ -2,6 +2,7 @@ package com.example.falldetectionapp.view;
 
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -14,6 +15,7 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -24,6 +26,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.falldetectionapp.R;
+import com.example.falldetectionapp.model.Program;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -107,9 +110,13 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
         });
 
         handler = new Handler(Looper.getMainLooper()) {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void handleMessage(Message message) {
-                Toast.makeText(getApplicationContext(), "Fall Detected", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Fall Detected", Toast.LENGTH_LONG).show();
+                Program program = Program.getInstance();
+                program.receiveAlert();
+                openFallDetectedScreenActivity();
             }
         };
 
@@ -119,6 +126,16 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
     private void openAddDeviceScreenActivity() {
         Intent intent = new Intent(this, AddDeviceScreenActivity.class);
         startActivity(intent);
+    }
+
+    private void openFallDetectedScreenActivity() {
+        try {
+            //Toast.makeText(getApplicationContext(), "Going to change screen", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, FallDetectedScreenActivity.class);
+            startActivity(intent);
+        } catch (NullPointerException error) {
+            Log.e(TAG, "Error changing screen", error);
+        }
     }
 
 
@@ -166,6 +183,7 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
                 if (resultCode == Activity.RESULT_OK) {
 
                     MAC_ADDRESS = data.getExtras().getString(DeviceListActivity.MAC_ADDRESS);
+
                     //Toast.makeText(getApplicationContext(), "Success obtaining MAC ADDRESS:\n" + MAC_ADDRESS, Toast.LENGTH_LONG).show();
 
                     bluetoothDevice = bluetoothAdapter.getRemoteDevice(MAC_ADDRESS);
