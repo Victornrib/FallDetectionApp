@@ -21,7 +21,7 @@ import java.util.Set;
 public class DeviceListActivity extends ListActivity {
 
     private BluetoothAdapter bluetoothAdapter = null;
-    static String MAC_ADDRESS = null;
+    public static String MAC_ADDRESS = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
