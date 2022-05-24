@@ -1,4 +1,6 @@
 package com.example.falldetectionapp.model;
+import android.util.Log;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
@@ -16,15 +18,14 @@ public class User {
     public String password;
     boolean isConnected;
     boolean isEmContactVerified;
-    private ArrayList<EmergencyContact> emContacts;
-    protected ArrayList<Device> pairedDevices;
+    private ArrayList<EmergencyContact> emContacts = new ArrayList<EmergencyContact>();
+    private ArrayList<Device> pairedDevices = new ArrayList<Device>();
 
     public User(String name, String telephone, String email, String password) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;
         this.password = password;
-        this.emContacts = new ArrayList<EmergencyContact>();
 
         //need to add check in the system all ID's and guarantee it is a unique ID
         Random random = new Random();
@@ -52,6 +53,12 @@ public class User {
     //-----Device-----
 
     public void addDevice(String DeviceName, String MAC_ADDRESS) {
+        if (this.pairedDevices.size() > 0) {
+            for (int i = 0; i < this.pairedDevices.size(); i++) {
+                if (MAC_ADDRESS.equals(pairedDevices.get(i).MAC_ADDRESS))
+                    return;
+            }
+        }
         Device newDevice = new Device(DeviceName, MAC_ADDRESS);
         pairedDevices.add(newDevice);
         storeUser();

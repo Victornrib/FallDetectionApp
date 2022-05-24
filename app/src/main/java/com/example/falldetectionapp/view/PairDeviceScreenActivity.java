@@ -136,10 +136,8 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
             case REQUEST_BLUETOOTH_CONNECTION:
 
                 if (resultCode == Activity.RESULT_OK) {
-
-                    pairDeviceController.getDevice(data);
                     try {
-                        pairDeviceController.connectDevice();
+                        pairDeviceController.connectDevice(data);
                         Toast.makeText(getApplicationContext(), "You have been connected with:\n" + pairDeviceController.MAC_ADDRESS, Toast.LENGTH_LONG).show();
                     } catch (IOException error) {
                         pairDeviceController.connected = false;

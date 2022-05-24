@@ -14,6 +14,8 @@ import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 
+import com.example.falldetectionapp.model.Program;
+import com.example.falldetectionapp.model.User;
 import com.example.falldetectionapp.view.DeviceListActivity;
 
 import java.io.IOException;
@@ -39,30 +41,38 @@ public class PairDeviceController {
 
     public boolean connected = false;
 
+
     public PairDeviceController(Context context, Handler handler) {
         this.context = context;
         this.handler = handler;
     }
 
     public boolean startBluetooth() {
-
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         return bluetoothAdapter != null;
     }
 
-    public void getDevice(Intent data) {
-        MAC_ADDRESS = data.getExtras().getString(DeviceListActivity.MAC_ADDRESS);
+    public boolean getDevice(Intent data) {
+        MAC_ADDRESS = data.getExtras().getString("MAC_ADDRESS");
         bluetoothDevice = bluetoothAdapter.getRemoteDevice(MAC_ADDRESS);
+        return bluetoothDevice != null;
     }
 
-    public void connectDevice() throws IOException {
-        if (ActivityCompat.checkSelfPermission(this.context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-            bluetoothSocket = bluetoothDevice.createRfcommSocketToServiceRecord(uuid);
-            bluetoothSocket.connect();
-            connected = true;
-            connectedThread = new ConnectedThread(bluetoothSocket);
-            connectedThread.start();
-        }
+    public void connectDevice(Intent data) throws IOException {
+        if (getDevice(data)) {
+            if (ActivityCompat.checkSelfPermission(this.context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+
+                bluetoothSocket = bluetoothDevice.createRfcommSocketToServiceRecord(uuid);
+                bluetoothSocket.connect();
+                connected = true;
+
+                String deviceName = data.getExtras().getString("DEVICE_NAME");
+                addDevice(deviceName);
+
+                connectedThread = new ConnectedThread(bluetoothSocket);
+                connectedThread.start();
+            }
+        };
     }
 
     public void disconnectDevice() {
@@ -73,6 +83,13 @@ public class PairDeviceController {
         catch (IOException error) {
             Log.e(TAG, "An error has occurred:\n" + error, error);
         }
+    }
+
+    private void addDevice(String deviceName) {
+        //Adding the device to the current user
+        Program program = Program.getInstance();
+        User currentUser = program.getCurrentUser();
+        currentUser.addDevice(deviceName, MAC_ADDRESS);
     }
 
 

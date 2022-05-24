@@ -15,13 +15,13 @@ import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 
 public class DeviceListActivity extends ListActivity {
 
     private BluetoothAdapter bluetoothAdapter = null;
-    public static String MAC_ADDRESS = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +31,6 @@ public class DeviceListActivity extends ListActivity {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
             if (pairedDevices.size() > 0) {
                 for (BluetoothDevice device : pairedDevices) {
@@ -57,13 +50,20 @@ public class DeviceListActivity extends ListActivity {
         String generalInformation = ((TextView) v).getText().toString();
         //Toast.makeText(getApplicationContext(), "Info:\n" + generalInformation, Toast.LENGTH_LONG).show();
 
+        String deviceName = generalInformation.substring(0, generalInformation.length() - 18);
+        //Toast.makeText(getApplicationContext(), "Device name:\n" + deviceName, Toast.LENGTH_LONG).show();
+
         String macAddress = generalInformation.substring(generalInformation.length() - 17);
         //Toast.makeText(getApplicationContext(), "MAC ADDRESS:\n" + macAddress, Toast.LENGTH_LONG).show();
 
-        Intent returnMacAddress = new Intent();
-        returnMacAddress.putExtra(MAC_ADDRESS, macAddress);
+        Bundle bundleDeviceProperties = new Bundle();
+        bundleDeviceProperties.putString("DEVICE_NAME", deviceName);
+        bundleDeviceProperties.putString("MAC_ADDRESS", macAddress);
 
-        setResult(RESULT_OK, returnMacAddress);
+        Intent returnDeviceProperties = new Intent();
+        returnDeviceProperties.putExtras(bundleDeviceProperties);
+
+        setResult(RESULT_OK, returnDeviceProperties);
         finish();
     }
 }
