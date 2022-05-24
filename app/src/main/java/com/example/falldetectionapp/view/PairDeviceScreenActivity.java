@@ -73,9 +73,7 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
             }
         }
         else {
-            alertDialog.setTitle("Error");
-            alertDialog.setMessage("Your device doesn't have bluetooth");
-            alertDialog.show();
+            Toast.makeText(getApplicationContext(), "Your device doesn't have bluetooth", Toast.LENGTH_LONG).show();
         }
 
         //click back --> goes back to add device
@@ -129,36 +127,26 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
 
             case REQUEST_BLUETOOTH_ACTIVATION:
                 if (resultCode == Activity.RESULT_OK) {
-                    alertDialog.setTitle("Success");
-                    alertDialog.setMessage("Bluetooth activated");
-                    alertDialog.show();
+                    Toast.makeText(getApplicationContext(), "Bluetooth activated", Toast.LENGTH_LONG).show();
                 } else {
-                    alertDialog.setTitle("Error");
-                    alertDialog.setMessage("Bluetooth wasn't activated");
-                    alertDialog.show();
+                    Toast.makeText(getApplicationContext(), "Bluetooth wasn't activated", Toast.LENGTH_LONG).show();
                 }
                 break;
 
             case REQUEST_BLUETOOTH_CONNECTION:
-                if (resultCode == Activity.RESULT_OK) {
-                    pairDeviceController.getDevice(data);
 
+                if (resultCode == Activity.RESULT_OK) {
+
+                    pairDeviceController.getDevice(data);
                     try {
-                        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                            //All of this functions need to be in the view and not in controller, because they need the permission above, which has to be done in a view
-                            buttonPairDevice.setText("Unpair");
-                            pairDeviceController.bluetoothSocket = pairDeviceController.bluetoothDevice.createRfcommSocketToServiceRecord(pairDeviceController.uuid);
-                            pairDeviceController.bluetoothSocket.connect();
-                            pairDeviceController.connectDevice();
-                            Toast.makeText(getApplicationContext(), "You have been connected with:\n" + pairDeviceController.MAC_ADDRESS, Toast.LENGTH_LONG).show();
-                        }
+                        pairDeviceController.connectDevice();
+                        Toast.makeText(getApplicationContext(), "You have been connected with:\n" + pairDeviceController.MAC_ADDRESS, Toast.LENGTH_LONG).show();
                     } catch (IOException error) {
                         pairDeviceController.connected = false;
                         Toast.makeText(getApplicationContext(), "An error has occurred:\n" + error, Toast.LENGTH_LONG).show();
                     }
-
-
-                } else {
+                }
+                else {
                     Toast.makeText(getApplicationContext(), "Didn't receive MAC ADDRESS", Toast.LENGTH_LONG).show();
                 }
         }

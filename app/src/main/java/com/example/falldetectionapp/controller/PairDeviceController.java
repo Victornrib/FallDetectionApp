@@ -1,14 +1,19 @@
 package com.example.falldetectionapp.controller;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+
+import androidx.core.app.ActivityCompat;
+
 import com.example.falldetectionapp.view.DeviceListActivity;
 
 import java.io.IOException;
@@ -42,12 +47,7 @@ public class PairDeviceController {
     public boolean startBluetooth() {
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (bluetoothAdapter == null) {
-            return false;
-        }
-        else {
-            return true;
-        }
+        return bluetoothAdapter != null;
     }
 
     public void getDevice(Intent data) {
@@ -55,10 +55,14 @@ public class PairDeviceController {
         bluetoothDevice = bluetoothAdapter.getRemoteDevice(MAC_ADDRESS);
     }
 
-    public void connectDevice() {
-        connected = true;
-        connectedThread = new ConnectedThread(bluetoothSocket);
-        connectedThread.start();
+    public void connectDevice() throws IOException {
+        if (ActivityCompat.checkSelfPermission(this.context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+            bluetoothSocket = bluetoothDevice.createRfcommSocketToServiceRecord(uuid);
+            bluetoothSocket.connect();
+            connected = true;
+            connectedThread = new ConnectedThread(bluetoothSocket);
+            connectedThread.start();
+        }
     }
 
     public void disconnectDevice() {
