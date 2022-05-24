@@ -66,14 +66,15 @@ public class Program {
     //activated when fall is detected
     //activated by controller right? -Gwen
 
-
+    //returns date and time of alert
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void receiveAlert() {
+    public LocalDateTime receiveAlert() {
         fallDetected = true;
 
         //Get time
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime currentTime = LocalDateTime.now();
         System.out.println(dtf.format(currentTime));
+        return currentTime;
     };
 }

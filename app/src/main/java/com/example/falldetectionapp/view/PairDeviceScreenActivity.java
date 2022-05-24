@@ -114,8 +114,10 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
             @Override
             public void handleMessage(Message message) {
                 //Toast.makeText(getApplicationContext(), "Fall Detected", Toast.LENGTH_LONG).show();
-                Program program = Program.getInstance();
-                program.receiveAlert();
+
+                //should only call the fall detected activity instead of receiveAlart
+                //Program program = Program.getInstance();
+                //program.receiveAlert();
                 openFallDetectedScreenActivity();
             }
         };

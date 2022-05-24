@@ -1,5 +1,6 @@
 package com.example.falldetectionapp.view;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -12,13 +13,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.falldetectionapp.R;
+import com.example.falldetectionapp.controller.FallDetectedController;
+import com.example.falldetectionapp.controller.SignInController;
 import com.example.falldetectionapp.model.EmergencyContact;
 import com.example.falldetectionapp.model.Program;
 
@@ -26,15 +31,22 @@ public class FallDetectedScreenActivity extends AppCompatActivity {
 
     private Button buttonSignOut;
     private Button buttonSettings;
+    private String textViewTimeFall;
+
+    private FallDetectedController fallDetectedController;
+
     //private String phoneNumber;
     //private String message;
     //private static final int REQUEST_CODE = 1;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fall_detected_screen);
+
+        fallDetectedController = new FallDetectedController();
 
         //when you click sign out, you go back to initial screen
         buttonSignOut = (Button) findViewById(R.id.buttonSignOut);
@@ -54,7 +66,12 @@ public class FallDetectedScreenActivity extends AppCompatActivity {
             }
         });
 
-        //give permission
+        //is this how i call this method? does it change the text automatically, or do we need to make a loop to check constantly if the text changed
+        getTimeOfFallText();
+
+        //not sure how to change the actual text of the TextView???
+
+
         if (ContextCompat.checkSelfPermission(FallDetectedScreenActivity.this, Manifest.permission.SEND_SMS)
                 == PackageManager.PERMISSION_GRANTED) {
             sendSMS();
@@ -62,17 +79,6 @@ public class FallDetectedScreenActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(FallDetectedScreenActivity.this, new String[]{Manifest.permission.SEND_SMS}, 100);
         }
     }
-
-    //code from https://www.youtube.com/watch?v=ofAL1C4jUJw
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-            if(requestCode == 100 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                sendSMS();
-            } else {
-                Toast.makeText(this, "Permission denied", Toast.LENGTH_LONG).show();
-            }
-        }
 
     private void openInitialScreenActivity() {
         Intent intent = new Intent(this, InitialScreenActivity.class);
@@ -84,6 +90,30 @@ public class FallDetectedScreenActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //this should be here or in the onCreate??
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public String getTimeOfFallText() {
+        if (fallDetectedController.checkTimeOfAlert()) {
+            textViewTimeFall = fallDetectedController.timeOfAlertMessage;
+        }
+        return textViewTimeFall;
+    }
+
+//    //move to controller
+    //why do we call sms twice in this class???!??
+    
+//    //code from https://www.youtube.com/watch?v=ofAL1C4jUJw
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            if(requestCode == 100 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                sendSMS();
+            } else {
+                Toast.makeText(this, "Permission denied", Toast.LENGTH_LONG).show();
+            }
+        }
+
+    //move to controller
     private void sendSMS() {
         Program program = Program.getInstance();
         SmsManager smsManager = SmsManager.getDefault();
@@ -107,106 +137,3 @@ public class FallDetectedScreenActivity extends AppCompatActivity {
 //    }
 
 
-
-
-//Part of the code that deals with the permissions from the manifest
-// When this code is uncommented it doesn't give an error message but also doesn't work
-//You will need to research a bit
-
-        /*
-
-        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) +
-                ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS))
-                != PackageManager.PERMISSION_GRANTED) {
-
-                // Permission is not granted
-                // Should we show an explanation?
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,"Manifest.permission.READ_SMS") ||
-                    ActivityCompat.shouldShowRequestPermissionRationale(this,"Manifest.permission.READ_SMS")) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-            } else {
-
-                // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(this,
-                        new String[]{"Manifest.permission.READ_SMS, Manifest.permission.SEND_SMS"},
-                        REQUEST_CODE);
-
-                // REQUEST_CODE is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
-        }
-
-        else {
-            // Permission has already been granted
-        }
-
-         */
-//
-//    private void sendSMS(String phoneNumber, String message) {
-//
-//        String SENT = "SMS_SENT";
-//        String DELIVERED = "SMS_DELIVERED";
-//
-//        PendingIntent sentPI = PendingIntent.getBroadcast(this, 0, new Intent(SENT), 0);
-//        PendingIntent deliveredPI = PendingIntent.getBroadcast(this, 0, new Intent(DELIVERED), 0);
-//
-//        // ---when the SMS has been sent---
-//        registerReceiver(new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context arg0, Intent arg1) {
-//                switch (getResultCode()) {
-//                    case Activity.RESULT_OK:
-//                        Toast.makeText(getBaseContext(), "SMS sent",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
-//                        Toast.makeText(getBaseContext(), "Generic failure",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case SmsManager.RESULT_ERROR_NO_SERVICE:
-//                        Toast.makeText(getBaseContext(), "No service",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case SmsManager.RESULT_ERROR_NULL_PDU:
-//                        Toast.makeText(getBaseContext(), "Null PDU",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case SmsManager.RESULT_ERROR_RADIO_OFF:
-//
-//                        Toast.makeText(getBaseContext(), "Radio off",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                }
-//            }
-//        }, new IntentFilter(SENT));
-//
-//        /*
-//
-//        // ---when the SMS has been delivered---
-//        registerReceiver(new BroadcastReceiver() {
-//            @Override
-//            public void onReceive(Context arg0, Intent arg1) {
-//                switch (getResultCode()) {
-//                    case Activity.RESULT_OK:
-//                        Toast.makeText(getBaseContext(), "SMS delivered",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case Activity.RESULT_CANCELED:
-//                        Toast.makeText(getBaseContext(), "SMS not delivered",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                }
-//            }
-//        }, new IntentFilter(DELIVERED));
-//
-//        */
-//
-//        SmsManager sms = SmsManager.getDefault();
-//        sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);
-//    }

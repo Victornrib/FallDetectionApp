@@ -51,7 +51,6 @@ public class SignInScreenActivity extends AppCompatActivity {
                 //Instantiating SignInController
                 signInController = new SignInController(email, password);
 
-
                 if (signInController.checkSignInFields()) {
                     openAddDeviceScreenActivity();
                 }
