@@ -18,8 +18,8 @@ public class User {
     public String password;
     boolean isConnected;
     boolean isEmContactVerified;
-    private ArrayList<EmergencyContact> emContacts = new ArrayList<EmergencyContact>();
-    private ArrayList<Device> pairedDevices = new ArrayList<Device>();
+    public ArrayList<EmergencyContact> emContacts = new ArrayList<EmergencyContact>();
+    public ArrayList<Device> pairedDevices = new ArrayList<Device>();
 
     public User(String name, String telephone, String email, String password) {
         this.name = name;
