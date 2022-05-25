@@ -41,9 +41,6 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
     private static final int REQUEST_BLUETOOTH_ACTIVATION = 1;
     private static final int REQUEST_BLUETOOTH_CONNECTION = 2;
 
-    //Create handler for dealing with messages
-    Handler handler;
-
     PairDeviceController pairDeviceController;
 
 
@@ -54,17 +51,7 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
 
         alertDialog = new AlertDialog.Builder(PairDeviceScreenActivity.this).create();
 
-        handler = new Handler(Looper.getMainLooper()) {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void handleMessage(Message message) {
-                Program program = Program.getInstance();
-                program.receiveAlert();
-                openFallDetectedScreenActivity();
-            }
-        };
-
-        pairDeviceController = new PairDeviceController(this, handler);
+        pairDeviceController = new PairDeviceController(this);
 
         if (pairDeviceController.startBluetooth()) {
             Intent activateBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
@@ -109,7 +96,7 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (pairDeviceController.connected) {
-                    pairDeviceController.connectedThread.write("Alert");
+                    Program.getInstance().writeToBluetoothConnectedThread("Alert");
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Bluetooth is not connected", Toast.LENGTH_LONG).show();
@@ -118,6 +105,12 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        Program.getInstance().setCurrentActivity(this);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -138,6 +131,7 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
                 if (resultCode == Activity.RESULT_OK) {
                     try {
                         pairDeviceController.connectDevice(data);
+                        buttonPairDevice.setText("Unpair");
                         Toast.makeText(getApplicationContext(), "You have been connected with:\n" + pairDeviceController.MAC_ADDRESS, Toast.LENGTH_LONG).show();
                     } catch (IOException error) {
                         pairDeviceController.connected = false;
@@ -153,12 +147,6 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
 
     private void openAddDeviceScreenActivity() {
         Intent intent = new Intent(this, AddDeviceScreenActivity.class);
-        startActivity(intent);
-    }
-
-
-    private void openFallDetectedScreenActivity() {
-        Intent intent = new Intent(this, FallDetectedScreenActivity.class);
         startActivity(intent);
     }
 }

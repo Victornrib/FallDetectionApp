@@ -14,6 +14,7 @@ import android.widget.EditText;
 import com.example.falldetectionapp.R;
 import com.example.falldetectionapp.controller.EmergencyContactController;
 import com.example.falldetectionapp.model.EmergencyContact;
+import com.example.falldetectionapp.model.Program;
 import com.example.falldetectionapp.model.SharedPrefs;
 import com.example.falldetectionapp.model.User;
 import com.google.gson.Gson;
@@ -70,6 +71,13 @@ public class EmergencyContactScreenActivity extends AppCompatActivity {
                 generateDialog();
             }
         });
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        Program.getInstance().setCurrentActivity(this);
     }
 
 

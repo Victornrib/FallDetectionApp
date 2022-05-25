@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.example.falldetectionapp.R;
 import com.example.falldetectionapp.model.EmergencyContact;
+import com.example.falldetectionapp.model.Program;
 import com.example.falldetectionapp.model.SharedPrefs;
 import com.example.falldetectionapp.model.User;
 import com.google.gson.Gson;
@@ -56,6 +57,13 @@ public class SettingsScreenActivity extends AppCompatActivity {
                 openEmergencyContactScreenActivity();
             }
         });
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        Program.getInstance().setCurrentActivity(this);
     }
 
     private void openAddDeviceScreenActivity() {

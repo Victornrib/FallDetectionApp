@@ -13,7 +13,7 @@ import android.widget.EditText;
 
 import com.example.falldetectionapp.R;
 import com.example.falldetectionapp.controller.SignInController;
-
+import com.example.falldetectionapp.model.Program;
 
 
 public class SignInScreenActivity extends AppCompatActivity {
@@ -62,6 +62,12 @@ public class SignInScreenActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        Program.getInstance().setCurrentActivity(this);
+    }
 
     private void generateErrorDialog() {
 

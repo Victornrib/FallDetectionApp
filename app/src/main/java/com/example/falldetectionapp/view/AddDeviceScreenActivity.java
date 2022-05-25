@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.falldetectionapp.R;
+import com.example.falldetectionapp.model.Program;
 
 public class AddDeviceScreenActivity extends AppCompatActivity {
     private Button buttonSignOut;
@@ -47,6 +48,13 @@ public class AddDeviceScreenActivity extends AppCompatActivity {
                 openPairDeviceScreenActivity();
             }
         });
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        Program.getInstance().setCurrentActivity(this);
     }
 
     private void openInitialScreenActivity() {

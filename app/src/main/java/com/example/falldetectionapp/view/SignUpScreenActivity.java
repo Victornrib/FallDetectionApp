@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.falldetectionapp.R;
+import com.example.falldetectionapp.model.Program;
 
 public class SignUpScreenActivity extends AppCompatActivity {
 
@@ -80,6 +81,12 @@ public class SignUpScreenActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        Program.getInstance().setCurrentActivity(this);
+    }
 
     public void generateDialog() {
 
