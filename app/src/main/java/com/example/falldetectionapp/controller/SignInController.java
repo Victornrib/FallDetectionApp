@@ -1,5 +1,7 @@
 package com.example.falldetectionapp.controller;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.falldetectionapp.model.SharedPrefs;
@@ -45,18 +47,21 @@ public class SignInController {
     private User getUser() {
 
         /*
-        DatabaseReference firebaseReference = FirebaseDatabase.getInstance().getReference("Users");
-        firebaseReference.addChildEventListener(new ValueEventListener() {
+        DatabaseReference firebaseUserReference = FirebaseDatabase.getInstance().getReference("Users").child(email.replace(".",","));
+        ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String potentialUser = snapshot.getValue().toString();
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                System.out.println(user.email);
             }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("Error", databaseError.getMessage()); //Don't ignore errors!
             }
-        });
-        */
+        };
+        firebaseUserReference.addListenerForSingleValueEvent(valueEventListener);
+         */
 
         Gson gson = new Gson();
         String jsonRet = SharedPrefs.getString(email,null);

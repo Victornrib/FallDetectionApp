@@ -16,8 +16,8 @@ public class User {
     public String telephone;
     public String email;
     public String password;
-    boolean isConnected;
-    boolean isEmContactVerified;
+    //boolean isConnected;
+    //boolean isEmContactVerified;
     public ArrayList<EmergencyContact> emContacts = new ArrayList<EmergencyContact>();
     public ArrayList<Device> pairedDevices = new ArrayList<Device>();
 
