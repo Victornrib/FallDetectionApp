@@ -21,6 +21,8 @@ public class User {
     public ArrayList<EmergencyContact> emContacts = new ArrayList<EmergencyContact>();
     public ArrayList<Device> pairedDevices = new ArrayList<Device>();
 
+    public User() {}
+
     public User(String name, String telephone, String email, String password) {
         this.name = name;
         this.telephone = telephone;

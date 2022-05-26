@@ -70,6 +70,13 @@ public class FallDetectedScreenActivity extends AppCompatActivity {
         Program.getInstance().setCurrentActivity(this);
     }
 
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        Program.getInstance().setCurrentActivity(null);
+    }
+
     //code from https://www.youtube.com/watch?v=ofAL1C4jUJw
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

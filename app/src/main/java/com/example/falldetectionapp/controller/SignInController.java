@@ -44,15 +44,14 @@ public class SignInController {
     }
 
 
-    private User getUser() {
+    public User getUser() {
 
-        /*
         DatabaseReference firebaseUserReference = FirebaseDatabase.getInstance().getReference("Users").child(email.replace(".",","));
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                System.out.println(user.email);
+                currentUser = dataSnapshot.getValue(User.class);
+                System.out.println(currentUser.email);
             }
 
             @Override
@@ -61,7 +60,7 @@ public class SignInController {
             }
         };
         firebaseUserReference.addListenerForSingleValueEvent(valueEventListener);
-         */
+
 
         Gson gson = new Gson();
         String jsonRet = SharedPrefs.getString(email,null);

@@ -66,6 +66,13 @@ public class SettingsScreenActivity extends AppCompatActivity {
         Program.getInstance().setCurrentActivity(this);
     }
 
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        Program.getInstance().setCurrentActivity(null);
+    }
+
     private void openAddDeviceScreenActivity() {
         Intent intent = new Intent(this, AddDeviceScreenActivity.class);
         startActivity(intent);

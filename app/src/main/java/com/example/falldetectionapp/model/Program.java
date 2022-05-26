@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 
 import java.sql.Time;
 
-public class Program extends AppCompatActivity {
+public class Program {
 
     private static Program program;
     private User currentUser;
@@ -90,12 +90,12 @@ public class Program extends AppCompatActivity {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime currentTime = LocalDateTime.now();
         System.out.println(dtf.format(currentTime));
-        //openFallDetectedScreenActivity();
+        openFallDetectedScreenActivity();
     };
 
     private void openFallDetectedScreenActivity() {
         Intent intent = new Intent(currentActivity, FallDetectedScreenActivity.class);
-        startActivity(intent);
+        currentActivity.startActivity(intent);
     }
 
 

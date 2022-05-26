@@ -57,6 +57,13 @@ public class AddDeviceScreenActivity extends AppCompatActivity {
         Program.getInstance().setCurrentActivity(this);
     }
 
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        Program.getInstance().setCurrentActivity(null);
+    }
+
     private void openInitialScreenActivity() {
         Intent intent = new Intent(this, InitialScreenActivity.class);
         startActivity(intent);

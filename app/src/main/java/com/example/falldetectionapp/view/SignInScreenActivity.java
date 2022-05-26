@@ -69,6 +69,13 @@ public class SignInScreenActivity extends AppCompatActivity {
         Program.getInstance().setCurrentActivity(this);
     }
 
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        Program.getInstance().setCurrentActivity(null);
+    }
+
     private void generateErrorDialog() {
 
         //Create alert dialog

@@ -3,6 +3,9 @@ package com.example.falldetectionapp.model;
 import java.util.Random;
 
 public class EmergencyContact {
+
+    public EmergencyContact() {}
+
     public String name;
     public String telephone;
     public String email; //we may need to make these more specific eg emConEmail, emConPhone

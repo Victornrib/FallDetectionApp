@@ -88,6 +88,13 @@ public class SignUpScreenActivity extends AppCompatActivity {
         Program.getInstance().setCurrentActivity(this);
     }
 
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        Program.getInstance().setCurrentActivity(null);
+    }
+
     public void generateDialog() {
 
         //Setting up alert error dialog
