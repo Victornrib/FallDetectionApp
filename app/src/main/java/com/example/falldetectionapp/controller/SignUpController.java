@@ -92,6 +92,7 @@ public class SignUpController {
     }
 
 
+    //Move this function to the Program class
     //Send signal to view. Find a way to communicate both ways.
     public void storeNewUser() {
         User newUser = new User(name, telephone, email, password);
