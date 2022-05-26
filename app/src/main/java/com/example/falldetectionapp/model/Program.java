@@ -90,7 +90,9 @@ public class Program {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime currentTime = LocalDateTime.now();
         System.out.println(dtf.format(currentTime));
-        openFallDetectedScreenActivity();
+
+        //Add checks if the activity is not on to choose if open the FallDetectedScreenActivity
+        //openFallDetectedScreenActivity();
     };
 
     private void openFallDetectedScreenActivity() {
