@@ -31,7 +31,7 @@ public class FallDetectedScreenActivity extends AppCompatActivity {
 
     private Button buttonSignOut;
     private Button buttonSettings;
-    private String textViewTimeFall;
+    private TextView textViewTimeFall;
 
     private FallDetectedController fallDetectedController;
 
@@ -47,6 +47,8 @@ public class FallDetectedScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fall_detected_screen);
 
         fallDetectedController = new FallDetectedController();
+
+        textViewTimeFall = (TextView) findViewById(R.id.textViewTimeFall);
 
         //when you click sign out, you go back to initial screen
         buttonSignOut = (Button) findViewById(R.id.buttonSignOut);
@@ -92,11 +94,10 @@ public class FallDetectedScreenActivity extends AppCompatActivity {
 
     //this should be here or in the onCreate??
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public String getTimeOfFallText() {
+    public getTimeOfFallText() {
         if (fallDetectedController.checkTimeOfAlert()) {
-            textViewTimeFall = fallDetectedController.timeOfAlertMessage;
+            textViewTimeFall.setText(fallDetectedController.timeOfAlertMessage);
         }
-        return textViewTimeFall;
     }
 
 //    //move to controller
