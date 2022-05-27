@@ -2,6 +2,7 @@ package com.example.falldetectionapp.controller;
 
 import android.util.Log;
 
+import com.example.falldetectionapp.model.Program;
 import com.example.falldetectionapp.model.SharedPrefs;
 import com.example.falldetectionapp.model.User;
 import com.google.firebase.database.DatabaseReference;
@@ -95,8 +96,8 @@ public class SignUpController {
     //Move this function to the Program class
     //Send signal to view. Find a way to communicate both ways.
     public void storeNewUser() {
-        User newUser = new User(name, telephone, email, password);
-        newUser.storeUser();
+        Program program = Program.getInstance();
+        program.storeNewUser(name, telephone, email, password);
     }
 
 }

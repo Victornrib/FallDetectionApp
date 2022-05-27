@@ -96,7 +96,7 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (pairDeviceController.connected) {
-                    Program.getInstance().writeToBluetoothConnectedThread("Alert");
+                    Program.getInstance().writeToBluetoothConnectedThread("Start");
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Bluetooth is not connected", Toast.LENGTH_LONG).show();

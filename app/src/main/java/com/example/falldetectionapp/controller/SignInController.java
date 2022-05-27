@@ -29,57 +29,13 @@ public class SignInController {
         this.password = password;
     }
 
-
-    public boolean checkSignInFields() {
-        currentUser = getUser();
+    public void signIn() throws InterruptedException {
         Program program = Program.getInstance();
-        program.setCurrentUser(currentUser);
+        program.signIn(email, password);
         //returns true if sign in was valid.
-        return currentUser != null;
     }
-
 
     public String getAlertDialogErrorMessage() {
         return alertDialogErrorMessage;
     }
-
-
-    public User getUser() {
-
-        DatabaseReference firebaseUserReference = FirebaseDatabase.getInstance().getReference("Users").child(email.replace(".",","));
-        ValueEventListener valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                currentUser = dataSnapshot.getValue(User.class);
-                System.out.println(currentUser.email);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("Error", databaseError.getMessage()); //Don't ignore errors!
-            }
-        };
-        firebaseUserReference.addListenerForSingleValueEvent(valueEventListener);
-
-
-        Gson gson = new Gson();
-        String jsonRet = SharedPrefs.getString(email,null);
-
-        if (jsonRet != null) {
-            currentUser = gson.fromJson(jsonRet, User.class);
-
-            if (currentUser.password.equals(password)) {
-                return currentUser;
-            }
-            else {
-                alertDialogErrorMessage = "Password wrong.";
-                return null;
-            }
-        }
-        else {
-            alertDialogErrorMessage = "Email not found.";
-            return null;
-        }
-    }
-
 }

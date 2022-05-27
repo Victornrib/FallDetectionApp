@@ -3,7 +3,6 @@ package com.example.falldetectionapp.model;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,11 +10,16 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.falldetectionapp.view.AddDeviceScreenActivity;
 import com.example.falldetectionapp.view.FallDetectedScreenActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,12 +27,10 @@ import java.io.OutputStream;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
-import java.sql.Time;
-
 public class Program {
 
     private static Program program;
-    private User currentUser;
+    private User currentUser = null;
     private boolean fallDetected = false;
     private Context currentActivity;
     private static ConnectedThread connectedThread;
@@ -69,6 +71,59 @@ public class Program {
         this.currentActivity = currentActivity;
     }
 
+    public void signIn(String email, String password) throws InterruptedException {
+
+        DatabaseReference firebaseUserReference = FirebaseDatabase.getInstance().getReference("Users").child(email.replace(".",","));
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User potentialUser = dataSnapshot.getValue(User.class);
+                if (potentialUser.password.equals(password)) {
+                    program.setCurrentUser(potentialUser);
+                    openAddDeviceScreenActivity();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("Error", databaseError.getMessage()); //Don't ignore errors!
+            }
+        };
+        firebaseUserReference.addListenerForSingleValueEvent(valueEventListener);
+        /*
+        while (program.getCurrentUser() == null) {
+            Thread.sleep(500);
+        }
+        /*
+         */
+
+        /*
+        Gson gson = new Gson();
+        String jsonRet = SharedPrefs.getString(email,null);
+
+        if (jsonRet != null) {
+            currentUser = gson.fromJson(jsonRet, User.class);
+
+            if (currentUser.password.equals(password)) {
+                return currentUser;
+            }
+            else {
+                alertDialogErrorMessage = "Password wrong.";
+                return null;
+            }
+        }
+        else {
+            alertDialogErrorMessage = "Email not found.";
+            return null;
+        }
+
+         */
+    }
+
+    public void storeNewUser(String name, String telephone, String email, String password) {
+        User newUser = new User(name, telephone, email, password);
+        newUser.storeUser();
+    }
+
     public void startBluetoothConnectedThread(BluetoothSocket bluetoothSocket) {
         if (bluetoothSocket != null) {
             if (connectedThread == null) {
@@ -92,7 +147,7 @@ public class Program {
         System.out.println(dtf.format(currentTime));
 
         //Add checks if the activity is not on to choose if open the FallDetectedScreenActivity
-        //openFallDetectedScreenActivity();
+        openFallDetectedScreenActivity();
     };
 
     private void openFallDetectedScreenActivity() {
@@ -100,6 +155,10 @@ public class Program {
         currentActivity.startActivity(intent);
     }
 
+    private void openAddDeviceScreenActivity() {
+        Intent intent = new Intent(currentActivity, AddDeviceScreenActivity.class);
+        currentActivity.startActivity(intent);
+    }
 
     private interface MessageConstants {
         public static final int MESSAGE_READ = 0;
