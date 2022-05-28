@@ -92,7 +92,7 @@ public class SignInScreenActivity extends AppCompatActivity {
     }
 
 
-    private void openAddDeviceScreenActivity() {
+    public void openAddDeviceScreenActivity() {
         Intent intent = new Intent(this, AddDeviceScreenActivity.class);
         startActivity(intent);
     }

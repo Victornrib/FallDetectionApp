@@ -89,7 +89,7 @@ public class Program {
                 else {
                     if (potentialUser.password.equals(password)) {
                         program.setCurrentUser(potentialUser);
-                        openAddDeviceScreenActivity();
+                        signInActivity.openAddDeviceScreenActivity();
                     }
                     else {
                         signInActivity.generateErrorDialog("Password is wrong.");
@@ -137,11 +137,6 @@ public class Program {
 
     private void openFallDetectedScreenActivity() {
         Intent intent = new Intent(currentActivity, FallDetectedScreenActivity.class);
-        currentActivity.startActivity(intent);
-    }
-
-    private void openAddDeviceScreenActivity() {
-        Intent intent = new Intent(currentActivity, AddDeviceScreenActivity.class);
         currentActivity.startActivity(intent);
     }
 
