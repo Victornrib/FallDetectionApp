@@ -1,5 +1,6 @@
 package com.example.falldetectionapp.model;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import androidx.annotation.RequiresApi;
 
 import com.example.falldetectionapp.view.AddDeviceScreenActivity;
 import com.example.falldetectionapp.view.FallDetectedScreenActivity;
+import com.example.falldetectionapp.view.SignInScreenActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +28,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+
 
 public class Program {
 
@@ -67,7 +70,7 @@ public class Program {
     }
 
 
-    public void setCurrentActivity(Context currentActivity) {
+    public void setCurrentActivity(Activity currentActivity) {
         this.currentActivity = currentActivity;
     }
 
@@ -78,9 +81,19 @@ public class Program {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User potentialUser = dataSnapshot.getValue(User.class);
-                if (potentialUser.password.equals(password)) {
-                    program.setCurrentUser(potentialUser);
-                    openAddDeviceScreenActivity();
+                SignInScreenActivity signInActivity = (SignInScreenActivity) currentActivity;
+
+                if (potentialUser == null) {
+                    signInActivity.generateErrorDialog("Email not found.");
+                }
+                else {
+                    if (potentialUser.password.equals(password)) {
+                        program.setCurrentUser(potentialUser);
+                        openAddDeviceScreenActivity();
+                    }
+                    else {
+                        signInActivity.generateErrorDialog("Password is wrong.");
+                    }
                 }
             }
             @Override
@@ -89,34 +102,6 @@ public class Program {
             }
         };
         firebaseUserReference.addListenerForSingleValueEvent(valueEventListener);
-        /*
-        while (program.getCurrentUser() == null) {
-            Thread.sleep(500);
-        }
-        /*
-         */
-
-        /*
-        Gson gson = new Gson();
-        String jsonRet = SharedPrefs.getString(email,null);
-
-        if (jsonRet != null) {
-            currentUser = gson.fromJson(jsonRet, User.class);
-
-            if (currentUser.password.equals(password)) {
-                return currentUser;
-            }
-            else {
-                alertDialogErrorMessage = "Password wrong.";
-                return null;
-            }
-        }
-        else {
-            alertDialogErrorMessage = "Email not found.";
-            return null;
-        }
-
-         */
     }
 
     public void storeNewUser(String name, String telephone, String email, String password) {

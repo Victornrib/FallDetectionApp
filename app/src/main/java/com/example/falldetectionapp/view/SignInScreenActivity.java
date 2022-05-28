@@ -74,13 +74,14 @@ public class SignInScreenActivity extends AppCompatActivity {
         Program.getInstance().setCurrentActivity(null);
     }
 
-    private void generateErrorDialog() {
+
+    public void generateErrorDialog(String message) {
 
         //Create alert dialog
         alertDialog = new AlertDialog.Builder(SignInScreenActivity.this).create();
         alertDialog.setCancelable(false);
         alertDialog.setTitle("Error");
-        alertDialog.setMessage(signInController.getAlertDialogErrorMessage());
+        alertDialog.setMessage(message);
         alertDialog.setButton(Dialog.BUTTON_NEUTRAL, "Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

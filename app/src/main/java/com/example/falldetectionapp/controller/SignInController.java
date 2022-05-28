@@ -18,9 +18,6 @@ public class SignInController {
 
     public String email;
     public String password;
-    public User currentUser;
-
-    private String alertDialogErrorMessage;
 
 
     public SignInController(String email, String password) {
@@ -33,9 +30,5 @@ public class SignInController {
         Program program = Program.getInstance();
         program.signIn(email, password);
         //returns true if sign in was valid.
-    }
-
-    public String getAlertDialogErrorMessage() {
-        return alertDialogErrorMessage;
     }
 }
