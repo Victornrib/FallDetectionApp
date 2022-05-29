@@ -17,7 +17,7 @@ import android.widget.EditText;
 import com.example.falldetectionapp.R;
 import com.example.falldetectionapp.model.Program;
 
-public class SignUpScreenActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     Button buttonRegisterUser;
 
@@ -42,7 +42,7 @@ public class SignUpScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up_screen);
+        setContentView(R.layout.activity_sign_up);
 
         buttonRegisterUser = (Button) findViewById(R.id.buttonRegisterUser);
         //why does the method below not have a closed bracket before the curly bracket opens? - Because clickListener needs a View. Since you are creating one right away, you need to also declare its scope, even being inside of another function.
@@ -95,51 +95,63 @@ public class SignUpScreenActivity extends AppCompatActivity {
         Program.getInstance().setCurrentActivity(null);
     }
 
+
     public void generateDialog() {
 
         //Setting up alert error dialog
-        alertDialog = new AlertDialog.Builder(SignUpScreenActivity.this).create();
+        alertDialog = new AlertDialog.Builder(SignUpActivity.this).create();
 
         //Cancelable set to false to only dismiss popup when clicking in 'Ok' button
         alertDialog.setCancelable(false);
 
-        boolean registrationValid = signUpController.checkSignUpFields();
-
-        if (registrationValid) {
-            alertDialog.setTitle("Registration successful");
-            //Store new user
-            signUpController.storeNewUser();
-        }
-        else {
-            alertDialog.setTitle("Error");
-        }
-
-        //Setting dynamically generated message from the controller in dialog
-        alertDialog.setMessage(signUpController.getAlertDialogMessage());
-
-        //Defining button functionality
+        //Defining default dialog button functionality. Is overridden again if all fields are valid and user is unique
         alertDialog.setButton(Dialog.BUTTON_NEUTRAL, "Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-                //If all fields are valid
-                if (registrationValid) {
-
-                    //Switch to next activity
-                    openInitialScreenActivity();
-                }
-                else {
-                    alertDialog.cancel();
-                }
+                alertDialog.cancel();
             }
         });
 
+        if (!signUpController.signUpFieldsValid()) {
+            //Setting dynamically generated message from the controller in dialog
+            alertDialog.setMessage(signUpController.getAlertDialogMessage());
+            alertDialog.setTitle("Error");
+            alertDialog.show();
+        }
+        else {
+            signUpController.checkExistingUser();
+        }
+    }
+
+
+    public void generateUserCheckDialogMessage(String errorMessage) {
+        //Function called by the program
+
+        if (errorMessage == null) {
+            //Store new user
+            signUpController.storeNewUser();
+
+            //Override function of dialog button to lead the user to the AddDeviceActivity
+            alertDialog.setTitle("Registration successful");
+            alertDialog.setMessage("The user " + name + " has been successfully registered on the system.");
+            alertDialog.setButton(Dialog.BUTTON_NEUTRAL, "Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    openAddDeviceActivity();
+                }
+            });
+        }
+        else {
+            alertDialog.setTitle("Error");
+            //Display error message of already existing user
+            alertDialog.setMessage(errorMessage);
+        }
         alertDialog.show();
     }
 
 
-    public void openInitialScreenActivity() {
-        Intent intent = new Intent(this, InitialScreenActivity.class);
+    public void openAddDeviceActivity() {
+        Intent intent = new Intent(this, AddDeviceActivity.class);
         startActivity(intent);
     }
 

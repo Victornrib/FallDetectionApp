@@ -15,7 +15,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
-public class User {
+//Remove public after and see if it works
+class User {
     public int userID; //would be nice to have a string so it is specific "user4053"
     public String name; //may need to make these variables more specific? fx userName
     public String telephone;
@@ -79,13 +80,7 @@ public class User {
     public void storeUser() {
         //Getting reference to firebase
         DatabaseReference firebaseReference = FirebaseDatabase.getInstance().getReference();
-
         //Adding to firebase (Replacing "." with "," because firebase doesn't allow child names with ".")
         firebaseReference.child("Users").child(this.email.replace(".",",")).setValue(this);
-
-        //Passing values to Shared Preferences
-        Gson gson = new Gson();
-        String json = gson.toJson(this);
-        SharedPrefs.putString(this.email,json);
     }
 }

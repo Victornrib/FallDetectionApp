@@ -2,7 +2,6 @@ package com.example.falldetectionapp.view;
 
 
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -13,23 +12,19 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.falldetectionapp.R;
-import com.example.falldetectionapp.controller.PairDeviceController;
+import com.example.falldetectionapp.controller.ConnectDeviceController;
 import com.example.falldetectionapp.model.Program;
 
 import java.io.IOException;
 
 
-public class PairDeviceScreenActivity extends AppCompatActivity {
+public class ConnectDeviceActivity extends AppCompatActivity {
 
     Button buttonBack;
     Button buttonPairDevice;
@@ -41,19 +36,19 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
     private static final int REQUEST_BLUETOOTH_ACTIVATION = 1;
     private static final int REQUEST_BLUETOOTH_CONNECTION = 2;
 
-    PairDeviceController pairDeviceController;
+    ConnectDeviceController connectDeviceController;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pair_device_screen);
+        setContentView(R.layout.activity_connect_device);
 
-        alertDialog = new AlertDialog.Builder(PairDeviceScreenActivity.this).create();
+        alertDialog = new AlertDialog.Builder(ConnectDeviceActivity.this).create();
 
-        pairDeviceController = new PairDeviceController(this);
+        connectDeviceController = new ConnectDeviceController(this);
 
-        if (pairDeviceController.startBluetooth()) {
+        if (connectDeviceController.startBluetooth()) {
             Intent activateBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
                 startActivityForResult(activateBluetooth, REQUEST_BLUETOOTH_ACTIVATION);
@@ -68,22 +63,22 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openAddDeviceScreenActivity();
+                openAddDeviceActivity();
             }
         });
 
         //click pair --> also goes back to add device.
         // This is not the intention right? -gwen
-        buttonPairDevice = (Button) findViewById(R.id.buttonPairDevice);
+        buttonPairDevice = (Button) findViewById(R.id.buttonConnectDevice);
         buttonPairDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (!pairDeviceController.connected) {
-                    Intent openPairedDevicesList = new Intent(PairDeviceScreenActivity.this, DeviceListActivity.class);
+                if (!connectDeviceController.connected) {
+                    Intent openPairedDevicesList = new Intent(ConnectDeviceActivity.this, DeviceListActivity.class);
                     startActivityForResult(openPairedDevicesList, REQUEST_BLUETOOTH_CONNECTION);
                 } else {
-                    pairDeviceController.disconnectDevice();
+                    connectDeviceController.disconnectDevice();
                     Toast.makeText(getApplicationContext(), "Bluetooth disconnected", Toast.LENGTH_LONG).show();
                     buttonPairDevice.setText("Pair");
                 }
@@ -95,7 +90,7 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (pairDeviceController.connected) {
+                if (connectDeviceController.connected) {
                     Program.getInstance().writeToBluetoothConnectedThread("Start");
                 }
                 else {
@@ -137,11 +132,11 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
 
                 if (resultCode == Activity.RESULT_OK) {
                     try {
-                        pairDeviceController.connectDevice(data);
+                        connectDeviceController.connectDevice(data);
                         buttonPairDevice.setText("Unpair");
-                        Toast.makeText(getApplicationContext(), "You have been connected with:\n" + pairDeviceController.MAC_ADDRESS, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "You have been connected with:\n" + connectDeviceController.MAC_ADDRESS, Toast.LENGTH_LONG).show();
                     } catch (IOException error) {
-                        pairDeviceController.connected = false;
+                        connectDeviceController.connected = false;
                         Toast.makeText(getApplicationContext(), "An error has occurred:\n" + error, Toast.LENGTH_LONG).show();
                     }
                 }
@@ -152,8 +147,8 @@ public class PairDeviceScreenActivity extends AppCompatActivity {
     }
 
 
-    private void openAddDeviceScreenActivity() {
-        Intent intent = new Intent(this, AddDeviceScreenActivity.class);
+    private void openAddDeviceActivity() {
+        Intent intent = new Intent(this, AddDeviceActivity.class);
         startActivity(intent);
     }
 }

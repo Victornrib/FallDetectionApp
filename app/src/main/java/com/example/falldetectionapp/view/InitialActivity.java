@@ -10,7 +10,7 @@ import android.widget.Button;
 import com.example.falldetectionapp.R;
 import com.example.falldetectionapp.model.Program;
 
-public class InitialScreenActivity extends AppCompatActivity {
+public class InitialActivity extends AppCompatActivity {
     private Button buttonSignIn;
     private Button buttonSignUp;
 
@@ -18,23 +18,23 @@ public class InitialScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_initial_screen);
+        setContentView(R.layout.activity_initial);
 
-        //click sign in --> sign in screen
+        //click sign in --> sign in 
         buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
         buttonSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openSignInScreenActivity();
+                openSignInActivity();
             }
         });
 
-        //click sign up --> sign up screen
+        //click sign up --> sign up 
         buttonSignUp = (Button) findViewById(R.id.buttonSignUp);
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openSignUpScreenActivity();
+                openSignUpActivity();
             }
         });
     }
@@ -53,13 +53,13 @@ public class InitialScreenActivity extends AppCompatActivity {
         Program.getInstance().setCurrentActivity(null);
     }
 
-    private void openSignInScreenActivity() {
-        Intent intent = new Intent(this, SignInScreenActivity.class);
+    private void openSignInActivity() {
+        Intent intent = new Intent(this, SignInActivity.class);
         startActivity(intent);
     }
 
-    private void openSignUpScreenActivity() {
-        Intent intent = new Intent(this, SignUpScreenActivity.class);
+    private void openSignUpActivity() {
+        Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
     }
 

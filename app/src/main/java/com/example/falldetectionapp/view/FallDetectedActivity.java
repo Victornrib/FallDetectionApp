@@ -1,28 +1,18 @@
 package com.example.falldetectionapp.view;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.falldetectionapp.R;
-import com.example.falldetectionapp.model.EmergencyContact;
 import com.example.falldetectionapp.model.Program;
 
-public class FallDetectedScreenActivity extends AppCompatActivity {
+
+public class FallDetectedActivity extends AppCompatActivity {
+
 
     private Button buttonSignOut;
     private Button buttonSettings;
@@ -34,33 +24,27 @@ public class FallDetectedScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fall_detected_screen);
+        setContentView(R.layout.activity_fall_detected);
 
-        //when you click sign out, you go back to initial screen
+        //when you click sign out, you go back to initial 
         buttonSignOut = (Button) findViewById(R.id.buttonSignOut);
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openInitialScreenActivity();
+                openInitialActivity();
             }
         });
 
-        //click settings --> settings screen
+        //click settings --> settings 
         buttonSettings = (Button) findViewById(R.id.buttonSettings);
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openSettingsScreenActivity();
+                openSettingsActivity();
             }
         });
 
-        //give permission
-        if (ContextCompat.checkSelfPermission(FallDetectedScreenActivity.this, Manifest.permission.SEND_SMS)
-                == PackageManager.PERMISSION_GRANTED) {
-            sendSMS();
-        } else {
-            ActivityCompat.requestPermissions(FallDetectedScreenActivity.this, new String[]{Manifest.permission.SEND_SMS}, 100);
-        }
+        Toast.makeText(this, "SMS sent to all emergency contacts", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -77,6 +61,17 @@ public class FallDetectedScreenActivity extends AppCompatActivity {
         Program.getInstance().setCurrentActivity(null);
     }
 
+    private void openInitialActivity() {
+        Intent intent = new Intent(this, InitialActivity.class);
+        startActivity(intent);
+    }
+
+    private void openSettingsActivity() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    /*
     //code from https://www.youtube.com/watch?v=ofAL1C4jUJw
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -87,31 +82,11 @@ public class FallDetectedScreenActivity extends AppCompatActivity {
                 Toast.makeText(this, "Permission denied", Toast.LENGTH_LONG).show();
             }
         }
-
-    private void openInitialScreenActivity() {
-        Intent intent = new Intent(this, InitialScreenActivity.class);
-        startActivity(intent);
-    }
-
-    private void openSettingsScreenActivity() {
-        Intent intent = new Intent(this, SettingsScreenActivity.class);
-        startActivity(intent);
-    }
-
-    private void sendSMS() {
-        Program program = Program.getInstance();
-        SmsManager smsManager = SmsManager.getDefault();
-
-        for (int i = 0; i < program.getCurrentUser().getEmContacts().size(); i++) {
-            EmergencyContact currentEmContact = program.getCurrentUser().getEmContacts().get(i);
-            String emContactPhoneNumber = currentEmContact.telephone;
-            String message = "Attention " + currentEmContact.name + ": " + program.getCurrentUser().name + " felt!\nPlease take action now!";
-            smsManager.sendTextMessage(emContactPhoneNumber, null, message, null, null);
-        }
-
-        Toast.makeText(this, "SMS sent to all emergency contacts", Toast.LENGTH_LONG).show();
-    }
+     */
 }
+
+
+
 
 //not sure if we need this but in theory we need to also close the receiver, maybe in the main activity.
 //    @Override
@@ -223,4 +198,5 @@ public class FallDetectedScreenActivity extends AppCompatActivity {
 //
 //        SmsManager sms = SmsManager.getDefault();
 //        sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);
+//
 //    }

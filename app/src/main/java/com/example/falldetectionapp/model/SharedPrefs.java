@@ -8,9 +8,12 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class SharedPrefs {
+    //Legacy class
+    //Substituted for firebase
+
+    /*
 
     private static SharedPreferences sharedPreferencesUser;
-
 
     //Needs to declare a custom constructor cause it has to be static
     public static void init(Context context)
@@ -42,7 +45,10 @@ public class SharedPrefs {
     public static void removePreference(String entity, String Key){
         sharedPreferencesUser.edit().remove(Key).apply();
     }
+
+     */
 }
+
 
 
 

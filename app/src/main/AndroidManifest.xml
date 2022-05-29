@@ -2,11 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.falldetectionapp">
 
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
-
     <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
@@ -17,34 +16,37 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FallDetectionApp">
         <activity
-            android:name=".view.PairDeviceScreenActivity"
+            android:name=".view.CheckEmergencyContactActivity"
             android:exported="false" />
         <activity
-            android:name=".view.SignUpScreenActivity"
+            android:name=".view.ConnectDeviceActivity"
             android:exported="false" />
         <activity
-            android:name=".view.EmergencyContactScreenActivity"
+            android:name=".view.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".view.SettingsScreenActivity"
+            android:name=".view.AddEmergencyContactActivity"
             android:exported="false" />
         <activity
-            android:name=".view.AddDeviceScreenActivity"
+            android:name=".view.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".view.InitialScreenActivity"
+            android:name=".view.AddDeviceActivity"
             android:exported="false" />
         <activity
-            android:name=".view.SignInScreenActivity"
+            android:name=".view.InitialActivity"
             android:exported="false" />
         <activity
-            android:name=".view.FallDetectedScreenActivity"
+            android:name=".view.SignInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.FallDetectedActivity"
             android:exported="false" />
         <activity
             android:name=".view.DeviceListActivity"
             android:exported="false"
-            android:theme="@android:style/Theme.Dialog"
-            android:label="Paired Devices"/>
+            android:label="Paired Devices"
+            android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".view.MainActivity"
             android:exported="true">

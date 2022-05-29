@@ -44,7 +44,7 @@
             android:layout_weight="0.15" />
 
         <Button
-            android:id="@+id/buttonAddEC1"
+            android:id="@+id/buttonEC1"
             android:layout_width="250dp"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
@@ -61,7 +61,7 @@
             android:layout_weight="0.08" />
 
         <Button
-            android:id="@+id/buttonAddEC2"
+            android:id="@+id/buttonEC2"
             android:layout_width="250dp"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
@@ -73,8 +73,24 @@
 
         <Space
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.08" />
+
+        <Button
+            android:id="@+id/buttonEC3"
+            android:layout_width="250dp"
             android:layout_height="0dp"
-            android:layout_weight="0.25" />
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.12"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Add Emergency Contact 3"
+            android:textSize="20sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.20" />
 
         <Button
             android:id="@+id/buttonSignOut"

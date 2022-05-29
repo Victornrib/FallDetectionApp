@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.example.falldetectionapp.model.Program;
 import com.example.falldetectionapp.model.SharedPrefs;
-import com.example.falldetectionapp.model.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
@@ -21,7 +20,7 @@ public class SignUpController {
     private String password;
     private String repeatedPassword;
 
-    private boolean signUpValidated;
+    private boolean signUpFieldsValid;
 
     private String alertDialogMessage = "";
 
@@ -37,7 +36,7 @@ public class SignUpController {
     }
 
 
-    public boolean checkSignUpFields() {
+    public boolean signUpFieldsValid() {
 
         //Regular expression to validate telephone
         //  "^[0-9]{8,9}$" -- For standard format (ex: 12345678 or 123456789)
@@ -53,48 +52,43 @@ public class SignUpController {
         Matcher emailMatcher = emailPattern.matcher(email);
 
         //we should make this a boolean method and call it :)
-        signUpValidated = true;
+        signUpFieldsValid = true;
 
         if (name.equals("")) {
             alertDialogMessage = alertDialogMessage + "Registration invalid. Invalid name.\n";
-            signUpValidated = false;
+            signUpFieldsValid = false;
         }
         if (!telephoneMatcher.matches()) {
             alertDialogMessage = alertDialogMessage + "Registration invalid. Invalid telephone.\n";
-            signUpValidated = false;
+            signUpFieldsValid = false;
         }
         if (!emailMatcher.matches()) {
             alertDialogMessage = alertDialogMessage + "Registration invalid. Invalid email.\n";
-            signUpValidated = false;
-        }
-        if (SharedPrefs.getString(email,null) != null) {
-            alertDialogMessage = alertDialogMessage + "Registration invalid. User with this email already exists.\n";
-            signUpValidated = false;
+            signUpFieldsValid = false;
         }
         if (password.equals("")) {
             alertDialogMessage = alertDialogMessage + "Registration invalid. Invalid password.\n";
-            signUpValidated = false;
+            signUpFieldsValid = false;
         }
         if (!repeatedPassword.equals(password)) {
             alertDialogMessage = alertDialogMessage + "Registration invalid. Passwords do not match.\n";
-            signUpValidated = false;
+            signUpFieldsValid = false;
         }
 
-        return signUpValidated;
+        return signUpFieldsValid;
+    }
+
+    public void checkExistingUser() {
+        Program program = Program.getInstance();
+        program.checkExistingUser(email);
     }
 
 
     public String getAlertDialogMessage() {
-
-        if (signUpValidated) {
-            alertDialogMessage = "The user " + name + " has been successfully registered on the system.";
-        }
         return alertDialogMessage;
     }
 
 
-    //Move this function to the Program class
-    //Send signal to view. Find a way to communicate both ways.
     public void storeNewUser() {
         Program program = Program.getInstance();
         program.storeNewUser(name, telephone, email, password);

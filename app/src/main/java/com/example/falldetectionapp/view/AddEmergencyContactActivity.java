@@ -12,40 +12,30 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.falldetectionapp.R;
-import com.example.falldetectionapp.controller.EmergencyContactController;
-import com.example.falldetectionapp.model.EmergencyContact;
+import com.example.falldetectionapp.controller.AddEmergencyContactController;
 import com.example.falldetectionapp.model.Program;
-import com.example.falldetectionapp.model.SharedPrefs;
-import com.example.falldetectionapp.model.User;
-import com.google.gson.Gson;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-public class EmergencyContactScreenActivity extends AppCompatActivity {
+public class AddEmergencyContactActivity extends AppCompatActivity {
     private Button buttonBack;
     private Button buttonAddEmergencyContact;
-    String name;
-    String telephone;
-    String email;
     private EditText editTextRegisterContactName;
     private EditText editTextRegisterContactTel;
     private EditText editTextRegisterContactEmail;
 
-    EmergencyContactController emergencyContactController;
+    AddEmergencyContactController addEmergencyContactController;
 
     private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_emergency_contact);
+        setContentView(R.layout.activity_add_emergency_contact);
 
         buttonBack = (Button) findViewById(R.id.buttonBack);
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openSettingsScreenActivity();
+                openSettingsActivity();
             }
         });
 
@@ -56,17 +46,17 @@ public class EmergencyContactScreenActivity extends AppCompatActivity {
 
                 //Getting name
                 editTextRegisterContactName = (EditText) findViewById(R.id.editTextRegisterEmergencyContactName);
-                name = editTextRegisterContactName.getText().toString();
+                String name = editTextRegisterContactName.getText().toString();
 
                 //Getting telephone
                 editTextRegisterContactTel = (EditText) findViewById(R.id.editTextRegisterEmergencyContactTelephone);
-                telephone = editTextRegisterContactTel.getText().toString();
+                String telephone = editTextRegisterContactTel.getText().toString();
 
                 //Getting email
                 editTextRegisterContactEmail = (EditText) findViewById(R.id.editTextRegisterEmergencyContactEmail);
-                email = editTextRegisterContactEmail.getText().toString();
+                String email = editTextRegisterContactEmail.getText().toString();
 
-                emergencyContactController = new EmergencyContactController(name, telephone, email);
+                addEmergencyContactController = new AddEmergencyContactController(name, telephone, email);
 
                 generateDialog();
             }
@@ -92,10 +82,10 @@ public class EmergencyContactScreenActivity extends AppCompatActivity {
     private void generateDialog() {
 
         //Create error alert dialog
-        alertDialog = new AlertDialog.Builder(EmergencyContactScreenActivity.this).create();
+        alertDialog = new AlertDialog.Builder(AddEmergencyContactActivity.this).create();
         alertDialog.setCancelable(false);
 
-        boolean registrationValid = emergencyContactController.checkContactFields();
+        boolean registrationValid = addEmergencyContactController.checkContactFields();
 
         if (registrationValid) {
             alertDialog.setTitle("Registration successful");
@@ -104,7 +94,7 @@ public class EmergencyContactScreenActivity extends AppCompatActivity {
             alertDialog.setTitle("Error");
         }
 
-        alertDialog.setMessage(emergencyContactController.getAlertDialogMessage());
+        alertDialog.setMessage(addEmergencyContactController.getAlertDialogMessage());
 
         alertDialog.setButton(Dialog.BUTTON_NEUTRAL, "Ok", new DialogInterface.OnClickListener() {
             @Override
@@ -112,8 +102,8 @@ public class EmergencyContactScreenActivity extends AppCompatActivity {
 
                 if (registrationValid) {
 
-                    emergencyContactController.addNewEmergencyContact();
-                    openSettingsScreenActivity();
+                    addEmergencyContactController.addNewEmergencyContact();
+                    openSettingsActivity();
                 }
                 else {
                     alertDialog.cancel();
@@ -125,8 +115,8 @@ public class EmergencyContactScreenActivity extends AppCompatActivity {
     }
 
 
-    private void openSettingsScreenActivity() {
-        Intent intent = new Intent(this, SettingsScreenActivity.class);
+    private void openSettingsActivity() {
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 }

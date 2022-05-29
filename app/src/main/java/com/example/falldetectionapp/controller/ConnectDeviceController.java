@@ -15,7 +15,6 @@ import android.util.Log;
 import androidx.core.app.ActivityCompat;
 
 import com.example.falldetectionapp.model.Program;
-import com.example.falldetectionapp.model.User;
 import com.example.falldetectionapp.view.DeviceListActivity;
 
 import java.io.IOException;
@@ -23,7 +22,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
-public class PairDeviceController {
+public class ConnectDeviceController {
 
     Context context;
 
@@ -40,7 +39,7 @@ public class PairDeviceController {
     public boolean connected = false;
 
 
-    public PairDeviceController(Context context) {
+    public ConnectDeviceController(Context context) {
         this.context = context;
     }
 
@@ -64,9 +63,9 @@ public class PairDeviceController {
                 connected = true;
 
                 String deviceName = data.getExtras().getString("DEVICE_NAME");
-                addDevice(deviceName);
 
                 Program program = Program.getInstance();
+                program.addDeviceToCurrentUser(deviceName, MAC_ADDRESS);
                 program.startBluetoothConnectedThread(bluetoothSocket);
             }
         };
@@ -77,16 +76,11 @@ public class PairDeviceController {
         try {
             connected = false;
             bluetoothSocket.close();
+            Program program = Program.getInstance();
+            program.closeBluetoothConnectedThread();
         }
         catch (IOException error) {
             Log.e(TAG, "An error has occurred:\n" + error, error);
         }
-    }
-
-    private void addDevice(String deviceName) {
-        //Adding the device to the current user
-        Program program = Program.getInstance();
-        User currentUser = program.getCurrentUser();
-        currentUser.addDevice(deviceName, MAC_ADDRESS);
     }
 }

@@ -10,7 +10,7 @@ import android.widget.Button;
 import com.example.falldetectionapp.R;
 import com.example.falldetectionapp.model.Program;
 
-public class AddDeviceScreenActivity extends AppCompatActivity {
+public class AddDeviceActivity extends AppCompatActivity {
     private Button buttonSignOut;
     private Button buttonSettings;
     private Button buttonAddDevice;
@@ -20,32 +20,32 @@ public class AddDeviceScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_device_screen);
+        setContentView(R.layout.activity_add_device);
 
-        //when you click sign out, you go back to initial screen
+        //when you click sign out, you go back to initial 
         buttonSignOut = (Button) findViewById(R.id.buttonSignOut);
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openInitialScreenActivity();
+                openInitialActivity();
             }
         });
 
-        //click settings --> settings screen
+        //click settings --> settings 
         buttonSettings = (Button) findViewById(R.id.buttonSettings);
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openSettingsScreenActivity();
+                openSettingsActivity();
             }
         });
 
-        //click add device --> pair device screen
+        //click add device --> pair device 
         buttonAddDevice = (Button) findViewById(R.id.buttonAddDevice);
         buttonAddDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openPairDeviceScreenActivity();
+                openPairDeviceActivity();
             }
         });
     }
@@ -64,18 +64,18 @@ public class AddDeviceScreenActivity extends AppCompatActivity {
         Program.getInstance().setCurrentActivity(null);
     }
 
-    private void openInitialScreenActivity() {
-        Intent intent = new Intent(this, InitialScreenActivity.class);
+    private void openInitialActivity() {
+        Intent intent = new Intent(this, InitialActivity.class);
         startActivity(intent);
     }
 
-    private void openSettingsScreenActivity() {
-        Intent intent = new Intent(this, SettingsScreenActivity.class);
+    private void openSettingsActivity() {
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 
-    private void openPairDeviceScreenActivity() {
-        Intent intent = new Intent(this, PairDeviceScreenActivity.class);
+    private void openPairDeviceActivity() {
+        Intent intent = new Intent(this, ConnectDeviceActivity.class);
         startActivity(intent);
     }
 }

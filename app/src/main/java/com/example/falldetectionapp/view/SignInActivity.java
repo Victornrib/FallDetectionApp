@@ -16,7 +16,7 @@ import com.example.falldetectionapp.controller.SignInController;
 import com.example.falldetectionapp.model.Program;
 
 
-public class SignInScreenActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
     private Button buttonLogin;
 
@@ -33,7 +33,7 @@ public class SignInScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in_screen);
+        setContentView(R.layout.activity_sign_in);
 
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -51,11 +51,7 @@ public class SignInScreenActivity extends AppCompatActivity {
                 //Instantiating SignInController
                 signInController = new SignInController(email, password);
 
-                try {
-                    signInController.signIn();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                signInController.signIn();
             }
         });
     }
@@ -78,7 +74,7 @@ public class SignInScreenActivity extends AppCompatActivity {
     public void generateErrorDialog(String message) {
 
         //Create alert dialog
-        alertDialog = new AlertDialog.Builder(SignInScreenActivity.this).create();
+        alertDialog = new AlertDialog.Builder(SignInActivity.this).create();
         alertDialog.setCancelable(false);
         alertDialog.setTitle("Error");
         alertDialog.setMessage(message);
@@ -92,8 +88,8 @@ public class SignInScreenActivity extends AppCompatActivity {
     }
 
 
-    public void openAddDeviceScreenActivity() {
-        Intent intent = new Intent(this, AddDeviceScreenActivity.class);
+    public void openAddDeviceActivity() {
+        Intent intent = new Intent(this, AddDeviceActivity.class);
         startActivity(intent);
     }
 

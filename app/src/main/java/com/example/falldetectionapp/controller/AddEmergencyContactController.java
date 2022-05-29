@@ -1,10 +1,8 @@
 package com.example.falldetectionapp.controller;
 
 
-import com.example.falldetectionapp.model.EmergencyContact;
 import com.example.falldetectionapp.model.Program;
 import com.example.falldetectionapp.model.SharedPrefs;
-import com.example.falldetectionapp.model.User;
 import com.google.gson.Gson;
 
 import java.util.regex.Matcher;
@@ -12,7 +10,7 @@ import java.util.regex.Pattern;
 
 
 
-public class EmergencyContactController {
+public class AddEmergencyContactController {
 
     public String name;
     public String telephone;
@@ -22,7 +20,7 @@ public class EmergencyContactController {
     public String alertDialogMessage = "";
 
 
-    public EmergencyContactController(String name, String telephone, String email) {
+    public AddEmergencyContactController(String name, String telephone, String email) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;
@@ -55,6 +53,7 @@ public class EmergencyContactController {
             alertDialogMessage = alertDialogMessage + "Invalid telephone.\n";
             emergencyContactValidated = false;
         }
+        //Maybe work on this after to not add repeated emergency contacts
         /*
         if (SharedPrefs.getString("EmergencyContact", email,null) != null) {
             alertDialogMessage = alertDialogMessage + "Registration invalid. Emergency Contact with this email already exists.\n";
@@ -81,8 +80,7 @@ public class EmergencyContactController {
 
     public void addNewEmergencyContact() {
         Program program = Program.getInstance();
-        User currentUser = program.getCurrentUser();
-        currentUser.addEmContact(name, telephone, email);
+        program.addEmergencyContactToCurrentUser(name, telephone, email);
     }
 
 
