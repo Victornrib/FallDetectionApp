@@ -1,9 +1,6 @@
 package com.example.falldetectionapp.controller;
 
-
 import com.example.falldetectionapp.model.Program;
-import com.example.falldetectionapp.model.SharedPrefs;
-import com.google.gson.Gson;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -5,20 +5,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.falldetectionapp.R;
 import com.example.falldetectionapp.model.Program;
 
+import java.time.LocalDateTime;
+
 
 public class FallDetectedActivity extends AppCompatActivity {
 
-
     private Button buttonSignOut;
     private Button buttonSettings;
-    //private String phoneNumber;
-    //private String message;
-    //private static final int REQUEST_CODE = 1;
+    private TextView textViewTimeFall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,14 @@ public class FallDetectedActivity extends AppCompatActivity {
                 openSettingsActivity();
             }
         });
+
+        textViewTimeFall = (TextView) findViewById(R.id.textViewTimeFall);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String currentTime = extras.getString("currentTime");
+            textViewTimeFall.setText("Time: "+currentTime);
+        }
 
         Toast.makeText(this, "SMS sent to all emergency contacts", Toast.LENGTH_LONG).show();
     }

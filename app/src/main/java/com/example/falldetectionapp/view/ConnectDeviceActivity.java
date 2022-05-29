@@ -133,7 +133,7 @@ public class ConnectDeviceActivity extends AppCompatActivity {
                 if (resultCode == Activity.RESULT_OK) {
                     try {
                         connectDeviceController.connectDevice(data);
-                        buttonPairDevice.setText("Unpair");
+                        buttonPairDevice.setText("Disconnect");
                         Toast.makeText(getApplicationContext(), "You have been connected with:\n" + connectDeviceController.MAC_ADDRESS, Toast.LENGTH_LONG).show();
                     } catch (IOException error) {
                         connectDeviceController.connected = false;

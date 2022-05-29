@@ -191,9 +191,9 @@ public class Program {
         fallDetected = true;
 
         //Get time
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDateTime currentTime = LocalDateTime.now();
-        System.out.println(dtf.format(currentTime));
+        //System.out.println(dtf.format(currentTime));
 
         //Make a future check to know what is the type of contact
         // if contactType == "SMS"
@@ -201,7 +201,7 @@ public class Program {
             sendSMS();
         }
         //Add checks if the activity is not on to choose if open the FallDetectedActivity
-        openFallDetectedActivity();
+        openFallDetectedActivity(dtf.format(currentTime));
     };
 
     private void sendSMS() {
@@ -215,8 +215,10 @@ public class Program {
         }
     }
 
-    private void openFallDetectedActivity() {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void openFallDetectedActivity(String currentTime) {
         Intent intent = new Intent(currentActivity, FallDetectedActivity.class);
+        intent.putExtra("currentTime", currentTime);
         currentActivity.startActivity(intent);
     }
 
