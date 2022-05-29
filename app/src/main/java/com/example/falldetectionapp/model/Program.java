@@ -175,8 +175,10 @@ public class Program {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 AddEmergencyContactActivity addEmergencyContactActivity = (AddEmergencyContactActivity) currentActivity;
+                boolean hasChildren = false;
 
                 for (DataSnapshot dataValues : dataSnapshot.getChildren()){
+                    hasChildren = true;
                     EmergencyContact emergencyContact = dataValues.getValue(EmergencyContact.class);
 
                     if (emergencyContact.email.equals(email)) {
@@ -185,6 +187,9 @@ public class Program {
                     else {
                         addEmergencyContactActivity.generateEmergencyContactCheckDialogMessage(null);
                     }
+                }
+                if (!hasChildren) {
+                    addEmergencyContactActivity.generateEmergencyContactCheckDialogMessage(null);
                 }
             }
 
