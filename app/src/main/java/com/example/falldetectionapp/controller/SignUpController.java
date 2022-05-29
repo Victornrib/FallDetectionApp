@@ -14,11 +14,11 @@ import java.util.regex.Pattern;
 
 public class SignUpController {
 
-    private String name;
-    private String telephone;
-    private String email;
-    private String password;
-    private String repeatedPassword;
+    public String name;
+    public String telephone;
+    public String email;
+    public String password;
+    public String repeatedPassword;
 
     private boolean signUpFieldsValid;
 

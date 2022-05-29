@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
+import com.example.falldetectionapp.view.AddEmergencyContactActivity;
 import com.example.falldetectionapp.view.FallDetectedActivity;
 import com.example.falldetectionapp.view.SignInActivity;
 import com.example.falldetectionapp.view.SignUpActivity;
@@ -76,24 +77,30 @@ public class Program {
 
     public ArrayList<String> getCurrentUserEmContactsNames() {
         ArrayList<String> currentUserEmContactsNames = new ArrayList<String>();
-        for (int i = 0; i < currentUser.emContacts.size(); i++) {
-            currentUserEmContactsNames.add(currentUser.emContacts.get(i).name);
+        if (currentUser.emContacts != null) {
+            for (int i = 0; i < currentUser.emContacts.size(); i++) {
+                currentUserEmContactsNames.add(currentUser.emContacts.get(i).name);
+            }
         }
         return currentUserEmContactsNames;
     }
 
     public ArrayList<String> getCurrentUserEmContactsEmails() {
         ArrayList<String> currentUserEmContactsEmails = new ArrayList<String>();
-        for (int i = 0; i < currentUser.emContacts.size(); i++) {
-            currentUserEmContactsEmails.add(currentUser.emContacts.get(i).email);
+        if (currentUser.emContacts != null) {
+            for (int i = 0; i < currentUser.emContacts.size(); i++) {
+                currentUserEmContactsEmails.add(currentUser.emContacts.get(i).email);
+            }
         }
         return currentUserEmContactsEmails;
     }
 
     public ArrayList<String> getCurrentUserEmContactsTelephones() {
         ArrayList<String> currentUserEmContactsTelephones = new ArrayList<String>();
-        for (int i = 0; i < currentUser.emContacts.size(); i++) {
-            currentUserEmContactsTelephones.add(currentUser.emContacts.get(i).telephone);
+        if (currentUser.emContacts != null) {
+            for (int i = 0; i < currentUser.emContacts.size(); i++) {
+                currentUserEmContactsTelephones.add(currentUser.emContacts.get(i).telephone);
+            }
         }
         return currentUserEmContactsTelephones;
     }
@@ -161,6 +168,34 @@ public class Program {
         firebaseUserReference.addListenerForSingleValueEvent(valueEventListener);
     }
 
+    public void checkExistingEmergencyContact(String email) {
+        DatabaseReference firebaseUserReference = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.email.replace(".",",")).child("emContacts");
+        ValueEventListener valueEventListener = new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                AddEmergencyContactActivity addEmergencyContactActivity = (AddEmergencyContactActivity) currentActivity;
+
+                for (DataSnapshot dataValues : dataSnapshot.getChildren()){
+                    EmergencyContact emergencyContact = dataValues.getValue(EmergencyContact.class);
+
+                    if (emergencyContact.email.equals(email)) {
+                        addEmergencyContactActivity.generateEmergencyContactCheckDialogMessage("Registration invalid. Emergency Contact with this email already exists.\n");
+                    }
+                    else {
+                        addEmergencyContactActivity.generateEmergencyContactCheckDialogMessage(null);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("Error", databaseError.getMessage()); //Don't ignore errors!
+            }
+        };
+        firebaseUserReference.addListenerForSingleValueEvent(valueEventListener);
+    }
+
     public void addEmergencyContactToCurrentUser(String name, String telephone, String email) {
         currentUser.addEmContact(name, telephone, email);
     }
@@ -217,9 +252,11 @@ public class Program {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void openFallDetectedActivity(String currentTime) {
-        Intent intent = new Intent(currentActivity, FallDetectedActivity.class);
-        intent.putExtra("currentTime", currentTime);
-        currentActivity.startActivity(intent);
+        if (currentActivity != null) {
+            Intent intent = new Intent(currentActivity, FallDetectedActivity.class);
+            intent.putExtra("currentTime", currentTime);
+            currentActivity.startActivity(intent);
+        }
     }
 
     private interface MessageConstants {

@@ -13,7 +13,7 @@ public class AddEmergencyContactController {
     public String telephone;
     public String email;
 
-    public boolean emergencyContactValidated;
+    private boolean emergencyContactFieldsValid;
     public String alertDialogMessage = "";
 
 
@@ -24,7 +24,7 @@ public class AddEmergencyContactController {
     }
 
 
-    public boolean checkContactFields() {
+    public boolean emergencyContactFieldsValid() {
 
         //Regular expression to validate telephone
         //  "^[0-9]{8,9}$" -- For standard format (ex: 12345678 or 123456789)
@@ -39,43 +39,39 @@ public class AddEmergencyContactController {
         Pattern emailPattern = Pattern.compile(emailRegex);
         Matcher emailMatcher = emailPattern.matcher(email);
 
-        emergencyContactValidated = true;
+        emergencyContactFieldsValid = true;
 
         if (name.equals("")) {
-            //cant it just be alertDialogMessage = "invalid name \n"
             alertDialogMessage = alertDialogMessage + "Invalid name.\n";
-            emergencyContactValidated = false;
+            emergencyContactFieldsValid = false;
         }
         if (!telephoneMatcher.matches()) {
             alertDialogMessage = alertDialogMessage + "Invalid telephone.\n";
-            emergencyContactValidated = false;
+            emergencyContactFieldsValid = false;
         }
-        //Maybe work on this after to not add repeated emergency contacts
-        /*
-        if (SharedPrefs.getString("EmergencyContact", email,null) != null) {
-            alertDialogMessage = alertDialogMessage + "Registration invalid. Emergency Contact with this email already exists.\n";
-            emergencyContactValidated = false;
-        }
-        /*
-         */
         if (!emailMatcher.matches()) {
             alertDialogMessage = alertDialogMessage + "Invalid email.\n";
-            emergencyContactValidated = false;
+            emergencyContactFieldsValid = false;
         }
 
-        return emergencyContactValidated;
+        return emergencyContactFieldsValid;
+    }
+
+    public void checkExistingEmergencyContact() {
+        Program program = Program.getInstance();
+        program.checkExistingEmergencyContact(email);
     }
 
 
     public String getAlertDialogMessage() {
-        if (emergencyContactValidated) {
+        if (emergencyContactFieldsValid) {
             alertDialogMessage = "The emergency contact " + name + " has been successfully registered on the system.";
         }
         return alertDialogMessage;
     }
 
 
-    public void addNewEmergencyContact() {
+    public void storeNewEmergencyContact() {
         Program program = Program.getInstance();
         program.addEmergencyContactToCurrentUser(name, telephone, email);
     }

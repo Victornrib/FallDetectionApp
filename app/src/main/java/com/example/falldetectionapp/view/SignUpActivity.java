@@ -27,12 +27,6 @@ public class SignUpActivity extends AppCompatActivity {
     EditText editTextRegisterUserPassword;
     EditText editTextRegisterUserRepeatedPassword;
 
-    String name;
-    String telephone;
-    String email;
-    String password;
-    String repeatedPassword;
-
     AlertDialog alertDialog;
     SignUpController signUpController;
 
@@ -54,24 +48,24 @@ public class SignUpActivity extends AppCompatActivity {
 
                 //Getting name
                 editTextRegisterUserName = (EditText) findViewById(R.id.editTextRegisterUserName);
-                name = editTextRegisterUserName.getText().toString();
+                String name = editTextRegisterUserName.getText().toString();
                 //if (name.length()==0) {editTextRegisterUserName.setError("Field cannot be left blank"); -- I took care of that before, check how is it bellow --- name.equals("")
 
                 //Getting telephone
                 editTextRegisterUserTelephone = (EditText) findViewById(R.id.editTextRegisterUserTelephone);
-                telephone = editTextRegisterUserTelephone.getText().toString();
+                String telephone = editTextRegisterUserTelephone.getText().toString();
 
                 //Getting email
                 editTextRegisterUserEmail = (EditText) findViewById(R.id.editTextRegisterUserEmail);
-                email = editTextRegisterUserEmail.getText().toString();
+                String email = editTextRegisterUserEmail.getText().toString();
 
                 //Getting password
                 editTextRegisterUserPassword = (EditText) findViewById(R.id.editTextRegisterUserPassword);
-                password = editTextRegisterUserPassword.getText().toString();
+                String password = editTextRegisterUserPassword.getText().toString();
 
                 //Getting repeated password
                 editTextRegisterUserRepeatedPassword = (EditText) findViewById(R.id.editTextRegisterUserRepeatedPassword);
-                repeatedPassword = editTextRegisterUserRepeatedPassword.getText().toString();
+                String repeatedPassword = editTextRegisterUserRepeatedPassword.getText().toString();
 
                 //Needs to be instantiated on the onClick function because it has to get all the fields at the specific time of the click
                 signUpController = new SignUpController(name, telephone, email, password, repeatedPassword); //Can pass the context as well
@@ -133,11 +127,11 @@ public class SignUpActivity extends AppCompatActivity {
 
             //Override function of dialog button to lead the user to the AddDeviceActivity
             alertDialog.setTitle("Registration successful");
-            alertDialog.setMessage("The user " + name + " has been successfully registered on the system.");
+            alertDialog.setMessage("The user " + signUpController.name + " has been successfully registered on the system.");
             alertDialog.setButton(Dialog.BUTTON_NEUTRAL, "Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    openAddDeviceActivity();
+                    openInitialActivity();
                 }
             });
         }
@@ -150,8 +144,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-    public void openAddDeviceActivity() {
-        Intent intent = new Intent(this, AddDeviceActivity.class);
+    public void openInitialActivity() {
+        Intent intent = new Intent(this, InitialActivity.class);
         startActivity(intent);
     }
 

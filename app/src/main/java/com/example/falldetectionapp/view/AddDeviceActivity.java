@@ -54,7 +54,12 @@ public class AddDeviceActivity extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
-        Program.getInstance().setCurrentActivity(this);
+        Program program = Program.getInstance();
+        program.setCurrentActivity(this);
+        if (program.isFallDetected()) {
+            Intent intent = new Intent(this, FallDetectedActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override

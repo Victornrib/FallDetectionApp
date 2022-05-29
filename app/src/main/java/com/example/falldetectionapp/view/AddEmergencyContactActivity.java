@@ -67,7 +67,12 @@ public class AddEmergencyContactActivity extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
-        Program.getInstance().setCurrentActivity(this);
+        Program program = Program.getInstance();
+        program.setCurrentActivity(this);
+        if (program.isFallDetected()) {
+            Intent intent = new Intent(this, FallDetectedActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -79,38 +84,56 @@ public class AddEmergencyContactActivity extends AppCompatActivity {
 
 
 
-    private void generateDialog() {
+    public void generateDialog() {
 
-        //Create error alert dialog
+        //Setting up alert error dialog
         alertDialog = new AlertDialog.Builder(AddEmergencyContactActivity.this).create();
+
+        //Cancelable set to false to only dismiss popup when clicking in 'Ok' button
         alertDialog.setCancelable(false);
 
-        boolean registrationValid = addEmergencyContactController.checkContactFields();
-
-        if (registrationValid) {
-            alertDialog.setTitle("Registration successful");
-        }
-        else {
-            alertDialog.setTitle("Error");
-        }
-
-        alertDialog.setMessage(addEmergencyContactController.getAlertDialogMessage());
-
+        //Defining default dialog button functionality. Is overridden again if all fields are valid and user is unique
         alertDialog.setButton(Dialog.BUTTON_NEUTRAL, "Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-                if (registrationValid) {
-
-                    addEmergencyContactController.addNewEmergencyContact();
-                    openSettingsActivity();
-                }
-                else {
-                    alertDialog.cancel();
-                }
+                alertDialog.cancel();
             }
         });
 
+        if (!addEmergencyContactController.emergencyContactFieldsValid()) {
+            //Setting dynamically generated message from the controller in dialog
+            alertDialog.setMessage(addEmergencyContactController.getAlertDialogMessage());
+            alertDialog.setTitle("Error");
+            alertDialog.show();
+        }
+        else {
+            addEmergencyContactController.checkExistingEmergencyContact();
+        }
+    }
+
+
+    public void generateEmergencyContactCheckDialogMessage(String errorMessage) {
+        //Function called by the program
+
+        if (errorMessage == null) {
+            //Store new user
+            addEmergencyContactController.storeNewEmergencyContact();
+
+            //Override function of dialog button to lead the user to the AddDeviceActivity
+            alertDialog.setTitle("Registration successful");
+            alertDialog.setMessage("The emergency contact " + addEmergencyContactController.name + " has been successfully registered on the system.");
+            alertDialog.setButton(Dialog.BUTTON_NEUTRAL, "Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    openSettingsActivity();
+                }
+            });
+        }
+        else {
+            alertDialog.setTitle("Error");
+            //Display error message of already existing user
+            alertDialog.setMessage(errorMessage);
+        }
         alertDialog.show();
     }
 

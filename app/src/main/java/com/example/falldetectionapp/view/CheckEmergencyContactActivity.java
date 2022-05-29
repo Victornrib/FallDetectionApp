@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.falldetectionapp.R;
 import com.example.falldetectionapp.controller.CheckEmergencyContactController;
+import com.example.falldetectionapp.model.Program;
 
 public class CheckEmergencyContactActivity extends AppCompatActivity {
 
@@ -59,4 +60,23 @@ public class CheckEmergencyContactActivity extends AppCompatActivity {
             Intent intent = new Intent(this, AddDeviceActivity.class);
             startActivity(intent);
         }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        Program program = Program.getInstance();
+        program.setCurrentActivity(this);
+        if (program.isFallDetected()) {
+            Intent intent = new Intent(this, FallDetectedActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        Program.getInstance().setCurrentActivity(null);
+    }
     }
