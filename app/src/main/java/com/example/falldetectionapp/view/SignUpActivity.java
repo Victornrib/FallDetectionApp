@@ -19,16 +19,16 @@ import com.example.falldetectionapp.model.Program;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    Button buttonRegisterUser;
+    private Button buttonRegisterUser;
 
-    EditText editTextRegisterUserName;
-    EditText editTextRegisterUserTelephone;
-    EditText editTextRegisterUserEmail;
-    EditText editTextRegisterUserPassword;
-    EditText editTextRegisterUserRepeatedPassword;
+    private EditText editTextRegisterUserName;
+    private EditText editTextRegisterUserTelephone;
+    private EditText editTextRegisterUserEmail;
+    private EditText editTextRegisterUserPassword;
+    private EditText editTextRegisterUserRepeatedPassword;
 
-    AlertDialog alertDialog;
-    SignUpController signUpController;
+    private AlertDialog alertDialog;
+    private SignUpController signUpController;
 
     //Button buttonForgottenPassword;
 

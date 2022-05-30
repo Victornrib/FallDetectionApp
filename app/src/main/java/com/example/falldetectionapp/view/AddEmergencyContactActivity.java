@@ -24,7 +24,7 @@ public class AddEmergencyContactActivity extends AppCompatActivity {
     private EditText editTextRegisterContactTel;
     private EditText editTextRegisterContactEmail;
 
-    AddEmergencyContactController addEmergencyContactController;
+    private AddEmergencyContactController addEmergencyContactController;
 
     private AlertDialog alertDialog;
 
@@ -113,7 +113,7 @@ public class AddEmergencyContactActivity extends AppCompatActivity {
     }
 
 
-    public void generateEmergencyContactCheckDialogMessage(String errorMessage) {
+    public void generateEmContactCheckDialog(String errorMessage) {
         //Function called by the program
 
         if (errorMessage == null) {

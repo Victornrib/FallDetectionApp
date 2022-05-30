@@ -47,7 +47,7 @@ public class AddDeviceActivity extends AppCompatActivity {
         buttonAddDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openPairDeviceActivity();
+                openConnectDeviceActivity();
             }
         });
     }
@@ -80,7 +80,7 @@ public class AddDeviceActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void openPairDeviceActivity() {
+    private void openConnectDeviceActivity() {
         Intent intent = new Intent(this, ConnectDeviceActivity.class);
         startActivity(intent);
     }

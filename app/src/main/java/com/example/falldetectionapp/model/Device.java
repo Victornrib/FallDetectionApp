@@ -2,13 +2,13 @@ package com.example.falldetectionapp.model;
 
 
 class Device {
-    public String DeviceName;
-    public String MAC_ADDRESS;
+    public String deviceName;
+    public String macAddress;
 
     public Device() {}
 
-    public Device(String DeviceName, String MAC_ADDRESS){    //parameters missing?
-        this.DeviceName = DeviceName;
-        this.MAC_ADDRESS = MAC_ADDRESS;
+    public Device(String deviceName, String macAddress){    //parameters missing?
+        this.deviceName = deviceName;
+        this.macAddress = macAddress;
     }
 }

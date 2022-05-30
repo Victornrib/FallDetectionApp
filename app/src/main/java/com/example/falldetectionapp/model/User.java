@@ -77,7 +77,7 @@ class User {
     public void addDevice(String DeviceName, String MAC_ADDRESS) {
         if (this.pairedDevices.size() > 0) {
             for (int i = 0; i < this.pairedDevices.size(); i++) {
-                if (MAC_ADDRESS.equals(pairedDevices.get(i).MAC_ADDRESS))
+                if (MAC_ADDRESS.equals(pairedDevices.get(i).macAddress))
                     return;
             }
         }

@@ -14,11 +14,13 @@ import com.example.falldetectionapp.controller.SettingsController;
 import com.example.falldetectionapp.model.Program;
 
 public class SettingsActivity extends AppCompatActivity {
-    private Button buttonHome;
+    private Button buttonBack;
     private Button buttonSignOut;
     private Button buttonEC1;
     private Button buttonEC2;
     private Button buttonEC3;
+
+    private SettingsController settingsController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +28,8 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        buttonHome = (Button) findViewById(R.id.buttonHome);
-        buttonHome.setOnClickListener(new View.OnClickListener() {
+        buttonBack = (Button) findViewById(R.id.buttonBackFromSettings);
+        buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openAddDeviceActivity();
@@ -66,7 +68,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        SettingsController settingsController = new SettingsController();
+        settingsController = new SettingsController();
 
         for (int i = 0; i < settingsController.currentUserEmContactNames.size(); i++) {
             if (i == 0) {
@@ -75,7 +77,7 @@ public class SettingsActivity extends AppCompatActivity {
                 buttonEC1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        openViewEmergencyContactActivity(finalI);
+                        openCheckEmergencyContactActivity(finalI);
                     }
                 });
             }
@@ -85,7 +87,7 @@ public class SettingsActivity extends AppCompatActivity {
                 buttonEC2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        openViewEmergencyContactActivity(finalI1);
+                        openCheckEmergencyContactActivity(finalI1);
                     }
                 });
             }
@@ -95,7 +97,7 @@ public class SettingsActivity extends AppCompatActivity {
                 buttonEC3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        openViewEmergencyContactActivity(finalI2);
+                        openCheckEmergencyContactActivity(finalI2);
                     }
                 });
             }
@@ -135,7 +137,7 @@ public class SettingsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void openViewEmergencyContactActivity(int buttonIndex) {
+    private void openCheckEmergencyContactActivity(int buttonIndex) {
         Intent intent = new Intent(this, CheckEmergencyContactActivity.class);
         intent.putExtra("buttonIndex",buttonIndex);
         startActivity(intent);

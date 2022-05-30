@@ -191,14 +191,14 @@ public class Program {
                     EmergencyContact emergencyContact = dataValues.getValue(EmergencyContact.class);
 
                     if (emergencyContact.email.equals(email)) {
-                        addEmergencyContactActivity.generateEmergencyContactCheckDialogMessage("Registration invalid. Emergency Contact with this email already exists.\n");
+                        addEmergencyContactActivity.generateEmContactCheckDialog("Registration invalid. Emergency Contact with this email already exists.\n");
                     }
                     else {
-                        addEmergencyContactActivity.generateEmergencyContactCheckDialogMessage(null);
+                        addEmergencyContactActivity.generateEmContactCheckDialog(null);
                     }
                 }
                 if (!hasChildren) {
-                    addEmergencyContactActivity.generateEmergencyContactCheckDialogMessage(null);
+                    addEmergencyContactActivity.generateEmContactCheckDialog(null);
                 }
             }
 

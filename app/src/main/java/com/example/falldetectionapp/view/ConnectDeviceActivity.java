@@ -17,11 +17,9 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.falldetectionapp.R;
@@ -34,18 +32,18 @@ import java.util.Set;
 
 public class ConnectDeviceActivity extends AppCompatActivity {
 
-    Button buttonBack;
-    Button buttonConnectDevice;
-    Button buttonTestConnection;
-    ListView listViewPairedDevices;
+    private Button buttonBack;
+    private Button buttonConnectDevice;
+    private Button buttonTestConnection;
+    private ListView listViewPairedDevices;
 
     //Create alert dialog
-    AlertDialog alertDialog;
+    private AlertDialog alertDialog;
 
     private static final int REQUEST_BLUETOOTH_ACTIVATION = 1;
     private static final int REQUEST_BLUETOOTH_CONNECTION = 2;
 
-    ConnectDeviceController connectDeviceController;
+    private ConnectDeviceController connectDeviceController;
 
 
     @Override
@@ -160,7 +158,7 @@ public class ConnectDeviceActivity extends AppCompatActivity {
                     try {
                         connectDeviceController.connectDevice(data);
                         buttonConnectDevice.setText("Disconnect");
-                        Toast.makeText(getApplicationContext(), "You have been connected with:\n" + connectDeviceController.MAC_ADDRESS, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "You have been connected with:\n" + connectDeviceController.macAddress, Toast.LENGTH_LONG).show();
                     } catch (IOException error) {
                         connectDeviceController.connected = false;
                         Toast.makeText(getApplicationContext(), "An error has occurred:\n" + error, Toast.LENGTH_LONG).show();

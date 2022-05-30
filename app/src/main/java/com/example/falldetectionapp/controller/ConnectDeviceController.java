@@ -7,9 +7,6 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
@@ -25,7 +22,7 @@ public class ConnectDeviceController {
 
     private static final String TAG = "Error";
 
-    public static String MAC_ADDRESS = null;
+    public static String macAddress = null;
     public UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
 
     public BluetoothAdapter bluetoothAdapter = null;
@@ -45,8 +42,8 @@ public class ConnectDeviceController {
     }
 
     public boolean getDevice(Intent data) {
-        MAC_ADDRESS = data.getExtras().getString("MAC_ADDRESS");
-        bluetoothDevice = bluetoothAdapter.getRemoteDevice(MAC_ADDRESS);
+        macAddress = data.getExtras().getString("MAC_ADDRESS");
+        bluetoothDevice = bluetoothAdapter.getRemoteDevice(macAddress);
         return bluetoothDevice != null;
     }
 
@@ -61,7 +58,7 @@ public class ConnectDeviceController {
                 String deviceName = data.getExtras().getString("DEVICE_NAME");
 
                 Program program = Program.getInstance();
-                program.addDeviceToCurrentUser(deviceName, MAC_ADDRESS);
+                program.addDeviceToCurrentUser(deviceName, macAddress);
                 program.startBluetoothConnectedThread(bluetoothSocket);
             }
         };
