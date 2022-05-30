@@ -50,6 +50,15 @@ class User {
         storeUser();
     };
 
+    public void removeEmContact(String email) {
+        for (int i = 0; i < this.emContacts.size(); i++) {
+            if (emContacts.get(i).email.equals(email)) {
+                emContacts.remove(i);
+            }
+        }
+        storeUser();
+    }
+
     //check the list of emContacts for specific user
     public ArrayList<EmergencyContact> getEmContacts() {
         return emContacts;

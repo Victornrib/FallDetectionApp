@@ -1,8 +1,10 @@
 package com.example.falldetectionapp.view;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +41,7 @@ public class InitialActivity extends AppCompatActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onResume()
     {
@@ -46,12 +49,13 @@ public class InitialActivity extends AppCompatActivity {
         Program program = Program.getInstance();
         program.setCurrentActivity(this);
         program.setScreenVisibility(true);
+        program.checkFallDetectedActivity();
     }
 
     @Override
-    protected void onStop()
+    protected void onPause()
     {
-        super.onStop();
+        super.onPause();
         Program.getInstance().setScreenVisibility(false);
     }
 

@@ -41,8 +41,9 @@ public class Program {
     private static Program program;
     private User currentUser = null;
     private boolean fallDetected = false;
-    private boolean devicePaired = false;
+    private boolean deviceConnected = false;
     private boolean screenVisibility = false;
+    private String fallTime = "";
     private Context currentActivity;
     private static ConnectedThread connectedThread;
 
@@ -214,6 +215,10 @@ public class Program {
         currentUser.addEmContact(name, telephone, email);
     }
 
+    public void removeEmergencyContactFromUser(String email) {
+        currentUser.removeEmContact(email);
+    }
+
     public void addDeviceToCurrentUser(String deviceName, String MAC_ADDRESS) {
         currentUser.addDevice(deviceName, MAC_ADDRESS);
     }
@@ -242,6 +247,7 @@ public class Program {
         //Get time
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDateTime currentTime = LocalDateTime.now();
+        fallTime = dtf.format(currentTime);
         //System.out.println(dtf.format(currentTime));
 
         //Make a future check to know what is the type of contact
@@ -251,7 +257,7 @@ public class Program {
         }
         if (screenVisibility) {
             //Add checks if the activity is not on to choose if open the FallDetectedActivity
-            openFallDetectedActivity(dtf.format(currentTime));
+            checkFallDetectedActivity();
         }
     };
 
@@ -267,11 +273,13 @@ public class Program {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void openFallDetectedActivity(String currentTime) {
-        if (currentActivity != null) {
-            Intent intent = new Intent(currentActivity, FallDetectedActivity.class);
-            intent.putExtra("currentTime", currentTime);
-            currentActivity.startActivity(intent);
+    public void checkFallDetectedActivity() {
+        if (fallDetected) {
+            if (currentActivity != null) {
+                Intent intent = new Intent(currentActivity, FallDetectedActivity.class);
+                intent.putExtra("fallTime", fallTime);
+                currentActivity.startActivity(intent);
+            }
         }
     }
 

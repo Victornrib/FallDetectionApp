@@ -48,8 +48,8 @@ public class FallDetectedActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            String currentTime = extras.getString("currentTime");
-            textViewTimeFall.setText("Time: "+currentTime);
+            String fallTime = extras.getString("fallTime");
+            textViewTimeFall.setText("Time: "+fallTime);
         }
 
         Toast.makeText(this, "SMS sent to all emergency contacts", Toast.LENGTH_LONG).show();
