@@ -60,14 +60,16 @@ public class SignInActivity extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
-        Program.getInstance().setCurrentActivity(this);
+        Program program = Program.getInstance();
+        program.setCurrentActivity(this);
+        program.setScreenVisibility(true);
     }
 
     @Override
-    protected void onPause()
+    protected void onStop()
     {
-        super.onPause();
-        Program.getInstance().setCurrentActivity(null);
+        super.onStop();
+        Program.getInstance().setScreenVisibility(false);
     }
 
 

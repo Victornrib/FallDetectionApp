@@ -20,7 +20,7 @@ public class InitialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initial);
 
-        //click sign in --> sign in 
+        //click sign in --> sign in
         buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
         buttonSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,7 +29,7 @@ public class InitialActivity extends AppCompatActivity {
             }
         });
 
-        //click sign up --> sign up 
+        //click sign up --> sign up
         buttonSignUp = (Button) findViewById(R.id.buttonSignUp);
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,14 +43,16 @@ public class InitialActivity extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
-        Program.getInstance().setCurrentActivity(this);
+        Program program = Program.getInstance();
+        program.setCurrentActivity(this);
+        program.setScreenVisibility(true);
     }
 
     @Override
-    protected void onPause()
+    protected void onStop()
     {
-        super.onPause();
-        Program.getInstance().setCurrentActivity(null);
+        super.onStop();
+        Program.getInstance().setScreenVisibility(false);
     }
 
     private void openSignInActivity() {

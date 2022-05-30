@@ -15,11 +15,8 @@ import android.util.Log;
 import androidx.core.app.ActivityCompat;
 
 import com.example.falldetectionapp.model.Program;
-import com.example.falldetectionapp.view.DeviceListActivity;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.UUID;
 
 public class ConnectDeviceController {
@@ -27,7 +24,6 @@ public class ConnectDeviceController {
     Context context;
 
     private static final String TAG = "Error";
-    private Handler handler; // handler that gets info from Bluetooth service
 
     public static String MAC_ADDRESS = null;
     public UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");

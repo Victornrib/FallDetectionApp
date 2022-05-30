@@ -59,14 +59,18 @@ public class FallDetectedActivity extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
-        Program.getInstance().setCurrentActivity(this);
+        Program program = Program.getInstance();
+        program.setCurrentActivity(this);
+        program.setScreenVisibility(true);
+        program.setFallDetected(false);
     }
 
     @Override
     protected void onPause()
     {
         super.onPause();
-        Program.getInstance().setCurrentActivity(null);
+        Program program = Program.getInstance();
+        program.setScreenVisibility(false);
     }
 
     private void openInitialActivity() {

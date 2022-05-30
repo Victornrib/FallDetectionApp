@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3575" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/drawable/rectangle.xml" value="0.33" />
+        <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_add_device.xml" value="0.2" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_add_device_screen.xml" value="0.25" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_add_emergency_contact.xml" value="0.2821557971014493" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_check_emergency_contact.xml" value="0.275" />
@@ -13,6 +14,7 @@
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_emergency_contact.xml" value="0.33" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_fall_detected.xml" value="0.275" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_fall_detected_screen.xml" value="0.33" />
+        <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_initial.xml" value="0.234375" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_initial_screen.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_login_screen.xml" value="0.25317028985507245" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_main.xml" value="0.18" />
@@ -21,6 +23,7 @@
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_settings_screen.xml" value="0.33" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_sign_in_screen.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_sign_up.xml" value="0.234375" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_sign_up_screen.xml" value="0.33" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_test.xml" value="0.35280797101449274" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_view_emergency_contact.xml" value="0.2821557971014493" />

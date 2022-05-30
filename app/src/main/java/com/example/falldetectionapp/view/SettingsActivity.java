@@ -106,6 +106,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onResume();
         Program program = Program.getInstance();
         program.setCurrentActivity(this);
+        program.setScreenVisibility(true);
         if (program.isFallDetected()) {
             Intent intent = new Intent(this, FallDetectedActivity.class);
             startActivity(intent);
@@ -113,10 +114,10 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause()
+    protected void onStop()
     {
-        super.onPause();
-        Program.getInstance().setCurrentActivity(null);
+        super.onStop();
+        Program.getInstance().setScreenVisibility(false);
     }
 
     private void openAddDeviceActivity() {

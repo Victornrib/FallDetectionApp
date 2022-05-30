@@ -47,14 +47,12 @@
             android:layout_height="0dp"
             android:layout_weight="0.2" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewPairingDevices"
+        <ListView
+            android:id="@+id/listViewPairedDevices"
             android:layout_width="300dp"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.8"
-            tools:itemCount="8"
-            tools:listitem="@layout/recycler_view_item" />
+            android:layout_weight="0.8" />
 
         <Space
             android:layout_width="match_parent"

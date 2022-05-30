@@ -80,7 +80,7 @@ public class ConnectDeviceActivity extends AppCompatActivity {
                 } else {
                     connectDeviceController.disconnectDevice();
                     Toast.makeText(getApplicationContext(), "Bluetooth disconnected", Toast.LENGTH_LONG).show();
-                    buttonPairDevice.setText("Pair");
+                    buttonPairDevice.setText("Connect");
                 }
             }
         });
@@ -98,6 +98,8 @@ public class ConnectDeviceActivity extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 
     @Override
@@ -106,6 +108,7 @@ public class ConnectDeviceActivity extends AppCompatActivity {
         super.onResume();
         Program program = Program.getInstance();
         program.setCurrentActivity(this);
+        program.setScreenVisibility(true);
         if (program.isFallDetected()) {
             Intent intent = new Intent(this, FallDetectedActivity.class);
             startActivity(intent);
@@ -113,10 +116,10 @@ public class ConnectDeviceActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause()
+    protected void onStop()
     {
-        super.onPause();
-        Program.getInstance().setCurrentActivity(null);
+        super.onStop();
+        Program.getInstance().setScreenVisibility(false);
     }
 
     @Override

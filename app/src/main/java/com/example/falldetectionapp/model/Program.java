@@ -42,6 +42,7 @@ public class Program {
     private User currentUser = null;
     private boolean fallDetected = false;
     private boolean devicePaired = false;
+    private boolean screenVisibility = false;
     private Context currentActivity;
     private static ConnectedThread connectedThread;
 
@@ -69,6 +70,10 @@ public class Program {
 
     public boolean isFallDetected() {
         return fallDetected;
+    }
+
+    public void setFallDetected(boolean fallDetected) {
+        this.fallDetected = fallDetected;
     }
 
     public void setCurrentUser(User currentUser) {
@@ -108,6 +113,10 @@ public class Program {
 
     public void setCurrentActivity(Activity currentActivity) {
         this.currentActivity = currentActivity;
+    }
+
+    public void setScreenVisibility(boolean screenVisibility) {
+        this.screenVisibility = screenVisibility;
     }
 
     public void signIn(String email, String password) {
@@ -240,8 +249,10 @@ public class Program {
         if (ContextCompat.checkSelfPermission(currentActivity, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
             sendSMS();
         }
-        //Add checks if the activity is not on to choose if open the FallDetectedActivity
-        openFallDetectedActivity(dtf.format(currentTime));
+        if (screenVisibility) {
+            //Add checks if the activity is not on to choose if open the FallDetectedActivity
+            openFallDetectedActivity(dtf.format(currentTime));
+        }
     };
 
     private void sendSMS() {
