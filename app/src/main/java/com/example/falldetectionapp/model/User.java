@@ -22,10 +22,10 @@ class User {
     public String telephone;
     public String email;
     public String password;
-    //boolean isConnected;
     //boolean isEmContactVerified;
     public ArrayList<EmergencyContact> emContacts = new ArrayList<EmergencyContact>();
     public ArrayList<Device> pairedDevices = new ArrayList<Device>();
+    public ArrayList<String> recordedFalls = new ArrayList<String>();
 
     public User() {}
 
@@ -40,6 +40,11 @@ class User {
         this.userID = random.nextInt(1000);
     }
 
+    //-----Fall-----
+    public void addRecordedFall(String time) {
+        recordedFalls.add(time);
+        storeUser();
+    }
 
     //-----Emergency Contact-----
 
@@ -82,7 +87,6 @@ class User {
     }
 
     public ArrayList<Device> returnPairedDevices() { return pairedDevices; }
-
 
     //-----User-----
 

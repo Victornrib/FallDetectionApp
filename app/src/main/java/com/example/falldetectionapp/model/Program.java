@@ -47,7 +47,6 @@ public class Program {
     private Context currentActivity;
     private static ConnectedThread connectedThread;
 
-
     //Create handler for dealing with messages
     public Handler handler;
 
@@ -245,10 +244,13 @@ public class Program {
         fallDetected = true;
 
         //Get time
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDateTime currentTime = LocalDateTime.now();
-        fallTime = dtf.format(currentTime);
-        //System.out.println(dtf.format(currentTime));
+
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        fallTime = timeFormatter.format(currentTime);
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd - HH:mm:ss");
+        currentUser.addRecordedFall(dateTimeFormatter.format((currentTime)));
 
         //Make a future check to know what is the type of contact
         // if contactType == "SMS"
