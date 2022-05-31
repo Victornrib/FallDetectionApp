@@ -20,11 +20,11 @@ public class SignInController {
 
 
     public SignInController(String email, String password) {
-
         this.email = email;
         this.password = password;
     }
 
+    //Singleton method
     public void signIn() {
         Program program = Program.getInstance();
         program.signIn(email, password);

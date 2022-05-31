@@ -25,7 +25,6 @@ public class SignUpController {
     private String alertDialogMessage = "";
 
 
-
     public SignUpController(String name, String telephone, String email, String password, String repeatedPassword) {
 
         this.name = name;
@@ -35,25 +34,24 @@ public class SignUpController {
         this.repeatedPassword = repeatedPassword;
     }
 
-
+    //this method checks all registration fields
     public boolean signUpFieldsValid() {
 
-        //Regular expression to validate telephone
+        //Regular expression to check telephone. String must be between 8-11 characters, only certain numbers/symbols allowed.
         //  "^[0-9]{8,9}$" -- For standard format (ex: 12345678 or 123456789)
         //  "^\+(?:[0-9] ?){6,14}[0-9]$" -- For international format (ex: +0133557799)
         String telephoneRegex = "(^\\+(?:[0-9] ?){6,14}[0-9]$)|(^[0-9]{8,9}$)";
         Pattern telephonePattern = Pattern.compile(telephoneRegex);
         Matcher telephoneMatcher = telephonePattern.matcher(telephone);
 
-        //Regular expression to validate email
-        //Format "XXX@YYY.ZZZ"
+        //Checks that format of email is  "XXX@YYY.ZZZ", in order to validate email.
         String emailRegex = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
         Pattern emailPattern = Pattern.compile(emailRegex);
         Matcher emailMatcher = emailPattern.matcher(email);
 
-        //we should make this a boolean method and call it :)
         signUpFieldsValid = true;
 
+        //series of if statements to check each field, and concatenate the alertDialogMessage
         if (name.equals("")) {
             alertDialogMessage = alertDialogMessage + "Registration invalid. Invalid name.\n";
             signUpFieldsValid = false;
@@ -75,20 +73,24 @@ public class SignUpController {
             signUpFieldsValid = false;
         }
 
+        //will return false if any field was not valid, will return true if all fields valid.
         return signUpFieldsValid;
     }
 
+    //COMPARED TO STORENEWUSER COMMENT, IS THIS BETTER OR TOO MUCH INFO?
+    //passes the email to a method in the Program which will check if the email is already existing in the database.
     public void checkExistingUser() {
         Program program = Program.getInstance();
         program.checkExistingUser(email);
     }
 
-
+    //getter function
     public String getAlertDialogMessage() {
         return alertDialogMessage;
     }
 
-
+    //IS THIS COMMENT NEEDED????
+    //Gets an instance of the Program, then passes the arguments to call storeNewUser in Program
     public void storeNewUser() {
         Program program = Program.getInstance();
         program.storeNewUser(name, telephone, email, password);

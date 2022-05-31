@@ -6,10 +6,11 @@ import java.util.ArrayList;
 
 public class CheckEmergencyContactController {
 
-    public String currentUserEmContactName = null;
-    public String currentUserEmContactTelephone = null;
-    public String currentUserEmContactEmail = null;
+    public String currentUserEmContactName;
+    public String currentUserEmContactTelephone;
+    public String currentUserEmContactEmail;
 
+    //this constructor basically gets an Instance, and sets the details of the current User's EmergencyContacts
     public CheckEmergencyContactController(int specifiedEmergencyContact) {
         Program program = Program.getInstance();
         currentUserEmContactName = program.getCurrentUserEmContactsNames().get(specifiedEmergencyContact);

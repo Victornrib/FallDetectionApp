@@ -1,7 +1,7 @@
 package com.example.falldetectionapp.model;
 
-
 class Device {
+
     public String deviceName;
     public String macAddress;
 

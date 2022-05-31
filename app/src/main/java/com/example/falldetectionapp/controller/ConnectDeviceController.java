@@ -20,9 +20,12 @@ public class ConnectDeviceController {
 
     Context context;
 
+    //?
     private static final String TAG = "Error";
 
+    //this is a unique address which identifies a Bluetooth device
     public static String macAddress = null;
+    //Universal Unique Identifier which is used for uniquely identifying information
     public UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
 
     public BluetoothAdapter bluetoothAdapter = null;
@@ -31,16 +34,19 @@ public class ConnectDeviceController {
 
     public boolean connected = false;
 
-
+    //CORECT?
+    //all this constructor needs is to establish context.
     public ConnectDeviceController(Context context) {
         this.context = context;
     }
 
+    //returns a non-null BluetoothAdapter
     public boolean startBluetooth() {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         return bluetoothAdapter != null;
     }
 
+    //?
     public boolean getDevice(Intent data) {
         macAddress = data.getExtras().getString("MAC_ADDRESS");
         bluetoothDevice = bluetoothAdapter.getRemoteDevice(macAddress);
@@ -49,12 +55,14 @@ public class ConnectDeviceController {
 
     public void connectDevice(Intent data) throws IOException {
         if (getDevice(data)) {
+            //if the correct permissions are given...
             if (ActivityCompat.checkSelfPermission(this.context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-
+                //a socket can then be created and connected.
                 bluetoothSocket = bluetoothDevice.createRfcommSocketToServiceRecord(uuid);
                 bluetoothSocket.connect();
                 connected = true;
 
+                //gets the name of the device being connected
                 String deviceName = data.getExtras().getString("DEVICE_NAME");
 
                 Program program = Program.getInstance();
@@ -64,8 +72,9 @@ public class ConnectDeviceController {
         };
     }
 
+    //???
     public void disconnectDevice() {
-        //Adjust later
+        //Adjust later - still need to adjust???
         try {
             connected = false;
             bluetoothSocket.close();
