@@ -21,7 +21,6 @@ public class AddEmergencyContactController {
         this.email = email;
     }
 
-    //check all fields
     public boolean emergencyContactFieldsValid() {
 
         //Regular expression to check telephone. String must be between 8-11 characters, only certain numbers/symbols allowed.
@@ -73,6 +72,5 @@ public class AddEmergencyContactController {
         Program program = Program.getInstance();
         program.addEmergencyContactToCurrentUser(name, telephone, email);
     }
-
 
 }

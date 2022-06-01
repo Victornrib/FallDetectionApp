@@ -47,7 +47,6 @@ public class Program {
     private Context currentActivity;
     private static ConnectedThread connectedThread;
 
-    //Create handler for dealing with messages
     public Handler handler;
 
     private Program() {
@@ -109,7 +108,6 @@ public class Program {
         }
         return currentUserEmContactsTelephones;
     }
-
 
     public void setCurrentActivity(Activity currentActivity) {
         this.currentActivity = currentActivity;
@@ -210,9 +208,11 @@ public class Program {
         firebaseUserReference.addListenerForSingleValueEvent(valueEventListener);
     }
 
+
     public void addEmergencyContactToCurrentUser(String name, String telephone, String email) {
         currentUser.addEmContact(name, telephone, email);
     }
+
 
     public void removeEmergencyContactFromUser(String email) {
         currentUser.removeEmContact(email);
@@ -263,6 +263,7 @@ public class Program {
         }
     };
 
+    //code from https://www.youtube.com/watch?v=ofAL1C4jUJw
     private void sendSMS() {
         SmsManager smsManager = SmsManager.getDefault();
 

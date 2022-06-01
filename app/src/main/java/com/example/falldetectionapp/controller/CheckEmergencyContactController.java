@@ -2,8 +2,6 @@ package com.example.falldetectionapp.controller;
 
 import com.example.falldetectionapp.model.Program;
 
-import java.util.ArrayList;
-
 public class CheckEmergencyContactController {
 
     public String currentUserEmContactName;

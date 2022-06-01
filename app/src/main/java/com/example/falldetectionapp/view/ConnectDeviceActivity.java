@@ -1,6 +1,5 @@
 package com.example.falldetectionapp.view;
 
-
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
@@ -29,7 +28,6 @@ import com.example.falldetectionapp.model.Program;
 import java.io.IOException;
 import java.util.Set;
 
-
 public class ConnectDeviceActivity extends AppCompatActivity {
 
     private Button buttonBack;
@@ -37,14 +35,12 @@ public class ConnectDeviceActivity extends AppCompatActivity {
     private Button buttonTestConnection;
     private ListView listViewPairedDevices;
 
-    //Create alert dialog
     private AlertDialog alertDialog;
 
     private static final int REQUEST_BLUETOOTH_ACTIVATION = 1;
     private static final int REQUEST_BLUETOOTH_CONNECTION = 2;
 
     private ConnectDeviceController connectDeviceController;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +61,6 @@ public class ConnectDeviceActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Your device doesn't have bluetooth", Toast.LENGTH_LONG).show();
         }
 
-        //click back --> goes back to add device
         buttonBack = (Button) findViewById(R.id.buttonBack);
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,8 +69,6 @@ public class ConnectDeviceActivity extends AppCompatActivity {
             }
         });
 
-        //click pair --> also goes back to add device.
-        // This is not the intention right? -gwen
         buttonConnectDevice = (Button) findViewById(R.id.buttonConnectDevice);
         buttonConnectDevice.setOnClickListener(new View.OnClickListener() {
             @Override

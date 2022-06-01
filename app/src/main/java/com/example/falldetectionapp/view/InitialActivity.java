@@ -22,7 +22,6 @@ public class InitialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initial);
 
-        //click sign in --> sign in
         buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
         buttonSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,7 +30,6 @@ public class InitialActivity extends AppCompatActivity {
             }
         });
 
-        //click sign up --> sign up
         buttonSignUp = (Button) findViewById(R.id.buttonSignUp);
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,5 +67,4 @@ public class InitialActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //may need an alert dialog here for if the previous login is not remembered/stored properly for some reason?
 }

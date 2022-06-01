@@ -46,15 +46,12 @@ public class AddEmergencyContactActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //Getting name
                 editTextRegisterContactName = (EditText) findViewById(R.id.editTextRegisterEmergencyContactName);
                 String name = editTextRegisterContactName.getText().toString();
 
-                //Getting telephone
                 editTextRegisterContactTel = (EditText) findViewById(R.id.editTextRegisterEmergencyContactTelephone);
                 String telephone = editTextRegisterContactTel.getText().toString();
 
-                //Getting email
                 editTextRegisterContactEmail = (EditText) findViewById(R.id.editTextRegisterEmergencyContactEmail);
                 String email = editTextRegisterContactEmail.getText().toString();
 
@@ -87,13 +84,10 @@ public class AddEmergencyContactActivity extends AppCompatActivity {
 
     public void generateDialog() {
 
-        //Setting up alert error dialog
         alertDialog = new AlertDialog.Builder(AddEmergencyContactActivity.this).create();
 
-        //Cancelable set to false to only dismiss popup when clicking in 'Ok' button
         alertDialog.setCancelable(false);
 
-        //Defining default dialog button functionality. Is overridden again if all fields are valid and user is unique
         alertDialog.setButton(Dialog.BUTTON_NEUTRAL, "Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -102,7 +96,6 @@ public class AddEmergencyContactActivity extends AppCompatActivity {
         });
 
         if (!addEmergencyContactController.emergencyContactFieldsValid()) {
-            //Setting dynamically generated message from the controller in dialog
             alertDialog.setMessage(addEmergencyContactController.getAlertDialogMessage());
             alertDialog.setTitle("Error");
             alertDialog.show();
@@ -114,13 +107,8 @@ public class AddEmergencyContactActivity extends AppCompatActivity {
 
 
     public void generateEmContactCheckDialog(String errorMessage) {
-        //Function called by the program
-
         if (errorMessage == null) {
-            //Store new user
             addEmergencyContactController.storeNewEmergencyContact();
-
-            //Override function of dialog button to lead the user to the AddDeviceActivity
             alertDialog.setTitle("Registration successful");
             alertDialog.setMessage("The emergency contact " + addEmergencyContactController.name + " has been successfully registered on the system.");
             alertDialog.setButton(Dialog.BUTTON_NEUTRAL, "Ok", new DialogInterface.OnClickListener() {
@@ -132,7 +120,6 @@ public class AddEmergencyContactActivity extends AppCompatActivity {
         }
         else {
             alertDialog.setTitle("Error");
-            //Display error message of already existing user
             alertDialog.setMessage(errorMessage);
         }
         alertDialog.show();

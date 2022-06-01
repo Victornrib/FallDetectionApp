@@ -20,7 +20,6 @@ public class ConnectDeviceController {
 
     Context context;
 
-    //?
     private static final String TAG = "Error";
 
     //this is a unique address which identifies a Bluetooth device
@@ -34,19 +33,15 @@ public class ConnectDeviceController {
 
     public boolean connected = false;
 
-    //CORECT?
-    //all this constructor needs is to establish context.
     public ConnectDeviceController(Context context) {
         this.context = context;
     }
 
-    //returns a non-null BluetoothAdapter
     public boolean startBluetooth() {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         return bluetoothAdapter != null;
     }
 
-    //?
     public boolean getDevice(Intent data) {
         macAddress = data.getExtras().getString("MAC_ADDRESS");
         bluetoothDevice = bluetoothAdapter.getRemoteDevice(macAddress);
@@ -72,9 +67,7 @@ public class ConnectDeviceController {
         };
     }
 
-    //???
     public void disconnectDevice() {
-        //Adjust later - still need to adjust???
         try {
             connected = false;
             bluetoothSocket.close();

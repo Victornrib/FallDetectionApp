@@ -1,14 +1,7 @@
 package com.example.falldetectionapp.controller;
 
-import android.util.Log;
-
 import com.example.falldetectionapp.model.Program;
-import com.example.falldetectionapp.model.SharedPrefs;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.gson.Gson;
 
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,7 +16,6 @@ public class SignUpController {
     private boolean signUpFieldsValid;
 
     private String alertDialogMessage = "";
-
 
     public SignUpController(String name, String telephone, String email, String password, String repeatedPassword) {
 
@@ -77,20 +69,15 @@ public class SignUpController {
         return signUpFieldsValid;
     }
 
-    //COMPARED TO STORENEWUSER COMMENT, IS THIS BETTER OR TOO MUCH INFO?
-    //passes the email to a method in the Program which will check if the email is already existing in the database.
     public void checkExistingUser() {
         Program program = Program.getInstance();
         program.checkExistingUser(email);
     }
 
-    //getter function
     public String getAlertDialogMessage() {
         return alertDialogMessage;
     }
 
-    //IS THIS COMMENT NEEDED????
-    //Gets an instance of the Program, then passes the arguments to call storeNewUser in Program
     public void storeNewUser() {
         Program program = Program.getInstance();
         program.storeNewUser(name, telephone, email, password);

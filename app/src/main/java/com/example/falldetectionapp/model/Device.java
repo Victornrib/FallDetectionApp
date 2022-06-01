@@ -7,7 +7,7 @@ class Device {
 
     public Device() {}
 
-    public Device(String deviceName, String macAddress){    //parameters missing?
+    public Device(String deviceName, String macAddress){
         this.deviceName = deviceName;
         this.macAddress = macAddress;
     }

@@ -40,17 +40,13 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //Getting email
                 editTextEmail = (EditText) findViewById(R.id.editTextEmail);
                 email = editTextEmail.getText().toString();
 
-                //Getting password
                 editTextPassword = (EditText) findViewById(R.id.editTextPassword);
                 password = editTextPassword.getText().toString();
 
-                //Instantiating SignInController
                 signInController = new SignInController(email, password);
-
                 signInController.signIn();
             }
         });
@@ -75,7 +71,6 @@ public class SignInActivity extends AppCompatActivity {
 
     public void generateErrorDialog(String message) {
 
-        //Create alert dialog
         alertDialog = new AlertDialog.Builder(SignInActivity.this).create();
         alertDialog.setCancelable(false);
         alertDialog.setTitle("Error");
@@ -86,6 +81,7 @@ public class SignInActivity extends AppCompatActivity {
                 alertDialog.cancel();
             }
         });
+
         alertDialog.show();
     }
 
