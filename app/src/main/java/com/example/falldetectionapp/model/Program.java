@@ -119,7 +119,7 @@ public class Program {
 
     public void signIn(String email, String password) {
 
-        DatabaseReference firebaseUserReference = FirebaseDatabase.getInstance().getReference("Users").child(email.replace(".",","));
+        DatabaseReference firebaseUserReference = FirebaseDatabase.getInstance("https://fall-detection-83eed-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(email.replace(".",","));
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -153,7 +153,7 @@ public class Program {
     }
 
     public void checkExistingUser(String email) {
-        DatabaseReference firebaseUserReference = FirebaseDatabase.getInstance().getReference("Users").child(email.replace(".",","));
+        DatabaseReference firebaseUserReference = FirebaseDatabase.getInstance("https://fall-detection-83eed-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(email.replace(".",","));
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -176,7 +176,7 @@ public class Program {
     }
 
     public void checkExistingEmergencyContact(String email) {
-        DatabaseReference firebaseUserReference = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.email.replace(".",",")).child("emContacts");
+        DatabaseReference firebaseUserReference = FirebaseDatabase.getInstance("https://fall-detection-83eed-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(currentUser.email.replace(".",",")).child("emContacts");
         ValueEventListener valueEventListener = new ValueEventListener() {
 
             @Override

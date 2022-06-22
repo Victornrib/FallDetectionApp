@@ -71,7 +71,7 @@ class User {
 
     public void storeUser() {
         //Getting reference to firebase
-        DatabaseReference firebaseReference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference firebaseReference = FirebaseDatabase.getInstance("https://fall-detection-83eed-default-rtdb.europe-west1.firebasedatabase.app").getReference();
         //Adding to firebase (Replacing "." with "," because firebase doesn't allow child names with ".")
         firebaseReference.child("Users").child(this.email.replace(".",",")).setValue(this);
     }
