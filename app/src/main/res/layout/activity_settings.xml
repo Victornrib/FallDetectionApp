@@ -14,15 +14,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/buttonBackFromSettings"
-            android:layout_width="150dp"
-            android:layout_height="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.07"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="Back"
-            android:textSize="20sp" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonBackFromSettings"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="Back"
+                android:textSize="20sp" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1" />
+
+            <Switch
+                android:id="@+id/switchAlertMode"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:text="Alert Mode"
+                android:textColor="#505050"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"

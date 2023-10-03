@@ -28,6 +28,9 @@
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_test.xml" value="0.35280797101449274" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/activity_view_emergency_contact.xml" value="0.2821557971014493" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FallDetectionApp/app/src/main/res/layout/recycler_view_item.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/victo/Desktop/FallertApp/app/src/main/res/layout/activity_connect_device.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/victo/Desktop/FallertApp/app/src/main/res/layout/activity_initial.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/victo/Desktop/FallertApp/app/src/main/res/layout/activity_settings.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_add_device_screen.xml" value="0.21105072463768115" />
         <entry key="app/src/main/res/layout/activity_emergency_contact.xml" value="0.21105072463768115" />
         <entry key="app/src/main/res/layout/activity_fall_detected.xml" value="0.19021739130434784" />
@@ -39,7 +42,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

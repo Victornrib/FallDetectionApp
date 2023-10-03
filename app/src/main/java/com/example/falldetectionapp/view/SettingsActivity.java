@@ -8,6 +8,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.falldetectionapp.R;
 import com.example.falldetectionapp.controller.SettingsController;
@@ -19,6 +21,7 @@ public class SettingsActivity extends AppCompatActivity {
     private Button buttonEC1;
     private Button buttonEC2;
     private Button buttonEC3;
+    private Switch switchAlertMode;
 
     private SettingsController settingsController;
 
@@ -28,11 +31,22 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        settingsController = new SettingsController();
+
         buttonBack = (Button) findViewById(R.id.buttonBackFromSettings);
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openAddDeviceActivity();
+            }
+        });
+
+        switchAlertMode = (Switch) findViewById(R.id.switchAlertMode);
+        switchAlertMode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                settingsController.switchAlertMode();
+                Toast.makeText(getApplicationContext(), "Alert mode set to: "+settingsController.getCurrentUserAlertMode(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -67,8 +81,6 @@ public class SettingsActivity extends AppCompatActivity {
                 openAddEmergencyContactActivity();
             }
         });
-
-        settingsController = new SettingsController();
 
         for (int i = 0; i < settingsController.currentUserEmContactNames.size(); i++) {
             if (i == 0) {
@@ -113,6 +125,12 @@ public class SettingsActivity extends AppCompatActivity {
         program.setCurrentActivity(this);
         program.setScreenVisibility(true);
         program.checkFallDetectedActivity();
+        if (settingsController.getCurrentUserAlertMode().equals("SMS")) {
+            switchAlertMode.setChecked(false);
+        }
+        else if (settingsController.getCurrentUserAlertMode().equals("Call")) {
+            switchAlertMode.setChecked(true);
+        }
     }
 
     @Override

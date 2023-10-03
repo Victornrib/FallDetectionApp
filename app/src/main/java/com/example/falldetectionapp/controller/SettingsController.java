@@ -13,4 +13,14 @@ public class SettingsController {
         Program program = Program.getInstance();
         currentUserEmContactNames = program.getCurrentUserEmContactsNames();
     }
+
+    public void switchAlertMode() {
+        Program program = Program.getInstance();
+        program.switchAlertModeFromCurrentUser();
+    }
+
+    public String getCurrentUserAlertMode() {
+        Program program = Program.getInstance();
+        return program.getCurrentUserAlertMode();
+    }
 }

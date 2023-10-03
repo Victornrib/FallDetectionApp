@@ -9,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.falldetectionapp.R;
+import com.example.falldetectionapp.controller.ConnectDeviceController;
+import com.example.falldetectionapp.controller.FallDetectedController;
 import com.example.falldetectionapp.model.Program;
 
 public class FallDetectedActivity extends AppCompatActivity {
@@ -16,6 +18,8 @@ public class FallDetectedActivity extends AppCompatActivity {
     private Button buttonSignOut;
     private Button buttonSettings;
     private TextView textViewTimeFall;
+
+    private FallDetectedController fallDetectedController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +45,19 @@ public class FallDetectedActivity extends AppCompatActivity {
 
         textViewTimeFall = (TextView) findViewById(R.id.textViewTimeFall);
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String fallTime = extras.getString("fallTime");
-            textViewTimeFall.setText("Time: "+fallTime);
+        fallDetectedController = new FallDetectedController();
+
+        textViewTimeFall.setText("Time: "+fallDetectedController.fallTime);
+
+        if (fallDetectedController.getCurrentUserAlertMode().equals("SMS")) {
+            Toast.makeText(this, "SMS sent to all emergency contacts", Toast.LENGTH_LONG).show();
+        }
+        else if (fallDetectedController.getCurrentUserAlertMode().equals("Call")) {
+            Toast.makeText(this, "Calling all emergency contacts", Toast.LENGTH_LONG).show();
+            fallDetectedController.callEmergencyContactsFromUser();
         }
 
-        Toast.makeText(this, "SMS sent to all emergency contacts", Toast.LENGTH_LONG).show();
+
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 
@@ -16,6 +17,7 @@ class User {
     public ArrayList<EmergencyContact> emContacts = new ArrayList<EmergencyContact>();
     public ArrayList<Device> pairedDevices = new ArrayList<Device>();
     public ArrayList<String> recordedFalls = new ArrayList<String>();
+    public String alertMode = "SMS";
 
     public User() {}
 
@@ -45,6 +47,16 @@ class User {
             if (emContacts.get(i).email.equals(email)) {
                 emContacts.remove(i);
             }
+        }
+        storeUser();
+    }
+
+    public void switchAlertMode() {
+        if (Objects.equals(this.alertMode, "SMS")) {
+            this.alertMode = "Call";
+        }
+        else if (Objects.equals(this.alertMode, "Call")) {
+            this.alertMode = "SMS";
         }
         storeUser();
     }

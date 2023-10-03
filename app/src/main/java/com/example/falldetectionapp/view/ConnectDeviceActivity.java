@@ -87,15 +87,19 @@ public class ConnectDeviceActivity extends AppCompatActivity {
 
         buttonTestConnection = (Button) findViewById(R.id.buttonTestConnection);
         buttonTestConnection.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
 
+                Program.getInstance().receiveAlert();
+                /*
                 if (connectDeviceController.connected) {
                     Program.getInstance().writeToBluetoothConnectedThread("Start");
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Bluetooth is not connected", Toast.LENGTH_LONG).show();
                 }
+                 */
             }
         });
 

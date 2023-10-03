@@ -56,7 +56,7 @@ public class AddDeviceActivity extends AppCompatActivity {
         Program program = Program.getInstance();
         program.setCurrentActivity(this);
         program.setScreenVisibility(true);
-        program.checkFallDetectedActivity();
+        //program.checkFallDetectedActivity();
     }
 
     @Override
