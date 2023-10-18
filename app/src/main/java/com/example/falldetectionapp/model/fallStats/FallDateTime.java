@@ -39,7 +39,7 @@ public class FallDateTime {
     }
 
     public String getFallDateTimeString() {
-        String fallDateTimeString =  month + " " + dayOfMonth + ", " + year;
+        String fallDateTimeString =  month + " " + dayOfMonth + ", " + year + " - " + hour + ":" + minute + ":" + second;
         return fallDateTimeString;
     }
 }
