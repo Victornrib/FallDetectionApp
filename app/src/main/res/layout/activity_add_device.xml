@@ -24,12 +24,12 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/buttonSettings"
+                android:id="@+id/buttonPersonalReport"
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="@string/settings"
+                android:text="@string/personal_report"
                 android:textSize="20sp" />
 
             <Space
@@ -38,12 +38,12 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/buttonReports"
+                android:id="@+id/buttonStatistics"
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="@string/reports"
+                android:text="@string/stats"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -80,16 +80,38 @@
             android:layout_height="0dp"
             android:layout_weight="0.3" />
 
-        <Button
-            android:id="@+id/buttonSignOut"
-            android:layout_width="150dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_gravity="end"
             android:layout_weight="0.08"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="Sign Out"
-            android:textSize="20sp" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonSettings"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/settings"
+                android:textSize="20sp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/buttonSignOut"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_weight="0.08"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="Sign Out"
+                android:textSize="20sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

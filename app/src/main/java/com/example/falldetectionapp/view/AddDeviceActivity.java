@@ -48,11 +48,11 @@ public class AddDeviceActivity extends AppCompatActivity {
             }
         });
 
-        buttonPersonalReport = (Button) findViewById(R.id.buttonReports);
+        buttonPersonalReport = (Button) findViewById(R.id.buttonStatistics);
         buttonPersonalReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openPersonalReportActivity();
+                openStatisticsActivity();
             }
         });
     }
@@ -90,8 +90,8 @@ public class AddDeviceActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void openPersonalReportActivity() {
-        Intent intent = new Intent(this, PersonalReportActivity.class);
+    private void openStatisticsActivity() {
+        Intent intent = new Intent(this, StatisticsActivity.class);
         startActivity(intent);
     }
 }

@@ -1,7 +1,9 @@
 package com.example.falldetectionapp.view;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.falldetectionapp.R;
-import com.example.falldetectionapp.controller.ConnectDeviceController;
 import com.example.falldetectionapp.controller.FallDetectedController;
 import com.example.falldetectionapp.model.Program;
 
@@ -21,6 +22,7 @@ public class FallDetectedActivity extends AppCompatActivity {
 
     private FallDetectedController fallDetectedController;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -67,7 +69,6 @@ public class FallDetectedActivity extends AppCompatActivity {
         Program program = Program.getInstance();
         program.setCurrentActivity(this);
         program.setScreenVisibility(true);
-        program.setFallDetected(false);
     }
 
     @Override

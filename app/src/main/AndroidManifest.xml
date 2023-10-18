@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.falldetectionapp" >
+    package="com.example.falldetectionapp">
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
 
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -18,14 +22,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FallDetectionApp" >
+        android:theme="@style/Theme.FallDetectionApp">
+        <activity
+            android:name=".view.PersonalReportActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBJoiR5UWC8NyrjP7SLcvTqjRpEsuZ7Yro" />
 
         <activity
-            android:name=".view.PersonalReportActivity"
+            android:name=".view.StatisticsActivity"
             android:exported="false" />
         <activity
             android:name=".view.CheckEmergencyContactActivity"
@@ -61,7 +68,7 @@
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".view.MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

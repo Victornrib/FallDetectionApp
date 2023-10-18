@@ -1,11 +1,16 @@
 package com.example.falldetectionapp.controller;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.example.falldetectionapp.model.Program;
 
 public class FallDetectedController {
 
     public String fallTime;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public FallDetectedController() {
         Program program = Program.getInstance();
         fallTime = program.getFallTime();

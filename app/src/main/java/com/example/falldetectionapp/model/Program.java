@@ -54,7 +54,7 @@ public class Program {
     private boolean sendingMessage = false;
     private boolean deviceConnected = false;
     private boolean screenVisibility = false;
-    private String fallTime = "";
+    private LocalDateTime fallDateTime;
     private Context currentActivity;
     private static ConnectedThread connectedThread;
 
@@ -132,8 +132,16 @@ public class Program {
         return currentUser.alertMode;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public String getFallTime() {
-        return fallTime;
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        return timeFormatter.format(fallDateTime);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public String getFallDate() {
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("dd-mm-YY");
+        return timeFormatter.format(fallDateTime);
     }
 
     public void setCurrentActivity(Activity currentActivity) {
@@ -275,15 +283,8 @@ public class Program {
         sendingMessage = true;
 
         //Get time
-        LocalDateTime currentTime = LocalDateTime.now();
-
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        fallTime = timeFormatter.format(currentTime);
-
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd - HH:mm:ss");
-        currentUser.addRecordedFall(dateTimeFormatter.format((currentTime)));
-
-        getCurrentLocation();
+        fallDateTime = LocalDateTime.now();
+        startLocationListener();
 
         if (screenVisibility) {
             //Add checks if the activity is not on to choose if open the FallDetectedActivity
@@ -328,21 +329,28 @@ public class Program {
         sendingMessage = false;
     }
 
-    public void getCurrentLocation() {
+    public void startLocationListener() {
 
         ActivityCompat.requestPermissions((Activity) currentActivity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
         ActivityCompat.requestPermissions((Activity) currentActivity, new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
 
         locationListener = new LocationListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onLocationChanged(@NonNull Location location) {
-                latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                if (fallDetected) {
+                    latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    currentUser.addRecordedFall(fallDateTime, latLng);
 
-                //Probably will have errors when receiving alerts from different activities
-                if (currentUser.alertMode.equals("SMS") && sendingMessage) {
-                    if (ContextCompat.checkSelfPermission(currentActivity, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
-                        sendSmsToEmContacts();
+                    //Probably will have errors when receiving alerts from different activities
+                    if (currentUser.alertMode.equals("SMS") && sendingMessage) {
+                        if (ContextCompat.checkSelfPermission(currentActivity, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+                            sendSmsToEmContacts();
+                        }
                     }
+
+                    //Colocar após todos os procedimentos de queda terem sido realizados
+                    fallDetected = false;
                 }
             }
         };

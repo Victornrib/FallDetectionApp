@@ -1,8 +1,15 @@
 package com.example.falldetectionapp.model;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import com.example.falldetectionapp.model.fallStats.RecordedFall;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
@@ -16,7 +23,7 @@ class User {
     public String password;
     public ArrayList<EmergencyContact> emContacts = new ArrayList<EmergencyContact>();
     public ArrayList<Device> pairedDevices = new ArrayList<Device>();
-    public ArrayList<String> recordedFalls = new ArrayList<String>();
+    public ArrayList<RecordedFall> recordedFalls = new ArrayList<RecordedFall>();
     public String alertMode = "SMS";
 
     public User() {}
@@ -31,8 +38,24 @@ class User {
         this.userID = random.nextInt(1000);
     }
 
-    public void addRecordedFall(String time) {
-        recordedFalls.add(time);
+    private Integer generateFallId() {
+        ArrayList usedIds = new ArrayList<>();
+        for(int i = 0; i < recordedFalls.size(); i++)
+            usedIds.add(recordedFalls.get(i).fallId);
+
+        int sortedId;
+        Random random = new Random();
+        do { sortedId = random.nextInt(100000);
+        } while (usedIds.contains(sortedId));
+
+        return (Integer) sortedId;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void addRecordedFall(LocalDateTime fallDateTime, LatLng latLng) {
+        Integer fallId = generateFallId();
+        RecordedFall recordedFall = new RecordedFall(fallId, fallDateTime, latLng);
+        recordedFalls.add(recordedFall);
         storeUser();
     }
 
