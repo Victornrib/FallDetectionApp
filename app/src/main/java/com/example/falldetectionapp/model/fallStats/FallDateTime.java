@@ -37,4 +37,9 @@ public class FallDateTime {
         this.month = localDateTime.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
         this.dayOfWeek = localDateTime.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
     }
+
+    public String getFallDateTimeString() {
+        String fallDateTimeString =  month + " " + dayOfMonth + ", " + year;
+        return fallDateTimeString;
+    }
 }

@@ -17,6 +17,7 @@ public class AddDeviceActivity extends AppCompatActivity {
     private Button buttonSettings;
     private Button buttonAddDevice;
     private Button buttonPersonalReport;
+    private Button buttonStatistics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +49,16 @@ public class AddDeviceActivity extends AppCompatActivity {
             }
         });
 
-        buttonPersonalReport = (Button) findViewById(R.id.buttonStatistics);
+        buttonPersonalReport = (Button) findViewById(R.id.buttonPersonalReport);
         buttonPersonalReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openPersonalReportActivity();
+            }
+        });
+
+        buttonStatistics = (Button) findViewById(R.id.buttonStatistics);
+        buttonStatistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openStatisticsActivity();
@@ -87,6 +96,11 @@ public class AddDeviceActivity extends AppCompatActivity {
 
     private void openConnectDeviceActivity() {
         Intent intent = new Intent(this, ConnectDeviceActivity.class);
+        startActivity(intent);
+    }
+
+    private void openPersonalReportActivity() {
+        Intent intent = new Intent(this, PersonalReportActivity.class);
         startActivity(intent);
     }
 

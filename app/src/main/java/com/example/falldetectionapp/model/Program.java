@@ -26,6 +26,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.falldetectionapp.model.fallStats.RecordedFall;
 import com.example.falldetectionapp.view.AddEmergencyContactActivity;
 import com.example.falldetectionapp.view.FallDetectedActivity;
 import com.example.falldetectionapp.view.SignInActivity;
@@ -130,6 +131,16 @@ public class Program {
             }
         }
         return currentUserEmContactsTelephones;
+    }
+
+    public ArrayList<RecordedFall> getCurrentUserRecordedFalls() {
+        ArrayList<RecordedFall> currentUserRecordedFalls = new ArrayList<RecordedFall>();
+        if (currentUser.recordedFalls != null) {
+            for (int i = 0; i < currentUser.recordedFalls.size(); i++) {
+                currentUserRecordedFalls.add(currentUser.recordedFalls.get(i));
+            }
+        }
+        return currentUserRecordedFalls;
     }
 
     public String getCurrentUserAlertMode() {

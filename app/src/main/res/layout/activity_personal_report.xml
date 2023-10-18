@@ -20,7 +20,7 @@
             android:layout_weight="0.08" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textViewReportedFalls"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.1"
@@ -35,8 +35,8 @@
             android:layout_weight="0.05" />
 
         <ListView
-            android:id="@+id/listViewPairedDevices"
-            android:layout_width="match_parent"
+            android:id="@+id/listViewReportedFalls"
+            android:layout_width="300dp"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.8" />
