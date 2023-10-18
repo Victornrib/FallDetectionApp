@@ -115,7 +115,7 @@ public class SignUpActivity extends AppCompatActivity {
             alertDialog.setButton(Dialog.BUTTON_NEUTRAL, "Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    openInitialActivity();
+                    openAddUserInfoActivity();
                 }
             });
         }
@@ -127,8 +127,13 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-    public void openInitialActivity() {
+/*    public void openInitialActivity() {
         Intent intent = new Intent(this, InitialActivity.class);
+        startActivity(intent);
+    }*/
+
+    public void openAddUserInfoActivity() {
+        Intent intent = new Intent(this, AddUserInfoActivity.class);
         startActivity(intent);
     }
 

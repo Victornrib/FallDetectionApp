@@ -16,5 +16,11 @@
     <string name="personal_report">Personal Report</string>
     <string name="reports">Reports</string>
     <string name="stats">Stats</string>
+
+    <string-array name="genders">
+        <item>Female</item>
+        <item>Male</item>
+        <item>Not specified</item>
+    </string-array>
     />
 </resources>

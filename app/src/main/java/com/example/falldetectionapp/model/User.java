@@ -21,6 +21,12 @@ class User {
     public String telephone;
     public String email;
     public String password;
+
+    public String gender;
+    public String birthDate;
+    public Integer age;
+    public String disease;
+
     public ArrayList<EmergencyContact> emContacts = new ArrayList<EmergencyContact>();
     public ArrayList<Device> pairedDevices = new ArrayList<Device>();
     public ArrayList<RecordedFall> recordedFalls = new ArrayList<RecordedFall>();
@@ -49,6 +55,14 @@ class User {
         } while (usedIds.contains(sortedId));
 
         return (Integer) sortedId;
+    }
+
+    public void addInfo(String gender, String birthDate, Integer age, String disease) {
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.age = age;
+        this.disease = disease;
+        storeUser();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

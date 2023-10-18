@@ -98,6 +98,10 @@ public class Program {
         this.currentUser = currentUser;
     }
 
+    public void addCurrentUserInfo(String gender, String birthDate, Integer age, String disease) {
+        this.currentUser.addInfo(gender, birthDate, age, disease);
+    }
+
     public ArrayList<String> getCurrentUserEmContactsNames() {
         ArrayList<String> currentUserEmContactsNames = new ArrayList<String>();
         if (currentUser.emContacts != null) {
@@ -184,6 +188,7 @@ public class Program {
 
     public void storeNewUser(String name, String telephone, String email, String password) {
         User newUser = new User(name, telephone, email, password);
+        setCurrentUser(newUser);
         newUser.storeUser();
     }
 
