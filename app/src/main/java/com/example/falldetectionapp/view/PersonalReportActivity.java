@@ -116,7 +116,7 @@ public class PersonalReportActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     FallCoordinates coords = recordedFallItem.fallCoordinates;
-
+                    openMapActivty(coords);
                 }
             });
 
@@ -129,8 +129,12 @@ public class PersonalReportActivity extends AppCompatActivity {
         }
     }
 
-    private void openSettingsActivity() {
-        Intent intent = new Intent(this, SettingsActivity.class);
+    private void openMapActivty(FallCoordinates coords) {
+        Bundle bundle = new Bundle();
+        bundle.putDouble("latitude", coords.latitude);
+        bundle.putDouble("longitude", coords.longitude);
+        Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 }
