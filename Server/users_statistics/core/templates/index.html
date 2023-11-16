@@ -2,23 +2,23 @@
 
 <html>
     <head>
-        <title>Título</title>
+        <title>Fallert Stats</title>
     </head>
     <body>
-        <h1>TESTE</h1>
+        <h1>Fallert Stats</h1>
         <div id="main" style="width: 600px;height:400px;"></div>
         <h4>Ages</h4>
-        {% for age in ages %}
+        {% for age in users.ages %}
             <li>{{ age }}</li>
         {% endfor %}
         <br>
         <h4>Number of emergency contacts</h4>
-        {% for count in em_contacts_count %}
+        {% for count in users.em_contacts_count %}
             <li>{{ count }}</li>
         {% endfor %}
         <br>
         <h4>Genders</h4>
-        {% for gender in genders %}
+        {% for gender in users.genders %}
             <li>{{ gender }}</li>
         {% endfor %}
     </body>

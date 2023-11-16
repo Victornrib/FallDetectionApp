@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from collections import OrderedDict
+from core.services.users_service import UsersService
+
 import pyrebase
 
 # Firebase configuration
@@ -25,26 +26,8 @@ def index(request):
         # result = db.child("user").push({"campo": user})
         pass
     else:
-        users = db.child("Users").get()
-        users_dict = OrderedDict(users.val()).values()
-
-        ages = []
-        em_contacts_count = []
-        genders = []
-
-        for user in users_dict:
-            ages.append(user.get("age"))
-            if user.get("emContacts"):
-                em_contacts_count.append(len(user.get("emContacts")))
-            else:
-                em_contacts_count.append(0)
-            genders.append(user.get("gender"))
-            #diseases = []
-            #recordedFalls = []
-
-        #users_dict = OrderedDict(users_data.val())
+        users_info_dict = UsersService.get_users_info_dict(db)
         return render(request, 'index.html', context={
-            "ages": ages,
-            "em_contacts_count": em_contacts_count,
-            "genders": genders,
+            "users": users_info_dict,
         })
+    
