@@ -7,9 +7,19 @@
     <body>
         <h1>TESTE</h1>
         <div id="main" style="width: 600px;height:400px;"></div>
-        {% for user in users %}
-            <li>{{ user }}</li>
-            <br>
+        <h4>Ages</h4>
+        {% for age in ages %}
+            <li>{{ age }}</li>
+        {% endfor %}
+        <br>
+        <h4>Number of emergency contacts</h4>
+        {% for count in em_contacts_count %}
+            <li>{{ count }}</li>
+        {% endfor %}
+        <br>
+        <h4>Genders</h4>
+        {% for gender in genders %}
+            <li>{{ gender }}</li>
         {% endfor %}
     </body>
 </html>
