@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from collections import OrderedDict
 import pyrebase
 
 # Firebase configuration
@@ -22,5 +23,6 @@ def index(request):
     if request.method == "POST":
         pass
     else:
-        users = db.child("Users")
-        return render(request, 'index.html', context={"users": users})
+        users_data = db.child("Users").get()
+        users_dict = OrderedDict(users_data.val())
+        return render(request, 'index.html', context={"users": users_dict.values()})

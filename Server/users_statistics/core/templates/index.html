@@ -1,6 +1,9 @@
 <html>
     <body>
         <h1>TESTE</h1>
-        {{ users }}
+        {% for user in users %}
+            <li>{{ user }}</li>
+            <br>
+        {% endfor %}
     </body>
 </html>
