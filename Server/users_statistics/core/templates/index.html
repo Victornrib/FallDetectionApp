@@ -6,11 +6,12 @@
     </head>
     <body>
         <h1>Fallert Stats</h1>
-        <div id="main" style="width: 600px;height:400px;"></div>
-        <h4>Ages</h4>
-        {% for age in users.ages %}
-            <li>{{ age }}</li>
-        {% endfor %}
+
+        <!-- <div id="main" style="width: 600px;height:400px;"></div> -->
+
+        <h4>Number of falls per age</h4>
+        <div id="falls-per-age-distribution-graph" style="width: 300px;height:400px;"></div>
+        <script id="falls-per-age-distribution-graph-data" data-chart-data="{{ users.falls_per_age|safe }}"></script>
         <br>
         <h4>Number of emergency contacts</h4>
         {% for count in users.em_contacts_count %}
