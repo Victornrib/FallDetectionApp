@@ -39,34 +39,28 @@ document.addEventListener("DOMContentLoaded", function() {
   var fallsPerAgeDistributionGraph = echarts.init(document.getElementById('falls-per-age-distribution-graph'));
 
   fallsPerAgeDistributionGraphOption = {
-    tooltip: {
-      trigger: 'item'
-    },
-    legend: {
-      top: '5%',
+    title: {
+      text: 'Number of falls per age',
       left: 'center'
+    },
+    tooltip: {
+      trigger: 'item',
+      formatter: function(params) {
+        // Customize the tooltip content
+        return 'Falls at age ' + params.name + ': <strong>' + params.value + '</strong>';
+      },
     },
     series: [
       {
-        name: 'Access From',
+        name: 'Falls at age',
         type: 'pie',
-        radius: ['40%', '70%'],
         avoidLabelOverlap: false,
         itemStyle: {
-          borderRadius: 10,
           borderColor: '#fff',
           borderWidth: 2
         },
         label: {
           show: false,
-          position: 'center'
-        },
-        emphasis: {
-          label: {
-            show: true,
-            fontSize: 40,
-            fontWeight: 'bold'
-          }
         },
         labelLine: {
           show: false
