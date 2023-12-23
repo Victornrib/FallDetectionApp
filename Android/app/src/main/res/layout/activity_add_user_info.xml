@@ -20,7 +20,7 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.07" />
+        android:layout_weight="0.05" />
 
     <TextView
         android:id="@+id/textViewAddInfo"
@@ -35,7 +35,7 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.08" />
+        android:layout_weight="0.03" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,7 +84,7 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.06" />
+        android:layout_weight="0.03" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -131,12 +131,12 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.06" />
+        android:layout_weight="0.03" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.05"
+        android:layout_weight="0.2"
         android:orientation="horizontal">
 
       <Space
@@ -145,11 +145,11 @@
           android:layout_weight="1.5" />
 
       <TextView
-          android:id="@+id/textViewDisease"
+          android:id="@+id/textViewMovementDisorders"
           android:layout_width="75dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="Disease?"
+          android:text="Movement disorders?"
           android:textAlignment="center"
           android:textSize="17sp"
           android:textStyle="bold" />
@@ -159,11 +159,12 @@
           android:layout_height="wrap_content"
           android:layout_weight="0.6" />
 
-      <EditText
-          android:id="@+id/editTextDisease"
+      <ListView
+          android:id="@+id/listViewMovementDisorders"
           android:layout_width="180dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
+          android:choiceMode="multipleChoice"
           android:ems="10"
           android:minHeight="48dp"
           tools:ignore="SpeakableTextPresentCheck" />
@@ -185,7 +186,7 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.07" />
+        android:layout_weight="0.03" />
 
     <Button
         android:id="@+id/buttonConfirm"
@@ -201,7 +202,7 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.08" />
+        android:layout_weight="0.04" />
 
   </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,15 +11,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.falldetectionapp.R;
 import com.example.falldetectionapp.model.Program;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Date;
@@ -33,14 +33,18 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
     private Button buttonConfirm;
     private Spinner spinnerGender;
 
-    private EditText editTextDisease;
+    private ListView listViewMovementDisorders;
+
+    private ArrayAdapter<String> arrayAdapterMovementDisorders;
+
+    private String[] AllMovementDisorders = {"Ataxia", "Cervical dystonia", "Chorea", "Dystonia", "Functional movement disorder", "Huntington's disease", "Multiple system atrophy", "Myoclonus", "Parkinson's disease", "Parkinsonism", "Progressive supranuclear palsy", "Restless legs syndrome", "Tardive dyskinesia", "Tourette syndrome", "Tremor", "Wilson's disease"};
+
+    private ArrayList<String> movementDisorders = new ArrayList<String>();
 
     private String gender;
 
     private String birthDate;
     private Integer age;
-
-    private String disease;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,10 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
         buttonDateOfBirth = findViewById(R.id.buttonDateOfBirth);
         buttonDateOfBirth.setText(getTodaysDate());
         initDateOfBirthPicker();
+
+        arrayAdapterMovementDisorders = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, AllMovementDisorders);
+        listViewMovementDisorders = findViewById(R.id.listViewMovementDisorders);
+        listViewMovementDisorders.setAdapter(arrayAdapterMovementDisorders);
 
         spinnerGender = findViewById(R.id.spinnerGender);
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.genders, android.R.layout.simple_spinner_item);
@@ -62,7 +70,7 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
             @Override
             public void onClick(View view) {
                 calculateUserAge();
-                getUserDisease();
+                getUserMovementDisorders();
                 addUserInfo();
                 openAddDeviceActivity();
 
@@ -88,12 +96,15 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
 
     public void addUserInfo() {
         Program program = Program.getInstance();
-        program.addCurrentUserInfo(gender, birthDate, age, disease);
+        program.addCurrentUserInfo(gender, birthDate, age, movementDisorders);
     }
 
-    private void getUserDisease() {
-        editTextDisease = (EditText) findViewById(R.id.editTextDisease);
-        disease = editTextDisease.getText().toString();
+    private void getUserMovementDisorders() {
+        for(int i=0; i < listViewMovementDisorders.getCount(); i++) {
+            if (listViewMovementDisorders.isItemChecked(i)) {
+                movementDisorders.add(listViewMovementDisorders.getItemAtPosition(i).toString());
+            }
+        }
     }
 
     private Calendar getUserCalendarBirthDate() {

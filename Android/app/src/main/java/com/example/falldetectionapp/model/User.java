@@ -25,7 +25,7 @@ class User {
     public String gender;
     public String birthDate;
     public Integer age;
-    public String disease;
+    public ArrayList<String> movementDisorders;
 
     public ArrayList<EmergencyContact> emContacts = new ArrayList<EmergencyContact>();
     public ArrayList<Device> pairedDevices = new ArrayList<Device>();
@@ -57,11 +57,11 @@ class User {
         return (Integer) sortedId;
     }
 
-    public void addInfo(String gender, String birthDate, Integer age, String disease) {
+    public void addInfo(String gender, String birthDate, Integer age, ArrayList<String> movementDisorders) {
         this.gender = gender;
         this.birthDate = birthDate;
         this.age = age;
-        this.disease = disease;
+        this.movementDisorders = movementDisorders;
         storeUser();
     }
 
