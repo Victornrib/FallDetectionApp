@@ -11,7 +11,7 @@ class UsersService:
         em_contacts_count = []
 
         # ages_dict = cls.get_users_ages_dict(users_dict)
-        falls_per_age_dict = cls.get_users_falls_per_age(users_dict)
+        falls_per_age_list = cls.get_users_falls_per_age(users_dict)
         genders_dict = cls.get_users_genders_dict(users_dict)
 
         for user in users_dict:
@@ -20,7 +20,7 @@ class UsersService:
             #recordedFalls = []
 
         users_info_dict = {
-            "falls_per_age": falls_per_age_dict,
+            "falls_per_age": falls_per_age_list,
             "genders": genders_dict,
             "em_contacts_count": em_contacts_count,
         }
@@ -29,21 +29,30 @@ class UsersService:
 
     @classmethod
     def get_users_falls_per_age(cls, users_dict):
-        falls_per_age = []
+        sorted_users_dict = sorted(users_dict, key=lambda user: user['age'])
 
-        for user in users_dict:
+        fall_counter_falls = []
+        fall_counter_ages = []
+
+        for user in sorted_users_dict:
             age = user.get("age")
-            falls = len(user.get("recordedFalls"))
 
-            for fall_counter in falls_per_age:
-                #Caso em que há essa idade presente -> incrementa contador de quedas dessa idade
-                if str(age) == fall_counter['name']:
-                    fall_counter['value'] += falls
-            
-            #Caso em não há essa idade presente -> cria contador de quedas para essa idade e a adiciona na lista de contadores
-            fall_counter = {'value': falls, 'name': str(age)}
-            falls_per_age.append(fall_counter)
+            if user.get("recordedFalls"):
+                falls = len(user.get("recordedFalls"))
 
+                for i in range(len(fall_counter_falls)):
+                    #Caso em que há essa idade presente -> incrementa contador de quedas dessa idade
+                    if str(age) == fall_counter_ages[i]:
+                        fall_counter_falls[i] += falls
+
+                #Caso em não há essa idade presente -> cria contador de quedas para essa idade e a adiciona na lista de contadores
+                fall_counter_falls.append(falls)
+            else:
+                fall_counter_falls.append(0)
+
+            fall_counter_ages.append(str(age))
+
+        falls_per_age = {'falls': fall_counter_falls, 'ages': fall_counter_ages}
         return falls_per_age
 
 

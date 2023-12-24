@@ -30,46 +30,78 @@
 
 // //  console.log(document.getElementById('ages-distribution-graph-data'));
 
-var fallsPerAgeDistributionGraphData;
+
+var fallsPerAgeLineGraphData;
 
 document.addEventListener("DOMContentLoaded", function() {
-  var fallsPerAgeDistributionGraphDataElement = document.getElementById('falls-per-age-distribution-graph-data');
-  fallsPerAgeDistributionGraphData = JSON.parse(fallsPerAgeDistributionGraphDataElement.getAttribute('data-chart-data').replace(/\'/g, '"'));
-
-  var fallsPerAgeDistributionGraph = echarts.init(document.getElementById('falls-per-age-distribution-graph'));
-
-  fallsPerAgeDistributionGraphOption = {
-    title: {
-      text: 'Number of falls per age',
-      left: 'center'
-    },
-    tooltip: {
-      trigger: 'item',
-      formatter: function(params) {
-        // Customize the tooltip content
-        return 'Falls at age ' + params.name + ': <strong>' + params.value + '</strong>';
+    var fallsPerAgeLineGraphDataElement = document.getElementById('falls-per-age-line-graph-data');
+    fallsPerAgeLineGraphData = JSON.parse(fallsPerAgeLineGraphDataElement.getAttribute('data-chart-data').replace(/\'/g, '"'));
+  
+    var fallsPerAgeLineGraph = echarts.init(document.getElementById('falls-per-age-line-graph'));
+  
+    fallsPerAgeLineGraphOption = {
+      xAxis: {
+        type: 'category',
+        data: fallsPerAgeLineGraphData.ages
       },
-    },
-    series: [
-      {
-        name: 'Falls at age',
-        type: 'pie',
-        avoidLabelOverlap: false,
-        itemStyle: {
-          borderColor: '#fff',
-          borderWidth: 2
-        },
-        label: {
-          show: false,
-        },
-        labelLine: {
-          show: false
-        },
-        data: fallsPerAgeDistributionGraphData
-      }
-    ]
-  };
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          data: fallsPerAgeLineGraphData.falls,
+          type: 'line'
+        }
+      ]
+    };
 
-  console.log(fallsPerAgeDistributionGraphData);
-  fallsPerAgeDistributionGraph.setOption(fallsPerAgeDistributionGraphOption);
+    console.log(fallsPerAgeLineGraphData);
+    fallsPerAgeLineGraph.setOption(fallsPerAgeLineGraphOption);
 });
+
+
+
+
+// var fallsPerAgeDistributionGraphData;
+
+// document.addEventListener("DOMContentLoaded", function() {
+//   var fallsPerAgeDistributionGraphDataElement = document.getElementById('falls-per-age-distribution-graph-data');
+//   fallsPerAgeDistributionGraphData = JSON.parse(fallsPerAgeDistributionGraphDataElement.getAttribute('data-chart-data').replace(/\'/g, '"'));
+
+//   var fallsPerAgeDistributionGraph = echarts.init(document.getElementById('falls-per-age-distribution-graph'));
+
+//   fallsPerAgeDistributionGraphOption = {
+//     title: {
+//       text: 'Number of falls per age',
+//       left: 'center'
+//     },
+//     tooltip: {
+//       trigger: 'item',
+//       formatter: function(params) {
+//         // Customize the tooltip content
+//         return 'Falls at age ' + params.name + ': <strong>' + params.value + '</strong>';
+//       },
+//     },
+//     series: [
+//       {
+//         name: 'Falls at age',
+//         type: 'pie',
+//         avoidLabelOverlap: false,
+//         itemStyle: {
+//           borderColor: '#fff',
+//           borderWidth: 2
+//         },
+//         label: {
+//           show: false,
+//         },
+//         labelLine: {
+//           show: false
+//         },
+//         data: fallsPerAgeDistributionGraphData
+//       }
+//     ]
+//   };
+
+//   console.log(fallsPerAgeDistributionGraphData);
+//   fallsPerAgeDistributionGraph.setOption(fallsPerAgeDistributionGraphOption);
+// });
