@@ -23,8 +23,8 @@ db = firebase.database()
 # Create your views here.
 def index(request):
     if request.method == "POST":
-        # user = request.POST['usuario_etc']
-        # result = db.child("user").push({"campo": user})
+        # user = request.POST['user123']
+        # result = db.child("user").push({"field": user})
         pass
     else:
         users_info_dict = UsersService.get_users_info_dict(db)
