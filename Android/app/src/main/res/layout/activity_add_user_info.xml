@@ -98,11 +98,11 @@
           android:layout_weight="0.6" />
 
       <TextView
-          android:id="@+id/textViewGender"
+          android:id="@+id/textViewSex"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="Gender:"
+          android:text="Sex:"
           android:textAlignment="center"
           android:textSize="17sp"
           android:textStyle="bold" />
@@ -113,7 +113,7 @@
           android:layout_weight="1" />
 
       <Spinner
-          android:id="@+id/spinnerGender"
+          android:id="@+id/spinnerSex"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1.8"
