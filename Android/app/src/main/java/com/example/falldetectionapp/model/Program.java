@@ -99,8 +99,8 @@ public class Program {
         this.currentUser = currentUser;
     }
 
-    public void addCurrentUserInfo(String gender, String birthDate, Integer age, ArrayList<String> movementDisorders) {
-        this.currentUser.addInfo(gender, birthDate, age, movementDisorders);
+    public void addCurrentUserInfo(String sex, String birthDate, Integer age, ArrayList<String> movementDisorders) {
+        this.currentUser.addInfo(sex, birthDate, age, movementDisorders);
     }
 
     public ArrayList<String> getCurrentUserEmContactsNames() {

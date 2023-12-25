@@ -8,21 +8,14 @@ class UsersService:
         users = db.child("Users").get()
         users_dict = OrderedDict(users.val()).values()
 
-        em_contacts_count = []
-
-        # ages_dict = cls.get_users_ages_dict(users_dict)
-        falls_per_age_list = cls.get_users_falls_per_age(users_dict)
-        genders_dict = cls.get_users_genders_dict(users_dict)
-
-        for user in users_dict:
-            em_contacts_count.append(len(user.get("emContacts")) if user.get("emContacts") else 0)
-            #diseases = []
-            #recordedFalls = []
+        falls_per_age_dict = cls.get_users_falls_per_age(users_dict)
+        falls_per_sex_dict = cls.get_users_falls_per_sex(users_dict)
+        falls_per_movement_disorder_dict = cls.get_users_falls_per_movement_disorder(users_dict)
 
         users_info_dict = {
-            "falls_per_age": falls_per_age_list,
-            "genders": genders_dict,
-            "em_contacts_count": em_contacts_count,
+            "falls_per_age": falls_per_age_dict,
+            "falls_per_sex": falls_per_sex_dict,
+            "falls_per_movement_disorder": falls_per_movement_disorder_dict,
         }
         return users_info_dict
     
@@ -31,55 +24,68 @@ class UsersService:
     def get_users_falls_per_age(cls, users_dict):
         sorted_users_dict = sorted(users_dict, key=lambda user: user['age'])
 
-        fall_counter_falls = []
-        fall_counter_ages = []
-
+        falls_counter = {}
+        
         for user in sorted_users_dict:
             age = user.get("age")
 
             if user.get("recordedFalls"):
                 falls = len(user.get("recordedFalls"))
 
-                for i in range(len(fall_counter_falls)):
-                    #Caso em que há essa idade presente -> incrementa contador de quedas dessa idade
-                    if str(age) == fall_counter_ages[i]:
-                        fall_counter_falls[i] += falls
+                if str(age) in falls_counter:
+                    falls_counter[str(age)] += falls
+                else:
+                    falls_counter[str(age)] = falls
 
-                #Caso em não há essa idade presente -> cria contador de quedas para essa idade e a adiciona na lista de contadores
-                fall_counter_falls.append(falls)
-            else:
-                fall_counter_falls.append(0)
-
-            fall_counter_ages.append(str(age))
-
-        falls_per_age = {'falls': fall_counter_falls, 'ages': fall_counter_ages}
+        falls_per_age = {'falls': list(falls_counter.values()), 'ages': list(falls_counter.keys())}
         return falls_per_age
 
 
-    # @classmethod
-    # def get_users_ages_dict(cls, users_dict):
-    #     ages_dict = {'ages':[], 'ages_count':[]}
+    @classmethod
+    def get_users_falls_per_sex(cls, users_dict):
+        male_count = 0
+        female_count = 0
+        not_specified_count = 0
 
-    #     for user in users_dict:
-    #         age = user.get("age")
+        for user in users_dict:
+            if user.get("recordedFalls"):
+                falls = len(user.get("recordedFalls"))
+                sex = user.get("sex")
 
-    #         if str(age) in ages_dict['ages']:
-    #             ages_dict[str(age)] += 1
+                if sex == "Male":
+                    male_count += falls
+                elif sex == "Female":
+                    female_count += falls
+                else:
+                    not_specified_count += falls
+                
+        falls_counter = [male_count, female_count, not_specified_count]
+        listed_sexes = ["Male", "Female", "Not specified"]
 
-    #         else:
-    #             ages_dict[str(age)] = 1
-
-    #     return ages_dict
+        return {"falls": falls_counter, "sexes": listed_sexes}
     
 
     @classmethod
-    def get_users_genders_dict(cls, users_dict):
-        male_count = 0
-        female_count = 0
+    def get_users_falls_per_movement_disorder(cls, users_dict):
+        falls_per_movement_disorder = []
+
         for user in users_dict:
-            gender = user.get("gender")
-            if gender == "Male":
-                male_count += 1
-            else:
-                female_count += 1
-        return {"Male": male_count, "Female": female_count}
+            if user.get("recordedFalls"):
+                falls = len(user.get("recordedFalls"))
+
+                if user.get("movementDisorders"):
+                    user_movement_disorders = user.get("movementDisorders")
+
+                    for disorder in user_movement_disorders:
+                        found = False
+
+                        for fall_counter in falls_per_movement_disorder:
+                            if disorder == fall_counter["name"]:
+                                fall_counter["value"] += falls
+                                found = True
+                                break
+
+                        if not found:
+                            falls_per_movement_disorder.append({"name": disorder, "value": falls})
+
+        return falls_per_movement_disorder

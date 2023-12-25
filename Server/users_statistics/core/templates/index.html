@@ -8,12 +8,34 @@
         {% bootstrap_javascript %}
     </head>
     <body>
-        <br>
-        <h1 style="text-align: center;">Fallert Stats</h1>
-        <br>
-        <br>
+        <h1 style="text-align: center; margin-top: 2%;">Fallert Stats</h1>
 
-        <div class="container-xl">
+        <div class="container-fluid" style="margin-top: 4%;">
+            <div class="row" style="width: 75%; margin: auto;">
+                <div class="col col-md-12 col-lg-4 p-2">
+                    <div id="falls-per-age-line-graph" style="width: 500px;height:500px;"></div>
+                    <script id="falls-per-age-line-graph-data" data-chart-data="{{ users.falls_per_age|safe }}"></script>
+                </div>
+                <div class="col col-md-12 col-lg-4 p-2">
+                    <div id="falls-per-sex-bar-graph" style="width:500px;height:500px;"></div>
+                    <script id="falls-per-sex-bar-graph-data" data-chart-data="{{ users.falls_per_sex|safe }}"></script>
+                </div>
+                <div class="col col-md-12 col-lg-4 p-2">
+                    <div id="falls-per-movement-disorder-distribution-graph" style="width:500px;height:500px;"></div>
+                    <script id="falls-per-movement-disorder-distribution-graph-data" data-chart-data="{{ users.falls_per_movement_disorder|safe }}"></script>
+                </div>
+            </div>
+            
+            <br>
+
+        </div>  
+    </body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script src="{% static 'js/index.js'%}"></script>
+
+
             <!-- <div class="row align-items-start">
                 <div class="col">
                 One of three columns
@@ -27,41 +49,3 @@
             </div> -->
 
             <!-- <div id="main" style="width: 600px;height:400px;"></div> -->
-            <div class="row">
-                <div class="col-12 col-md-6 col-lg-4 p-2">
-                    <div id="falls-per-age-line-graph" style="width: 300px;height:300px;"></div>
-                    <script id="falls-per-age-line-graph-data" data-chart-data="{{ users.falls_per_age|safe }}"></script>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4 p-2">
-                    <div style="width: 300px;height:300px; background-color: black;"></div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4 p-2">
-                    <div style="width: 300px;height:300px; background-color: black;"></div>
-                </div>
-            </div>
-            
-            <br>
-
-            {% comment %}
-            <div id="falls-per-gender-graph" style="width:300px;height:400px;"></div>
-            <script id="falls-per-gender-graph-data" data-chart-data="{{ users.genders|safe }}"></script>
-            {% endcomment %}
-            
-            <br>
-            <h4>Number of emergency contacts</h4>
-            {% for count in users.em_contacts_count %}
-                <li>{{ count }}</li>
-            {% endfor %}
-            <br>
-            <h4>Genders</h4>
-            {% for gender in users.genders %}
-                <li>{{ gender }}</li>
-            {% endfor %}
-        </div>
-
-        
-    </body>
-</html>
-
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-<script src="{% static 'js/index.js'%}"></script>

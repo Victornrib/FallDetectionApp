@@ -17,7 +17,7 @@
     <string name="reports">Reports</string>
     <string name="stats">Stats</string>
 
-    <string-array name="genders">
+    <string-array name="sexes">
         <item>Female</item>
         <item>Male</item>
         <item>Not specified</item>

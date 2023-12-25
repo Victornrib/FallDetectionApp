@@ -22,7 +22,7 @@ class User {
     public String email;
     public String password;
 
-    public String gender;
+    public String sex;
     public String birthDate;
     public Integer age;
     public ArrayList<String> movementDisorders;
@@ -57,8 +57,8 @@ class User {
         return (Integer) sortedId;
     }
 
-    public void addInfo(String gender, String birthDate, Integer age, ArrayList<String> movementDisorders) {
-        this.gender = gender;
+    public void addInfo(String sex, String birthDate, Integer age, ArrayList<String> movementDisorders) {
+        this.sex = sex;
         this.birthDate = birthDate;
         this.age = age;
         this.movementDisorders = movementDisorders;

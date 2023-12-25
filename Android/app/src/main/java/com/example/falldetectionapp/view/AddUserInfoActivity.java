@@ -41,7 +41,7 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
 
     private ArrayList<String> movementDisorders = new ArrayList<String>();
 
-    private String gender;
+    private String sex;
 
     private String birthDate;
     private Integer age;
@@ -60,7 +60,7 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
         listViewMovementDisorders.setAdapter(arrayAdapterMovementDisorders);
 
         spinnerGender = findViewById(R.id.spinnerGender);
-        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.genders, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.sexes, android.R.layout.simple_spinner_item);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGender.setAdapter(arrayAdapter);
         spinnerGender.setOnItemSelectedListener(this);
@@ -73,7 +73,6 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
                 getUserMovementDisorders();
                 addUserInfo();
                 openAddDeviceActivity();
-
             }
         });
     }
@@ -96,7 +95,7 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
 
     public void addUserInfo() {
         Program program = Program.getInstance();
-        program.addCurrentUserInfo(gender, birthDate, age, movementDisorders);
+        program.addCurrentUserInfo(sex, birthDate, age, movementDisorders);
     }
 
     private void getUserMovementDisorders() {
@@ -204,7 +203,7 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        gender = parent.getItemAtPosition(position).toString();
+        sex = parent.getItemAtPosition(position).toString();
     }
 
     @Override

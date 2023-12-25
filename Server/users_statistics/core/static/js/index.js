@@ -1,63 +1,180 @@
-// //EXAMPLE GRAPH
-
-// // Initialize the echarts instance based on the prepared dom
-// var myChart = echarts.init(document.getElementById('main'));
-
-// // Specify the configuration items and data for the chart
-// var option = {
-//   title: {
-//     text: 'ECharts Getting Started Example'
-//   },
-//   tooltip: {},
-//   legend: {
-//     data: ['sales']
-//   },
-//   xAxis: {
-//     data: ['Shirts', 'Cardigans', 'Chiffons', 'Pants', 'Heels', 'Socks']
-//   },
-//   yAxis: {},
-//   series: [
-//     {
-//       name: 'sales',
-//       type: 'bar',
-//       data: [5, 20, 36, 10, 10, 20]
-//     }
-//   ]
-// };
-
-// // Display the chart using the configuration items and data just specified.
-// myChart.setOption(option);
-
-// //  console.log(document.getElementById('ages-distribution-graph-data'));
-
-
-var fallsPerAgeLineGraphData;
-
 document.addEventListener("DOMContentLoaded", function() {
-    var fallsPerAgeLineGraphDataElement = document.getElementById('falls-per-age-line-graph-data');
-    fallsPerAgeLineGraphData = JSON.parse(fallsPerAgeLineGraphDataElement.getAttribute('data-chart-data').replace(/\'/g, '"'));
-  
-    var fallsPerAgeLineGraph = echarts.init(document.getElementById('falls-per-age-line-graph'));
-  
-    fallsPerAgeLineGraphOption = {
-      xAxis: {
-        type: 'category',
-        data: fallsPerAgeLineGraphData.ages
-      },
-      yAxis: {
-        type: 'value'
-      },
-      series: [
-        {
-          data: fallsPerAgeLineGraphData.falls,
-          type: 'line'
-        }
-      ]
-    };
-
-    console.log(fallsPerAgeLineGraphData);
-    fallsPerAgeLineGraph.setOption(fallsPerAgeLineGraphOption);
+  setFallsPerAgeLineGraph();
+  setFallsPerSexBarGraph();
+  setFallsPerMovementDisorderDistributionGraph();
 });
+
+
+function setFallsPerAgeLineGraph() {
+  var fallsPerAgeLineGraph = echarts.init(document.getElementById('falls-per-age-line-graph'));
+  var fallsPerAgeLineGraphDataElement = document.getElementById('falls-per-age-line-graph-data');
+  var fallsPerAgeLineGraphData = JSON.parse(fallsPerAgeLineGraphDataElement.getAttribute('data-chart-data').replace(/\'/g, '"'));
+
+  fallsPerAgeLineGraphOption = {
+    title: {
+      text: 'Number of falls per age',
+      left: 'center',
+      textStyle: {
+        fontSize: 22
+      }
+    },
+    tooltip: {
+      trigger: 'item',
+      textStyle: {
+        fontSize: '16',
+      },
+    },
+    xAxis: {
+      name: 'Age',
+      nameTextStyle: {
+        fontSize: 14
+      },
+      type: 'category',
+      data: fallsPerAgeLineGraphData.ages,
+      axisLabel: {
+        fontSize: 16
+      }
+    },
+    yAxis: {
+      name: 'Falls',
+      nameTextStyle: {
+        fontSize: 16
+      },
+      type: 'value',
+      axisLabel: {
+        fontSize: 16
+      }
+    },
+    series: [
+      {
+        name: 'Falls',
+        nameTextStyle: {
+          fontSize: 16
+        },
+        lineStyle: {
+          width: 3
+        },
+        symbolSize: 12,
+        data: fallsPerAgeLineGraphData.falls,
+        type: 'line',
+      }
+    ]
+  };
+
+  fallsPerAgeLineGraph.setOption(fallsPerAgeLineGraphOption);
+}
+
+
+function setFallsPerSexBarGraph() {
+  var fallsPerSexBarGraph = echarts.init(document.getElementById('falls-per-sex-bar-graph'));
+  var fallsPerSexBarGraphDataElement = document.getElementById('falls-per-sex-bar-graph-data');
+  var fallsPerSexBarGraphData = JSON.parse(fallsPerSexBarGraphDataElement.getAttribute('data-chart-data').replace(/\'/g, '"'));
+
+  fallsPerSexBarGraphOption = {
+    title: {
+      text: 'Number of falls per sex',
+      left: 'center',
+      textStyle: {
+        fontSize: 22
+      }
+    },
+    tooltip: {
+      trigger: 'item',
+      textStyle: {
+        fontSize: '16',
+      },
+    },
+    xAxis: {
+      name: 'Sex',
+      nameTextStyle: {
+        fontSize: 16
+      },
+      type: 'category',
+      data: fallsPerSexBarGraphData.sexes,
+      axisLabel: {
+        fontSize: 16
+      }
+    },
+    yAxis: {
+      name: 'Falls',
+      nameTextStyle: {
+        fontSize: 16
+      },
+      type: 'value',
+      axisLabel: {
+        fontSize: 16
+      }
+    },
+    series: [
+      {
+        name: 'Falls',
+        nameTextStyle: {
+          fontSize: 16
+        },
+        data: fallsPerSexBarGraphData.falls,
+        type: 'bar'
+      }
+    ]
+  };
+
+  fallsPerSexBarGraph.setOption(fallsPerSexBarGraphOption);
+}
+
+
+function setFallsPerMovementDisorderDistributionGraph() {
+  var fallsPerMovementDisorderDistributionGraph = echarts.init(document.getElementById('falls-per-movement-disorder-distribution-graph'));
+  var fallsPerMovementDisorderDistributionGraphDataElement = document.getElementById('falls-per-movement-disorder-distribution-graph-data');
+  var fallsPerMovementDisorderDistributionGraphData = JSON.parse(fallsPerMovementDisorderDistributionGraphDataElement.getAttribute('data-chart-data').replace(/\'/g, '"'));
+
+  fallsPerMovementDisorderDistributionGraphOption = {
+    title: {
+      text: 'Number of falls per movement disorder',
+      left: 'center',
+      textStyle: {
+        fontSize: '22',
+      },
+    },
+    tooltip: {
+      trigger: 'item',
+      textStyle: {
+        fontSize: '16',
+      },
+      formatter: function(params) {
+        var colorCircle = '<span style="display:inline-block;margin-right:5px;border-radius:50%;width:10px;height:10px;background-color:' + params.color + '"></span>';
+        var tooltipContent = 'Falls<br>' + colorCircle + params.name + ': <b>' + params.value + '</b> (' + params.percent + '%)';
+        return tooltipContent;
+      },
+    },
+    label: {
+      show: true,
+      fontSize: 16,
+    },
+    series: [
+      {
+        name: 'Falls',
+        nameTextStyle: {
+          fontSize: 16
+        },
+        type: 'pie',
+        radius: '50%',
+        data: fallsPerMovementDisorderDistributionGraphData,
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    ]
+  };
+
+  fallsPerMovementDisorderDistributionGraph.setOption(fallsPerMovementDisorderDistributionGraphOption);
+}
+
+
+
+
 
 
 
