@@ -10,12 +10,12 @@ class UsersService:
 
         falls_per_age_dict = cls.get_users_falls_per_age(users_dict)
         falls_per_sex_dict = cls.get_users_falls_per_sex(users_dict)
-        falls_per_movement_disorder_dict = cls.get_users_falls_per_movement_disorder(users_dict)
+        falls_per_movement_disorder_list = cls.get_users_falls_per_movement_disorder(users_dict)
 
         users_info_dict = {
             "falls_per_age": falls_per_age_dict,
             "falls_per_sex": falls_per_sex_dict,
-            "falls_per_movement_disorder": falls_per_movement_disorder_dict,
+            "falls_per_movement_disorder": falls_per_movement_disorder_list,
         }
         return users_info_dict
     
@@ -62,7 +62,8 @@ class UsersService:
         falls_counter = [male_count, female_count, not_specified_count]
         listed_sexes = ["Male", "Female", "Not specified"]
 
-        return {"falls": falls_counter, "sexes": listed_sexes}
+        falls_per_sex = {"falls": falls_counter, "sexes": listed_sexes}
+        return falls_per_sex
     
 
     @classmethod
