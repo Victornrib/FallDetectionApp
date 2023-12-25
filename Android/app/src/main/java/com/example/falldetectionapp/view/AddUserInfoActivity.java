@@ -37,7 +37,7 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
 
     private ArrayAdapter<String> arrayAdapterMovementDisorders;
 
-    private String[] AllMovementDisorders = {"Ataxia", "Cervical dystonia", "Chorea", "Dystonia", "Functional movement disorder", "Huntington's disease", "Multiple system atrophy", "Myoclonus", "Parkinson's disease", "Parkinsonism", "Progressive supranuclear palsy", "Restless legs syndrome", "Tardive dyskinesia", "Tourette syndrome", "Tremor", "Wilson's disease"};
+    private String[] AllMovementDisorders = {"Ataxia", "Cervical dystonia", "Chorea", "Dystonia", "Functional movement disorder", "Huntington disease", "Multiple system atrophy", "Myoclonus", "Parkinson disease", "Parkinsonism", "Progressive supranuclear palsy", "Restless legs syndrome", "Tardive dyskinesia", "Tourette syndrome", "Tremor", "Wilson disease"};
 
     private ArrayList<String> movementDisorders = new ArrayList<String>();
 
