@@ -37,7 +37,7 @@ public class SettingsActivity extends AppCompatActivity {
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openAddDeviceActivity();
+                openHomeActivity();
             }
         });
 
@@ -140,8 +140,8 @@ public class SettingsActivity extends AppCompatActivity {
         Program.getInstance().setScreenVisibility(false);
     }
 
-    private void openAddDeviceActivity() {
-        Intent intent = new Intent(this, AddDeviceActivity.class);
+    private void openHomeActivity() {
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 

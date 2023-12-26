@@ -12,7 +12,7 @@ import android.widget.Button;
 import com.example.falldetectionapp.R;
 import com.example.falldetectionapp.model.Program;
 
-public class AddDeviceActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
     private Button buttonSignOut;
     private Button buttonSettings;
     private Button buttonAddDevice;
@@ -23,7 +23,7 @@ public class AddDeviceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_device);
+        setContentView(R.layout.activity_home);
 
         buttonSignOut = (Button) findViewById(R.id.buttonSignOut);
         buttonSignOut.setOnClickListener(new View.OnClickListener() {

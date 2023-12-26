@@ -62,7 +62,7 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
                 addUserInfoController.calculateUserAge(userCalendarBirthDate);
                 getUserMovementDisorders();
                 addUserInfoController.addUserInfo();
-                openAddDeviceActivity();
+                openHomeActivity();
             }
         });
     }
@@ -124,8 +124,8 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
         }
     }
 
-    public void openAddDeviceActivity() {
-        Intent intent = new Intent(this, AddDeviceActivity.class);
+    public void openHomeActivity() {
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 

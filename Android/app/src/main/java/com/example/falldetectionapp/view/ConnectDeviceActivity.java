@@ -65,7 +65,7 @@ public class ConnectDeviceActivity extends AppCompatActivity {
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openAddDeviceActivity();
+                openHomeActivity();
             }
         });
 
@@ -168,8 +168,8 @@ public class ConnectDeviceActivity extends AppCompatActivity {
     }
 
 
-    private void openAddDeviceActivity() {
-        Intent intent = new Intent(this, AddDeviceActivity.class);
+    private void openHomeActivity() {
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 }

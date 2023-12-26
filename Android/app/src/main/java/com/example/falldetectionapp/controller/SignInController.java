@@ -39,7 +39,7 @@ public class SignInController {
                 else {
                     if (potentialUser.password.equals(password)) {
                         program.setCurrentUser(potentialUser);
-                        signInActivity.openAddDeviceActivity();
+                        signInActivity.openHomeActivity();
                     }
                     else {
                         signInActivity.generateErrorDialog("Password is wrong.");

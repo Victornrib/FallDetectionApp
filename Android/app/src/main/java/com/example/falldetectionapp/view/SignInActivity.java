@@ -86,8 +86,8 @@ public class SignInActivity extends AppCompatActivity {
     }
 
 
-    public void openAddDeviceActivity() {
-        Intent intent = new Intent(this, AddDeviceActivity.class);
+    public void openHomeActivity() {
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
