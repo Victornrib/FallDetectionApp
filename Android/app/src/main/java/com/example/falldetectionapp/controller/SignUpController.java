@@ -1,6 +1,17 @@
 package com.example.falldetectionapp.controller;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
 import com.example.falldetectionapp.model.Program;
+import com.example.falldetectionapp.model.User;
+import com.example.falldetectionapp.view.SignUpActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -70,17 +81,37 @@ public class SignUpController {
     }
 
     public void checkExistingUser() {
-        Program program = Program.getInstance();
-        program.checkExistingUser(email);
+        DatabaseReference firebaseUserReference = FirebaseDatabase.getInstance("https://fall-detection-83eed-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(email.replace(".",","));
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Program program = Program.getInstance();
+                User potentialUser = dataSnapshot.getValue(User.class);
+                SignUpActivity signUpActivity = (SignUpActivity) program.getCurrentActivity();
+
+                if (potentialUser == null) {
+                    signUpActivity.generateUserCheckDialogMessage(null);
+                }
+                else {
+                    signUpActivity.generateUserCheckDialogMessage("Registration invalid. User with this email already exists.\n");
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("Error", databaseError.getMessage()); //Don't ignore errors!
+            }
+        };
+        firebaseUserReference.addListenerForSingleValueEvent(valueEventListener);
     }
 
     public String getAlertDialogMessage() {
         return alertDialogMessage;
     }
 
-    public void storeNewUser() {
-        Program program = Program.getInstance();
-        program.storeNewUser(name, telephone, email, password);
+   public void storeNewUser() {
+        User newUser = new User(name, telephone, email, password);
+        Program.getInstance().setCurrentUser(newUser);
+        newUser.storeUser();
     }
 
 }

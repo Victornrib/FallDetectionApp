@@ -45,7 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
         switchAlertMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                settingsController.switchAlertMode();
+                settingsController.switchCurrentUserAlertMode();
                 Toast.makeText(getApplicationContext(), "Alert mode set to: "+settingsController.getCurrentUserAlertMode(), Toast.LENGTH_SHORT).show();
             }
         });
