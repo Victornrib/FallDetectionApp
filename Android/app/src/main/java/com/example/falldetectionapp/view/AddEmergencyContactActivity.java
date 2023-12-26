@@ -70,17 +70,15 @@ public class AddEmergencyContactActivity extends AppCompatActivity {
         Program program = Program.getInstance();
         program.setCurrentActivity(this);
         program.setScreenVisibility(true);
-        program.checkFallDetectedActivity();
+        //program.checkFallDetectedActivity();
     }
 
     @Override
-    protected void onStop()
+    protected void onPause()
     {
-        super.onStop();
+        super.onPause();
         Program.getInstance().setScreenVisibility(false);
     }
-
-
 
     public void generateDialog() {
 
