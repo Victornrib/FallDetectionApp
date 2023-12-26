@@ -11,6 +11,7 @@ import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 
+import com.example.falldetectionapp.model.Device;
 import com.example.falldetectionapp.model.Program;
 
 import java.io.IOException;
@@ -60,11 +61,13 @@ public class ConnectDeviceController {
                 //gets the name of the device being connected
                 String deviceName = data.getExtras().getString("DEVICE_NAME");
 
+                Device newDevice = new Device(deviceName, macAddress);
+
                 Program program = Program.getInstance();
-                program.addDeviceToCurrentUser(deviceName, macAddress);
+                program.getCurrentUser().addDevice(newDevice);
                 program.startBluetoothConnectedThread(bluetoothSocket);
             }
-        };
+        }
     }
 
     public void disconnectDevice() {

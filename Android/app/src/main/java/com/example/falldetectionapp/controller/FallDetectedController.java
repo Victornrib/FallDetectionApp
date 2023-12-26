@@ -18,7 +18,7 @@ public class FallDetectedController {
 
     public String getCurrentUserAlertMode() {
         Program program = Program.getInstance();
-        return program.getCurrentUserAlertMode();
+        return program.getCurrentUser().getAlertMode();
     }
 
     public void callEmergencyContactsFromUser() {

@@ -1,6 +1,18 @@
 package com.example.falldetectionapp.controller;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.example.falldetectionapp.model.EmergencyContact;
 import com.example.falldetectionapp.model.Program;
+import com.example.falldetectionapp.view.AddEmergencyContactActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,7 +69,37 @@ public class AddEmergencyContactController {
 
     public void checkExistingEmergencyContact() {
         Program program = Program.getInstance();
-        program.checkExistingEmergencyContact(email);
+        DatabaseReference firebaseUserReference = FirebaseDatabase.getInstance("https://fall-detection-83eed-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(program.getCurrentUser().email.replace(".",",")).child("emContacts");
+        ValueEventListener valueEventListener = new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                AddEmergencyContactActivity addEmergencyContactActivity = (AddEmergencyContactActivity) program.getCurrentActivity();
+                boolean hasChildren = false;
+
+                for (DataSnapshot dataValues : dataSnapshot.getChildren()){
+                    hasChildren = true;
+                    EmergencyContact emergencyContact = dataValues.getValue(EmergencyContact.class);
+
+                    if (emergencyContact.getEmail().equals(email)) {
+                        addEmergencyContactActivity.generateEmContactCheckDialog("Registration invalid. Emergency Contact with this email already exists.\n");
+                    }
+                    else {
+                        addEmergencyContactActivity.generateEmContactCheckDialog(null);
+                    }
+                }
+                if (!hasChildren) {
+                    addEmergencyContactActivity.generateEmContactCheckDialog(null);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("Error", databaseError.getMessage()); //Don't ignore errors!
+            }
+        };
+        firebaseUserReference.addListenerForSingleValueEvent(valueEventListener);
     }
 
     //checks boolean to determine the alertDialogMessage
@@ -69,8 +111,8 @@ public class AddEmergencyContactController {
     }
 
     public void storeNewEmergencyContact() {
-        Program program = Program.getInstance();
-        program.addEmergencyContactToCurrentUser(name, telephone, email);
+        EmergencyContact emContact = new EmergencyContact(name, telephone, email);
+        Program.getInstance().getCurrentUser().addEmContact(emContact);
     }
 
 }

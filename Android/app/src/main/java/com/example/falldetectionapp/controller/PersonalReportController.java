@@ -9,7 +9,7 @@ public class PersonalReportController {
 
     public ArrayList<RecordedFallItem> getRecordedFallsFromProgram() {
         Program program = Program.getInstance();
-        ArrayList<RecordedFall> recordedFalls = program.getCurrentUserRecordedFalls();
+        ArrayList<RecordedFall> recordedFalls = program.getCurrentUser().getRecordedFalls();
 
         ArrayList<RecordedFallItem> falls = new ArrayList<>();
         for (RecordedFall recordedFall : recordedFalls) {

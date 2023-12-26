@@ -1,6 +1,7 @@
 package com.example.falldetectionapp.controller;
 
 import com.example.falldetectionapp.model.Program;
+import com.example.falldetectionapp.model.User;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,7 +19,8 @@ public class AddUserInfoController {
 
     public void addUserInfo() {
         Program program = Program.getInstance();
-        program.addCurrentUserInfo(sex, birthDate, age, movementDisorders);
+        User currentUser = program.getCurrentUser();
+        currentUser.addInfo(sex, birthDate, age, movementDisorders);
     }
 
     public static void getUserBirthDate(Calendar calendarBirthDate) {

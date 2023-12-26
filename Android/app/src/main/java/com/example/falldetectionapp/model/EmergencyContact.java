@@ -2,7 +2,7 @@ package com.example.falldetectionapp.model;
 
 import java.util.Random;
 
-class EmergencyContact {
+public class EmergencyContact {
 
     public EmergencyContact() {}
 
@@ -18,5 +18,18 @@ class EmergencyContact {
 
         Random random = new Random();
         this.emContactID = random.nextInt(1000);
+    }
+
+    public String getName() {
+        return name;
+    }
+    public String getTelephone() {
+        return telephone;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public int getEmContactID() {
+        return emContactID;
     }
 }

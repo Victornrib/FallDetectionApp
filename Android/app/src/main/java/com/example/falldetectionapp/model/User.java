@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.Random;
 
 
-class User {
+public class User {
     public int userID;
     public String name;
     public String telephone;
@@ -71,15 +71,14 @@ class User {
         storeUser();
     }
 
-    public void addEmContact(String name, String telephone, String email) {
-        EmergencyContact newEmContact = new EmergencyContact(name, telephone, email);
-        emContacts.add(newEmContact);
+    public void addEmContact(EmergencyContact emContact) {
+        emContacts.add(emContact);
         storeUser();
     }
 
     public void removeEmContact(String email) {
         for (int i = 0; i < this.emContacts.size(); i++) {
-            if (emContacts.get(i).email.equals(email)) {
+            if (emContacts.get(i).getEmail().equals(email)) {
                 emContacts.remove(i);
             }
         }
@@ -95,22 +94,24 @@ class User {
         }
         storeUser();
     }
+    public String getAlertMode() {return alertMode;}
 
     public ArrayList<EmergencyContact> getEmContacts() {
         return emContacts;
     };
 
+    public ArrayList<RecordedFall> getRecordedFalls() {return recordedFalls;}
+
     public void alertEmContact(String emContactEmail) {};
 
-    public void addDevice(String DeviceName, String MAC_ADDRESS) {
+    public void addDevice(Device device) {
         if (this.pairedDevices.size() > 0) {
             for (int i = 0; i < this.pairedDevices.size(); i++) {
-                if (MAC_ADDRESS.equals(pairedDevices.get(i).macAddress))
+                if (device.getMacAddress().equals(pairedDevices.get(i).macAddress))
                     return;
             }
         }
-        Device newDevice = new Device(DeviceName, MAC_ADDRESS);
-        pairedDevices.add(newDevice);
+        pairedDevices.add(device);
         storeUser();
     }
 

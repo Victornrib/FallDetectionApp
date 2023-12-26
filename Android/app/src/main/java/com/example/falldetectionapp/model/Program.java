@@ -25,15 +25,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.falldetectionapp.view.AddEmergencyContactActivity;
 import com.example.falldetectionapp.view.FallDetectedActivity;
-import com.example.falldetectionapp.view.SignInActivity;
-import com.example.falldetectionapp.view.SignUpActivity;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -42,7 +34,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 //com.example.falldetectionapp level:error
 public class Program {
@@ -97,52 +88,12 @@ public class Program {
         this.currentUser = currentUser;
     }
 
-    public void addCurrentUserInfo(String sex, String birthDate, Integer age, ArrayList<String> movementDisorders) {
-        this.currentUser.addInfo(sex, birthDate, age, movementDisorders);
+    public User getCurrentUser() {
+        return currentUser;
     }
 
-    public ArrayList<String> getCurrentUserEmContactsNames() {
-        ArrayList<String> currentUserEmContactsNames = new ArrayList<String>();
-        if (currentUser.emContacts != null) {
-            for (int i = 0; i < currentUser.emContacts.size(); i++) {
-                currentUserEmContactsNames.add(currentUser.emContacts.get(i).name);
-            }
-        }
-        return currentUserEmContactsNames;
-    }
-
-    public ArrayList<String> getCurrentUserEmContactsEmails() {
-        ArrayList<String> currentUserEmContactsEmails = new ArrayList<String>();
-        if (currentUser.emContacts != null) {
-            for (int i = 0; i < currentUser.emContacts.size(); i++) {
-                currentUserEmContactsEmails.add(currentUser.emContacts.get(i).email);
-            }
-        }
-        return currentUserEmContactsEmails;
-    }
-
-    public ArrayList<String> getCurrentUserEmContactsTelephones() {
-        ArrayList<String> currentUserEmContactsTelephones = new ArrayList<String>();
-        if (currentUser.emContacts != null) {
-            for (int i = 0; i < currentUser.emContacts.size(); i++) {
-                currentUserEmContactsTelephones.add(currentUser.emContacts.get(i).telephone);
-            }
-        }
-        return currentUserEmContactsTelephones;
-    }
-
-    public ArrayList<RecordedFall> getCurrentUserRecordedFalls() {
-        ArrayList<RecordedFall> currentUserRecordedFalls = new ArrayList<RecordedFall>();
-        if (currentUser.recordedFalls != null) {
-            for (int i = 0; i < currentUser.recordedFalls.size(); i++) {
-                currentUserRecordedFalls.add(currentUser.recordedFalls.get(i));
-            }
-        }
-        return currentUserRecordedFalls;
-    }
-
-    public String getCurrentUserAlertMode() {
-        return currentUser.alertMode;
+    public Context getCurrentActivity() {
+        return currentActivity;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -165,115 +116,6 @@ public class Program {
         this.screenVisibility = screenVisibility;
     }
 
-    public void signIn(String email, String password) {
-
-        DatabaseReference firebaseUserReference = FirebaseDatabase.getInstance("https://fall-detection-83eed-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(email.replace(".",","));
-        ValueEventListener valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                User potentialUser = dataSnapshot.getValue(User.class);
-                SignInActivity signInActivity = (SignInActivity) currentActivity;
-
-                if (potentialUser == null) {
-                    signInActivity.generateErrorDialog("Email not found.");
-                }
-                else {
-                    if (potentialUser.password.equals(password)) {
-                        program.setCurrentUser(potentialUser);
-                        signInActivity.openAddDeviceActivity();
-                    }
-                    else {
-                        signInActivity.generateErrorDialog("Password is wrong.");
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("Error", databaseError.getMessage()); //Don't ignore errors!
-            }
-        };
-        firebaseUserReference.addListenerForSingleValueEvent(valueEventListener);
-    }
-
-    public void storeNewUser(String name, String telephone, String email, String password) {
-        User newUser = new User(name, telephone, email, password);
-        setCurrentUser(newUser);
-        newUser.storeUser();
-    }
-
-    public void checkExistingUser(String email) {
-        DatabaseReference firebaseUserReference = FirebaseDatabase.getInstance("https://fall-detection-83eed-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(email.replace(".",","));
-        ValueEventListener valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                User potentialUser = dataSnapshot.getValue(User.class);
-                SignUpActivity signUpActivity = (SignUpActivity) currentActivity;
-
-                if (potentialUser == null) {
-                    signUpActivity.generateUserCheckDialogMessage(null);
-                }
-                else {
-                    signUpActivity.generateUserCheckDialogMessage("Registration invalid. User with this email already exists.\n");
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("Error", databaseError.getMessage()); //Don't ignore errors!
-            }
-        };
-        firebaseUserReference.addListenerForSingleValueEvent(valueEventListener);
-    }
-
-    public void checkExistingEmergencyContact(String email) {
-        DatabaseReference firebaseUserReference = FirebaseDatabase.getInstance("https://fall-detection-83eed-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Users").child(currentUser.email.replace(".",",")).child("emContacts");
-        ValueEventListener valueEventListener = new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                AddEmergencyContactActivity addEmergencyContactActivity = (AddEmergencyContactActivity) currentActivity;
-                boolean hasChildren = false;
-
-                for (DataSnapshot dataValues : dataSnapshot.getChildren()){
-                    hasChildren = true;
-                    EmergencyContact emergencyContact = dataValues.getValue(EmergencyContact.class);
-
-                    if (emergencyContact.email.equals(email)) {
-                        addEmergencyContactActivity.generateEmContactCheckDialog("Registration invalid. Emergency Contact with this email already exists.\n");
-                    }
-                    else {
-                        addEmergencyContactActivity.generateEmContactCheckDialog(null);
-                    }
-                }
-                if (!hasChildren) {
-                    addEmergencyContactActivity.generateEmContactCheckDialog(null);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("Error", databaseError.getMessage()); //Don't ignore errors!
-            }
-        };
-        firebaseUserReference.addListenerForSingleValueEvent(valueEventListener);
-    }
-
-
-    public void addEmergencyContactToCurrentUser(String name, String telephone, String email) {
-        currentUser.addEmContact(name, telephone, email);
-    }
-
-    public void removeEmergencyContactFromUser(String email) {
-        currentUser.removeEmContact(email);
-    }
-
-    public void addDeviceToCurrentUser(String deviceName, String MAC_ADDRESS) {
-        currentUser.addDevice(deviceName, MAC_ADDRESS);
-    }
-
-    public void switchAlertModeFromCurrentUser() {
-        currentUser.switchAlertMode();
-    }
-
     public void startBluetoothConnectedThread(BluetoothSocket bluetoothSocket) {
         if (bluetoothSocket != null) {
             if (connectedThread == null) {
@@ -281,6 +123,33 @@ public class Program {
                 connectedThread.start();
             }
         }
+    }
+
+    public void callEmContacts() {
+        if (ContextCompat.checkSelfPermission(currentActivity, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) currentActivity, new String[]{Manifest.permission.CALL_PHONE}, 1);
+        } else {
+            for (int i = 0; i < currentUser.getEmContacts().size(); i++) {
+                currentActivity.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + currentUser.getEmContacts().get(i).getTelephone())));
+            }
+        }
+    }
+
+    //code from https://www.youtube.com/watch?v=ofAL1C4jUJw
+    public void sendSmsToEmContacts() {
+        SmsManager smsManager = SmsManager.getDefault();
+
+        String latitude = String.valueOf(latLng.latitude).replace(",", ".");
+        String longitude = String.valueOf(latLng.longitude).replace(",", ".");
+        String location = "\nhttp://maps.google.com/maps?q=loc:"+latitude+","+longitude;
+
+        for (int i = 0; i < currentUser.getEmContacts().size(); i++) {
+            EmergencyContact currentEmContact = currentUser.getEmContacts().get(i);
+            String emContactPhoneNumber = currentEmContact.getTelephone();
+            String message = "Attention " + currentEmContact.getName() + ": " + currentUser.name + " fell!\nPlease take action now!\n"+location;
+            smsManager.sendTextMessage(emContactPhoneNumber, null, message, null, null);
+        }
+        sendingMessage = false;
     }
 
     public void closeBluetoothConnectedThread() {
@@ -314,38 +183,6 @@ public class Program {
             }
         }
     };
-
-    public void callEmContacts() {
-        if (ContextCompat.checkSelfPermission(currentActivity, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity) currentActivity, new String[]{Manifest.permission.CALL_PHONE}, 1);
-        } else {
-            for (int i = 0; i < currentUser.getEmContacts().size(); i++) {
-                currentActivity.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + currentUser.getEmContacts().get(i).telephone)));
-            }
-        }
-        /*
-        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + currentUser.getEmContacts().get(0).telephone));
-        currentActivity.startActivity(intent);
-        */
-
-    }
-
-    //code from https://www.youtube.com/watch?v=ofAL1C4jUJw
-    public void sendSmsToEmContacts() {
-        SmsManager smsManager = SmsManager.getDefault();
-
-        String latitude = String.valueOf(latLng.latitude).replace(",", ".");
-        String longitude = String.valueOf(latLng.longitude).replace(",", ".");
-        String location = "\nhttp://maps.google.com/maps?q=loc:"+latitude+","+longitude;
-
-        for (int i = 0; i < currentUser.getEmContacts().size(); i++) {
-            EmergencyContact currentEmContact = currentUser.getEmContacts().get(i);
-            String emContactPhoneNumber = currentEmContact.telephone;
-            String message = "Attention " + currentEmContact.name + ": " + currentUser.name + " fell!\nPlease take action now!\n"+location;
-            smsManager.sendTextMessage(emContactPhoneNumber, null, message, null, null);
-        }
-        sendingMessage = false;
-    }
 
     public void startLocationListener() {
 
