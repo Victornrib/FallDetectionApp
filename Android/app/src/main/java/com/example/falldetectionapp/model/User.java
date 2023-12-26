@@ -4,7 +4,6 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.falldetectionapp.model.fallStats.RecordedFall;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -26,7 +25,6 @@ class User {
     public String birthDate;
     public Integer age;
     public ArrayList<String> movementDisorders;
-
     public ArrayList<EmergencyContact> emContacts = new ArrayList<EmergencyContact>();
     public ArrayList<Device> pairedDevices = new ArrayList<Device>();
     public ArrayList<RecordedFall> recordedFalls = new ArrayList<RecordedFall>();

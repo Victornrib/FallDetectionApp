@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.example.falldetectionapp.R;
 import com.example.falldetectionapp.controller.PersonalReportController;
-import com.example.falldetectionapp.model.fallStats.FallCoordinates;
+import com.example.falldetectionapp.model.RecordedFall;
 
 import java.util.ArrayList;
 
@@ -84,7 +84,7 @@ public class PersonalReportActivity extends AppCompatActivity {
             holder.buttonFallCoordinates.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FallCoordinates coords = recordedFallItem.getFallCoordinates();
+                    RecordedFall.FallCoordinates coords = recordedFallItem.getFallCoordinates();
                     openMapActivty(coords);
                 }
             });
@@ -98,7 +98,7 @@ public class PersonalReportActivity extends AppCompatActivity {
         }
     }
 
-    private void openMapActivty(FallCoordinates coords) {
+    private void openMapActivty(RecordedFall.FallCoordinates coords) {
         Bundle bundle = new Bundle();
         bundle.putDouble("latitude", coords.latitude);
         bundle.putDouble("longitude", coords.longitude);

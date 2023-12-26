@@ -1,9 +1,7 @@
 package com.example.falldetectionapp.controller;
 
 import com.example.falldetectionapp.model.Program;
-import com.example.falldetectionapp.model.fallStats.FallCoordinates;
-import com.example.falldetectionapp.model.fallStats.FallDateTime;
-import com.example.falldetectionapp.model.fallStats.RecordedFall;
+import com.example.falldetectionapp.model.RecordedFall;
 
 import java.util.ArrayList;
 
@@ -15,8 +13,8 @@ public class PersonalReportController {
 
         ArrayList<RecordedFallItem> falls = new ArrayList<>();
         for (RecordedFall recordedFall : recordedFalls) {
-            FallDateTime fallDateTime = recordedFall.fallDateTime;
-            FallCoordinates fallCoordinates = recordedFall.latLng;
+            RecordedFall.FallDateTime fallDateTime = recordedFall.fallDateTime;
+            RecordedFall.FallCoordinates fallCoordinates = recordedFall.latLng;
 
             String fallDateTimeString = fallDateTime.getFallDateTimeString();
             RecordedFallItem recordedFallItem = new RecordedFallItem(fallDateTimeString, fallCoordinates);
@@ -27,12 +25,12 @@ public class PersonalReportController {
 
     public class RecordedFallItem {
         private String fallDateTimeString;
-        private FallCoordinates fallCoordinates;
-        public RecordedFallItem(String fallDateTimeString, FallCoordinates fallCoordinates) {
+        private RecordedFall.FallCoordinates fallCoordinates;
+        public RecordedFallItem(String fallDateTimeString, RecordedFall.FallCoordinates fallCoordinates) {
             this.fallDateTimeString = fallDateTimeString;
             this.fallCoordinates = fallCoordinates;
         }
-        public FallCoordinates getFallCoordinates() {
+        public RecordedFall.FallCoordinates getFallCoordinates() {
             return fallCoordinates;
         }
         public String getFallDateTimeString() {

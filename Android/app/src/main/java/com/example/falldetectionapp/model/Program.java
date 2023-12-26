@@ -19,14 +19,12 @@ import android.os.Looper;
 import android.os.Message;
 import android.telephony.SmsManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.falldetectionapp.model.fallStats.RecordedFall;
 import com.example.falldetectionapp.view.AddEmergencyContactActivity;
 import com.example.falldetectionapp.view.FallDetectedActivity;
 import com.example.falldetectionapp.view.SignInActivity;
