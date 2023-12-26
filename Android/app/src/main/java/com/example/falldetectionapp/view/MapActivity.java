@@ -19,10 +19,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    GoogleMap gMap;
-    FrameLayout map;
-    double latitude;
-    double longitude;
+    private GoogleMap gMap;
+    private FrameLayout map;
+    private double latitude;
+    private double longitude;
 
 
     @Override
