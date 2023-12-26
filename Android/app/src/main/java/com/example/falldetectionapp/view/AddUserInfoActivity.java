@@ -106,7 +106,7 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
         datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
     }
 
-    private Calendar getUserCalendarBirthDate() {
+    public Calendar getUserCalendarBirthDate() {
         int day = datePickerDialog.getDatePicker().getDayOfMonth();
         int month = datePickerDialog.getDatePicker().getMonth();
         int year =  datePickerDialog.getDatePicker().getYear();
