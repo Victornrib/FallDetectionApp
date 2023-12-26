@@ -18,7 +18,6 @@ import com.example.falldetectionapp.R;
 import com.example.falldetectionapp.controller.AddUserInfoController;
 import com.example.falldetectionapp.model.Program;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 

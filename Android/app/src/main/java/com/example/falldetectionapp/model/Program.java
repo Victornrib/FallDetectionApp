@@ -318,8 +318,12 @@ public class Program {
     };
 
     public void callEmContacts() {
-        for (int i = 0; i < currentUser.getEmContacts().size(); i++) {
-            currentActivity.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + currentUser.getEmContacts().get(i).telephone)));
+        if (ContextCompat.checkSelfPermission(currentActivity, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) currentActivity, new String[]{Manifest.permission.CALL_PHONE}, 1);
+        } else {
+            for (int i = 0; i < currentUser.getEmContacts().size(); i++) {
+                currentActivity.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + currentUser.getEmContacts().get(i).telephone)));
+            }
         }
         /*
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + currentUser.getEmContacts().get(0).telephone));
