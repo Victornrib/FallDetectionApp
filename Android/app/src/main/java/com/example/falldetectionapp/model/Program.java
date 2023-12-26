@@ -45,18 +45,12 @@ public class Program {
     private boolean deviceConnected = false;
     private boolean screenVisibility = false;
     private LocalDateTime fallDateTime;
+    private LatLng fallLatLng;
     private Context currentActivity;
     private static ConnectedThread connectedThread;
-
-    private LocationManager locationManager;
-    private LocationListener locationListener;
-
-    private final long MIN_TIME = 1000;
-    private final long MIN_DIST = 5;
-
-    private LatLng latLng;
-
-    public Handler handler;
+    private final long LOCATION_UPDATE_MIN_TIME = 1000;
+    private final long LOCATION_UPDATE_MIN_DIST = 5;
+    private Handler handler;
 
     private Program() {
 
@@ -116,15 +110,6 @@ public class Program {
         this.screenVisibility = screenVisibility;
     }
 
-    public void startBluetoothConnectedThread(BluetoothSocket bluetoothSocket) {
-        if (bluetoothSocket != null) {
-            if (connectedThread == null) {
-                connectedThread = new ConnectedThread(bluetoothSocket);
-                connectedThread.start();
-            }
-        }
-    }
-
     public void callEmContacts() {
         if (ContextCompat.checkSelfPermission(currentActivity, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions((Activity) currentActivity, new String[]{Manifest.permission.CALL_PHONE}, 1);
@@ -139,8 +124,8 @@ public class Program {
     public void sendSmsToEmContacts() {
         SmsManager smsManager = SmsManager.getDefault();
 
-        String latitude = String.valueOf(latLng.latitude).replace(",", ".");
-        String longitude = String.valueOf(latLng.longitude).replace(",", ".");
+        String latitude = String.valueOf(fallLatLng.latitude).replace(",", ".");
+        String longitude = String.valueOf(fallLatLng.longitude).replace(",", ".");
         String location = "\nhttp://maps.google.com/maps?q=loc:"+latitude+","+longitude;
 
         for (int i = 0; i < currentUser.getEmContacts().size(); i++) {
@@ -150,6 +135,15 @@ public class Program {
             smsManager.sendTextMessage(emContactPhoneNumber, null, message, null, null);
         }
         sendingMessage = false;
+    }
+
+    public void startBluetoothConnectedThread(BluetoothSocket bluetoothSocket) {
+        if (bluetoothSocket != null) {
+            if (connectedThread == null) {
+                connectedThread = new ConnectedThread(bluetoothSocket);
+                connectedThread.start();
+            }
+        }
     }
 
     public void closeBluetoothConnectedThread() {
@@ -189,13 +183,13 @@ public class Program {
         ActivityCompat.requestPermissions((Activity) currentActivity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
         ActivityCompat.requestPermissions((Activity) currentActivity, new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
 
-        locationListener = new LocationListener() {
+        LocationListener locationListener = new LocationListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onLocationChanged(@NonNull Location location) {
                 if (fallDetected) {
-                    latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                    currentUser.addRecordedFall(fallDateTime, latLng);
+                    fallLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    currentUser.addRecordedFall(fallDateTime, fallLatLng);
 
                     //Probably will have errors when receiving alerts from different activities
                     if (currentUser.alertMode.equals("SMS") && sendingMessage) {
@@ -209,13 +203,13 @@ public class Program {
                 }
             }
         };
-        locationManager = (LocationManager) currentActivity.getSystemService(LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) currentActivity.getSystemService(LOCATION_SERVICE);
         try {
             if (ActivityCompat.checkSelfPermission(currentActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(currentActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME, MIN_DIST, locationListener);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,MIN_TIME,MIN_DIST,locationListener);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, LOCATION_UPDATE_MIN_TIME, LOCATION_UPDATE_MIN_DIST, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,LOCATION_UPDATE_MIN_TIME,LOCATION_UPDATE_MIN_DIST,locationListener);
         }
         catch (SecurityException e) {
             e.printStackTrace();

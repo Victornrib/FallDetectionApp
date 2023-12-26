@@ -14,7 +14,7 @@ public class RecordedFall {
 
     public Integer fallId;
     public FallDateTime fallDateTime ;
-    public FallCoordinates latLng;
+    public FallCoordinates fallCoordinates;
     public String description = null;
 
     public RecordedFall() {}
@@ -23,11 +23,23 @@ public class RecordedFall {
     public RecordedFall(Integer fallId, LocalDateTime localDateTime, LatLng latLng) {
         this.fallId = fallId;
         this.fallDateTime = new FallDateTime(localDateTime);
-        this.latLng = new FallCoordinates(latLng);
+        this.fallCoordinates = new FallCoordinates(latLng);
     }
 
     public void addDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getFallId() {
+        return fallId;
+    }
+
+    public FallDateTime getFallDateTime() {
+        return fallDateTime;
+    }
+
+    public FallCoordinates getFallCoordinates() {
+        return fallCoordinates;
     }
 
     public static class FallDateTime {

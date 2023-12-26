@@ -20,7 +20,6 @@ public class User {
     public String telephone;
     public String email;
     public String password;
-
     public String sex;
     public String birthDate;
     public Integer age;
@@ -42,6 +41,14 @@ public class User {
         this.userID = random.nextInt(1000);
     }
 
+    public void addInfo(String sex, String birthDate, Integer age, ArrayList<String> movementDisorders) {
+        this.sex = sex;
+        this.birthDate = birthDate;
+        this.age = age;
+        this.movementDisorders = movementDisorders;
+        storeUser();
+    }
+
     private Integer generateFallId() {
         ArrayList usedIds = new ArrayList<>();
         for(int i = 0; i < recordedFalls.size(); i++)
@@ -55,14 +62,6 @@ public class User {
         return (Integer) sortedId;
     }
 
-    public void addInfo(String sex, String birthDate, Integer age, ArrayList<String> movementDisorders) {
-        this.sex = sex;
-        this.birthDate = birthDate;
-        this.age = age;
-        this.movementDisorders = movementDisorders;
-        storeUser();
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void addRecordedFall(LocalDateTime fallDateTime, LatLng latLng) {
         Integer fallId = generateFallId();
@@ -73,6 +72,17 @@ public class User {
 
     public void addEmContact(EmergencyContact emContact) {
         emContacts.add(emContact);
+        storeUser();
+    }
+
+    public void addDevice(Device device) {
+        if (this.pairedDevices.size() > 0) {
+            for (int i = 0; i < this.pairedDevices.size(); i++) {
+                if (device.getMacAddress().equals(pairedDevices.get(i).macAddress))
+                    return;
+            }
+        }
+        pairedDevices.add(device);
         storeUser();
     }
 
@@ -102,20 +112,7 @@ public class User {
 
     public ArrayList<RecordedFall> getRecordedFalls() {return recordedFalls;}
 
-    public void alertEmContact(String emContactEmail) {};
-
-    public void addDevice(Device device) {
-        if (this.pairedDevices.size() > 0) {
-            for (int i = 0; i < this.pairedDevices.size(); i++) {
-                if (device.getMacAddress().equals(pairedDevices.get(i).macAddress))
-                    return;
-            }
-        }
-        pairedDevices.add(device);
-        storeUser();
-    }
-
-    public ArrayList<Device> returnPairedDevices() { return pairedDevices; }
+    public ArrayList<Device> getPairedDevices() { return pairedDevices; }
 
     public void storeUser() {
         //Getting reference to firebase

@@ -1,9 +1,11 @@
 package com.example.falldetectionapp.view;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.falldetectionapp.R;
 import com.example.falldetectionapp.controller.PersonalReportController;
+import com.example.falldetectionapp.model.Program;
 import com.example.falldetectionapp.model.RecordedFall;
 
 import java.util.ArrayList;
@@ -36,6 +39,24 @@ public class PersonalReportActivity extends AppCompatActivity {
         ArrayList<PersonalReportController.RecordedFallItem> recordedFalls = personalReportController.getRecordedFallsFromProgram();
         RecordedFallAdapter adapter = new RecordedFallAdapter(this, recordedFalls);
         listViewReportedFalls.setAdapter(adapter);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        Program program = Program.getInstance();
+        program.setCurrentActivity(this);
+        program.setScreenVisibility(true);
+        program.checkFallDetectedActivity();
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        Program.getInstance().setScreenVisibility(false);
     }
 
     private class RecordedFallAdapter extends BaseAdapter {
