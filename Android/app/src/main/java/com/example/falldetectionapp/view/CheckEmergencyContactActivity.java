@@ -63,12 +63,12 @@ public class CheckEmergencyContactActivity extends AppCompatActivity {
         textViewEmergencyContactName.setText(checkEmergencyContactController.currentUserEmContactName);
         textViewEmergencyContactTelephone.setText(checkEmergencyContactController.currentUserEmContactTelephone);
         textViewEmergencyContactEmail.setText(checkEmergencyContactController.currentUserEmContactEmail);
-        }
+    }
 
-        public void openSettingsActivity() {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-        }
+    public void openSettingsActivity() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -78,7 +78,7 @@ public class CheckEmergencyContactActivity extends AppCompatActivity {
         Program program = Program.getInstance();
         program.setCurrentActivity(this);
         program.setScreenVisibility(true);
-        //program.checkFallDetectedActivity();
+        program.checkFallDetectedActivity();
     }
 
     @Override

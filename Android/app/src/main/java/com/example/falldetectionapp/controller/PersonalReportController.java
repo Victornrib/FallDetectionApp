@@ -14,7 +14,7 @@ public class PersonalReportController {
         ArrayList<RecordedFallItem> falls = new ArrayList<>();
         for (RecordedFall recordedFall : recordedFalls) {
             RecordedFall.FallDateTime fallDateTime = recordedFall.fallDateTime;
-            RecordedFall.FallCoordinates fallCoordinates = recordedFall.latLng;
+            RecordedFall.FallCoordinates fallCoordinates = recordedFall.getFallCoordinates();
 
             String fallDateTimeString = fallDateTime.getFallDateTimeString();
             RecordedFallItem recordedFallItem = new RecordedFallItem(fallDateTimeString, fallCoordinates);
