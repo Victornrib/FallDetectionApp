@@ -16,6 +16,7 @@
     <string name="personal_report">Personal Report</string>
     <string name="reports">Reports</string>
     <string name="stats">Stats</string>
+    <string name="fallert_logo">Fallert Logo</string>
 
     <string-array name="sexes">
         <item>Female</item>
