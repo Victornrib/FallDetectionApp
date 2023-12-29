@@ -9,6 +9,7 @@
         <item name="android:layout_gravity"> center_horizontal </item>
         <item name="android:insetTop"> 0dp </item>
         <item name="android:insetBottom"> 0dp </item>
+        <item name="android:fontFamily"> @font/josefin_sans_medium </item>
     </style>
 
     <style name="StandardButton.InitialActivity">
