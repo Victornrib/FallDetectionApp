@@ -23,14 +23,18 @@ public class AddUserInfoController {
         currentUser.addInfo(sex, birthDate, age, movementDisorders);
     }
 
-    public static void getUserBirthDate(Calendar calendarBirthDate) {
+    public static void setUserBirthDate(Calendar calendarBirthDate) {
         Date birthDateRaw = calendarBirthDate.getTime();
         DateFormat formatter = SimpleDateFormat.getDateInstance(DateFormat.LONG, Locale.ENGLISH);
         birthDate = formatter.format(birthDateRaw);
     }
 
-    public void getUserMovementDisorders(String movementDisorder) {
+    public void addUserMovementDisorder(String movementDisorder) {
         movementDisorders.add(movementDisorder);
+    }
+
+    public void setUserSex(String sex) {
+        this.sex = sex;
     }
 
     public void calculateUserAge(Calendar userCalendarBirthDate) {
@@ -82,9 +86,5 @@ public class AddUserInfoController {
 
         //default should never happen
         return "JAN";
-    }
-
-    public void setUserSex(String sex) {
-        this.sex = sex;
     }
 }

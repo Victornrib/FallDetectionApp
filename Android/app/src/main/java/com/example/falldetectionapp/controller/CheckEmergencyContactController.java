@@ -15,9 +15,11 @@ public class CheckEmergencyContactController {
         Program program = Program.getInstance();
         ArrayList<EmergencyContact> currentUserEmContacts = program.getCurrentUser().getEmContacts();
 
-        currentUserEmContactName = currentUserEmContacts.get(specifiedEmergencyContact).getName();
-        currentUserEmContactTelephone = currentUserEmContacts.get(specifiedEmergencyContact).getTelephone();
-        currentUserEmContactEmail = currentUserEmContacts.get(specifiedEmergencyContact).getEmail();
+        EmergencyContact currentUserEmContact = currentUserEmContacts.get(specifiedEmergencyContact);
+
+        currentUserEmContactName = currentUserEmContact.getName();
+        currentUserEmContactTelephone = currentUserEmContact.getTelephone();
+        currentUserEmContactEmail = currentUserEmContact.getEmail();
     }
 
     public void deleteEmergencyContact() {

@@ -111,7 +111,7 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
         int month = datePickerDialog.getDatePicker().getMonth();
         int year =  datePickerDialog.getDatePicker().getYear();
         Calendar calendarBirthDate = new GregorianCalendar(year, month, day);
-        AddUserInfoController.getUserBirthDate(calendarBirthDate);
+        AddUserInfoController.setUserBirthDate(calendarBirthDate);
         return calendarBirthDate;
     }
 
@@ -119,7 +119,7 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
         for(int i=0; i < listViewMovementDisorders.getCount(); i++) {
             if (listViewMovementDisorders.isItemChecked(i)) {
                 String movementDisorder = listViewMovementDisorders.getItemAtPosition(i).toString();
-                addUserInfoController.getUserMovementDisorders(movementDisorder);
+                addUserInfoController.addUserMovementDisorder(movementDisorder);
             }
         }
     }
