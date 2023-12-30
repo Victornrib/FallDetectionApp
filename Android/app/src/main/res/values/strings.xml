@@ -2,7 +2,7 @@
     <string name="app_name">FallDetectionApp</string>
     <string name="connect_nbracelet">Connect\nbracelet</string>
     <string name="log_out">Log out</string>
-    <string name="image_connect">image connect</string>
+    <string name="add_device_image">Add device image</string>
     <string name="fall_detection_app">Fall Detection App</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>
@@ -13,7 +13,7 @@
     <string name="time_xx_xx">Time: XX XX</string>
     <string name="alert_was_sent">Alert was sent</string>
     <string name="home">Home</string>
-    <string name="personal_report">Personal Report</string>
+    <string name="personal_report">Personal report</string>
     <string name="reports">Reports</string>
     <string name="stats">Stats</string>
     <string name="fallert_logo">Fallert Logo</string>

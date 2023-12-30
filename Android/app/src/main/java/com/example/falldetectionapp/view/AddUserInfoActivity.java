@@ -49,7 +49,7 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
         listViewMovementDisorders.setAdapter(arrayAdapterMovementDisorders);
 
         spinnerSex = findViewById(R.id.spinnerSex);
-        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.sexes, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.sexes, R.layout.spinner_item_sex);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSex.setAdapter(arrayAdapter);
         spinnerSex.setOnItemSelectedListener(this);

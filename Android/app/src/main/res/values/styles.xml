@@ -1,25 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--Standard Buttons-->
     <style name="StandardButton">
-        <item name="android:layout_width"> 200dp </item>
-        <item name="android:layout_height"> 17dp </item>
-        <item name="android:layout_weight"> 0.05 </item>
-        <item name="android:textSize"> 20sp </item>
-        <item name="android:layout_gravity"> center_horizontal </item>
-        <item name="android:insetTop"> 0dp </item>
-        <item name="android:insetBottom"> 0dp </item>
-        <item name="android:fontFamily"> @font/josefin_sans_medium </item>
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:fontFamily">@font/josefin_sans_medium</item>
     </style>
 
-    <style name="StandardButton.InitialActivity">
-        <item name="android:background">@drawable/button_initial_activity</item>
-        <item name="android:textColor"> #1C6AE6 </item>
+    <style name="StandardButton.White">
+        <item name="android:background">@drawable/button_standard_white</item>
+        <item name="android:textColor"> #1C6AE6</item>
     </style>
 
     <style name="StandardButton.Orange">
         <item name="android:background">@drawable/button_standard_orange</item>
         <item name="android:textColor"> @color/white </item>
+    </style>
+
+    <style name="StandardButton.Blue">
+        <item name="android:background">@drawable/button_standard_blue</item>
+        <item name="android:textColor"> @color/white </item>
+    </style>
+
+    <!--Standard Inputs-->
+    <style name="StandardInputLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="StandardTextView">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/standard_blue</item>
+        <item name="android:fontFamily">@font/josefin_sans_semibold</item>
+        <item name="android:textAlignment">textStart</item>
+    </style>
+
+    <style name="StandardEditText">
+        <item name="android:layout_width">250dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/standard_blue</item>
+        <item name="android:textColor">@color/standard_blue</item>
+        <item name="android:ems">10</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <style name="StandardInputButton">
+        <item name="android:layout_width">250dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="StandardSelectPicker">
+        <item name="android:layout_width">180dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/select_picker</item>
+        <item name="android:paddingLeft">15dp</item>
+    </style>
+
+    <style name="StandardSelectPicker.Button">
+        <item name="android:textColor">@color/standard_blue</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="fontFamily">@font/josefin_sans_medium</item>
     </style>
 
 </resources>
