@@ -12,13 +12,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.example.falldetectionapp.R;
 import com.example.falldetectionapp.controller.AddEmergencyContactController;
 import com.example.falldetectionapp.model.Program;
 
 public class AddEmergencyContactActivity extends AppCompatActivity {
-    private Button buttonBack;
+    private ImageButton buttonBack;
     private Button buttonAddEmergencyContact;
     private EditText editTextRegisterContactName;
     private EditText editTextRegisterContactTel;
@@ -33,7 +34,7 @@ public class AddEmergencyContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_emergency_contact);
 
-        buttonBack = (Button) findViewById(R.id.buttonBack);
+        buttonBack = (ImageButton) findViewById(R.id.buttonBack);
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

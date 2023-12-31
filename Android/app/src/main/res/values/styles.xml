@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--Standard Layout-->
+    <style name="StandardLayout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:background">@color/standard_background</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
     <!--Standard Buttons-->
     <style name="StandardButton">
         <item name="android:layout_width">200dp</item>
@@ -68,6 +76,16 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textAlignment">textStart</item>
         <item name="fontFamily">@font/josefin_sans_medium</item>
+    </style>
+
+    <!--Home ImageButton-->
+    <style name="HomeImageButton">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:src">@drawable/button_home</item>
     </style>
 
 </resources>
