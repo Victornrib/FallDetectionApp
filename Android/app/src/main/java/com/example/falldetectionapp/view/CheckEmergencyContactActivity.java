@@ -40,7 +40,7 @@ public class CheckEmergencyContactActivity extends AppCompatActivity {
 
         checkEmergencyContactController = new CheckEmergencyContactController(buttonIndex);
 
-        buttonBackToSettings = (ImageButton) findViewById(R.id.buttonBackToSettings);
+        buttonBackToSettings = (ImageButton) findViewById(R.id.buttonBackToSettingsFromCheckEmContact);
         buttonBackToSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

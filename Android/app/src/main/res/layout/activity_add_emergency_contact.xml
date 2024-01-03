@@ -14,9 +14,9 @@
         style="@style/StandardLayout">
 
         <ImageButton
-            android:id="@+id/buttonBack"
-            style="@style/HomeImageButton"
-            android:contentDescription="Button home" />
+            android:id="@+id/buttonBackToSettingsFromAddEmContact"
+            style="@style/CornerButton.BackImageButton"
+            android:contentDescription="Button back" />
 
         <Space
             android:layout_width="match_parent"

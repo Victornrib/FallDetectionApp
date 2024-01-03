@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,9 +16,7 @@ import com.example.falldetectionapp.controller.FallDetectedController;
 import com.example.falldetectionapp.model.Program;
 
 public class FallDetectedActivity extends AppCompatActivity {
-
-    private Button buttonSignOut;
-    private Button buttonSettings;
+    private ImageButton buttonHome;
     private TextView textViewTimeFall;
 
     private FallDetectedController fallDetectedController;
@@ -29,19 +28,11 @@ public class FallDetectedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fall_detected);
 
-        buttonSignOut = (Button) findViewById(R.id.buttonSignOut);
-        buttonSignOut.setOnClickListener(new View.OnClickListener() {
+        buttonHome = (ImageButton) findViewById(R.id.buttonHomeFromFallDetected);
+        buttonHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openInitialActivity();
-            }
-        });
-
-        buttonSettings = (Button) findViewById(R.id.buttonSettings);
-        buttonSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openSettingsActivity();
+                openHomeActivity();
             }
         });
 
@@ -58,8 +49,6 @@ public class FallDetectedActivity extends AppCompatActivity {
             Toast.makeText(this, "Calling all emergency contacts", Toast.LENGTH_LONG).show();
             fallDetectedController.callEmergencyContactsFromUser();
         }
-
-
     }
 
     @Override
@@ -79,13 +68,8 @@ public class FallDetectedActivity extends AppCompatActivity {
         program.setScreenVisibility(false);
     }
 
-    private void openInitialActivity() {
-        Intent intent = new Intent(this, InitialActivity.class);
-        startActivity(intent);
-    }
-
-    private void openSettingsActivity() {
-        Intent intent = new Intent(this, SettingsActivity.class);
+    private void openHomeActivity() {
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 }

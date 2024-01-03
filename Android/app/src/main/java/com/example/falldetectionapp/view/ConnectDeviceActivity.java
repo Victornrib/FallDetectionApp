@@ -61,7 +61,7 @@ public class ConnectDeviceActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Your device doesn't have bluetooth", Toast.LENGTH_LONG).show();
         }
 
-        buttonBack = (Button) findViewById(R.id.buttonBack);
+        buttonBack = (Button) findViewById(R.id.buttonBackToSettingsFromAddEmContact);
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
