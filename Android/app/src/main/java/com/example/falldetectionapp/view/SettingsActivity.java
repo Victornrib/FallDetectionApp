@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -16,8 +17,7 @@ import com.example.falldetectionapp.controller.SettingsController;
 import com.example.falldetectionapp.model.Program;
 
 public class SettingsActivity extends AppCompatActivity {
-    private Button buttonBack;
-    private Button buttonSignOut;
+    private ImageButton buttonBack;
     private Button buttonEC1;
     private Button buttonEC2;
     private Button buttonEC3;
@@ -33,7 +33,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         settingsController = new SettingsController();
 
-        buttonBack = (Button) findViewById(R.id.buttonBackFromSettings);
+        buttonBack = (ImageButton) findViewById(R.id.buttonBackToHomeFromSettings);
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,17 +46,18 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 settingsController.switchCurrentUserAlertMode();
-                Toast.makeText(getApplicationContext(), "Alert mode set to: "+settingsController.getCurrentUserAlertMode(), Toast.LENGTH_SHORT).show();
+                String alertMode = settingsController.getCurrentUserAlertMode();
+                if (alertMode.equals("Call"))
+                    switchAlertMode.setThumbResource(R.drawable.alert_mode_switch_call_icon);
+                else
+                    switchAlertMode.setThumbResource(R.drawable.alert_mode_switch_text_icon);
+                Toast.makeText(getApplicationContext(), "Alert mode set to: "+alertMode, Toast.LENGTH_SHORT).show();
             }
         });
-
-        buttonSignOut = (Button) findViewById(R.id.buttonSignOut);
-        buttonSignOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openInitialActivity();
-            }
-        });
+        if (settingsController.getCurrentUserAlertMode().equals("Call"))
+            switchAlertMode.setThumbResource(R.drawable.alert_mode_switch_call_icon);
+        else
+            switchAlertMode.setThumbResource(R.drawable.alert_mode_switch_text_icon);
 
         buttonEC1 = (Button) findViewById(R.id.buttonEC1);
         buttonEC1.setOnClickListener(new View.OnClickListener() {
@@ -142,11 +143,6 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void openHomeActivity() {
         Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
-    }
-
-    private void openInitialActivity() {
-        Intent intent = new Intent(this, InitialActivity.class);
         startActivity(intent);
     }
 

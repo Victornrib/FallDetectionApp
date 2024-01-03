@@ -25,12 +25,15 @@
         android:theme="@style/Theme.FallDetectionApp">
         <activity
             android:name=".view.MapActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".view.AddUserInfoActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".view.PersonalReportActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
 
         <meta-data
@@ -42,33 +45,43 @@
             android:exported="false" />
         <activity
             android:name=".view.CheckEmergencyContactActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".view.ConnectDeviceActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".view.SignUpActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".view.AddEmergencyContactActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".view.SettingsActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".view.HomeActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".view.InitialActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".view.SignInActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".view.FallDetectedActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".view.DeviceListActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:label="Paired Devices"
             android:theme="@android:style/Theme.Dialog" />

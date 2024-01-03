@@ -98,6 +98,21 @@
     <!--Back ImageButton-->
     <style name="CornerButton.BackImageButton">
         <item name="android:src">@drawable/button_back</item>
+        <item name="android:scaleX">0.5</item>
+        <item name="android:scaleY">0.5</item>
+    </style>
+
+
+    <!--Emergency Contact Button-->
+    <style name="EmergencyContactButton">
+        <item name="android:layout_width">250dp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:background">@drawable/button_em_contact</item>
+        <item name="android:elevation">20dp</item>
+        <item name="android:fontFamily">@font/josefin_sans_bold</item>
+        <item name="android:textColor">@color/standard_blue</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
 </resources>

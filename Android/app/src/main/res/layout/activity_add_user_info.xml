@@ -137,6 +137,42 @@
           android:layout_width="20dp"
           android:layout_height="wrap_content" />
 
+      <Button
+          android:id="@+id/buttonMovementDisorders"
+          android:choiceMode="multipleChoice"
+          android:text="Select"
+          android:contentDescription="Movement disorders"
+          style="@style/StandardSelectPicker.Button"/>
+
+      <Space
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1" />
+
+    </LinearLayout>
+
+<!--    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.03" />
+
+    <LinearLayout
+        style="@style/StandardInputLayout">
+
+      <Space
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1" />
+
+      <TextView
+          android:id="@+id/textViewMovementDisorders"
+          android:text="Movement disorders?"
+          style="@style/StandardTextView" />
+
+      <Space
+          android:layout_width="20dp"
+          android:layout_height="wrap_content" />
+
       <ListView
           android:id="@+id/listViewMovementDisorders"
           android:choiceMode="multipleChoice"
@@ -147,7 +183,7 @@
           android:layout_height="wrap_content"
           android:layout_weight="1" />
 
-    </LinearLayout>
+    </LinearLayout>-->
 
     <Space
         android:layout_width="match_parent"

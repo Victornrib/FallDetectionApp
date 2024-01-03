@@ -27,7 +27,7 @@
             android:id="@+id/textViewAddContactInformation"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:fontFamily="@font/josefin_sans_bold"
+            android:fontFamily="@font/josefin_sans_bold_italic"
             android:text="EMERGENCY\nCONTACT\nINFORMATION"
             android:textAlignment="center"
             android:textColor="@color/standard_blue"

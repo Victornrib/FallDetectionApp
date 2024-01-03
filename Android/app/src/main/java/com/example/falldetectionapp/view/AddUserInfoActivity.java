@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -28,9 +29,9 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
     private Button buttonDateOfBirth;
     private Button buttonConfirm;
     private Spinner spinnerSex;
-    private ListView listViewMovementDisorders;
-    private ArrayAdapter<String> arrayAdapterMovementDisorders;
+    private Button buttonMovementDisorders;
     private String[] allMovementDisorders = {"Ataxia", "Cervical dystonia", "Chorea", "Dystonia", "Functional movement disorder", "Huntington disease", "Multiple system atrophy", "Myoclonus", "Parkinson disease", "Parkinsonism", "Progressive supranuclear palsy", "Restless legs syndrome", "Tardive dyskinesia", "Tourette syndrome", "Tremor", "Wilson disease"};
+    private boolean[] selectedMovementDisorders = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
     private AddUserInfoController addUserInfoController;
 
     @Override
@@ -44,9 +45,36 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
         buttonDateOfBirth.setText(addUserInfoController.getTodaysDate());
         initDateOfBirthPicker();
 
-        arrayAdapterMovementDisorders = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, allMovementDisorders);
-        listViewMovementDisorders = findViewById(R.id.listViewMovementDisorders);
-        listViewMovementDisorders.setAdapter(arrayAdapterMovementDisorders);
+        buttonMovementDisorders = findViewById(R.id.buttonMovementDisorders);
+        buttonMovementDisorders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alertDialogBuilderMovementDisorders = new AlertDialog.Builder(AddUserInfoActivity.this);
+                alertDialogBuilderMovementDisorders.setCancelable(true);
+                alertDialogBuilderMovementDisorders.setMultiChoiceItems(allMovementDisorders, selectedMovementDisorders, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                        selectedMovementDisorders[which] = isChecked;
+                    }
+                });
+                alertDialogBuilderMovementDisorders.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        getUserMovementDisorders();
+                        dialog.dismiss();
+                    }
+                });
+                alertDialogBuilderMovementDisorders.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog alertDialog = alertDialogBuilderMovementDisorders.create();
+                alertDialog.setCanceledOnTouchOutside(true);
+                alertDialog.show();
+            }
+        });
 
         spinnerSex = findViewById(R.id.spinnerSex);
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.sexes, R.layout.spinner_item_sex);
@@ -60,7 +88,6 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
             public void onClick(View view) {
                 Calendar userCalendarBirthDate = getUserCalendarBirthDate();
                 addUserInfoController.calculateUserAge(userCalendarBirthDate);
-                getUserMovementDisorders();
                 addUserInfoController.addUserInfo();
                 openHomeActivity();
             }
@@ -81,6 +108,21 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
     {
         super.onPause();
         Program.getInstance().setScreenVisibility(false);
+    }
+
+    public void getUserMovementDisorders() {
+        if (!addUserInfoController.movementDisorders.isEmpty())
+            addUserInfoController.movementDisorders.clear();
+
+        int counter = 0;
+        for(int i=0; i < selectedMovementDisorders.length; i++) {
+            if (selectedMovementDisorders[i]) {
+                counter += 1;
+                String movementDisorder = allMovementDisorders[i];
+                addUserInfoController.addUserMovementDisorder(movementDisorder);
+            }
+        }
+        buttonMovementDisorders.setText(counter + " Selected");
     }
 
     public void initDateOfBirthPicker()
@@ -113,15 +155,6 @@ public class AddUserInfoActivity extends AppCompatActivity implements AdapterVie
         Calendar calendarBirthDate = new GregorianCalendar(year, month, day);
         AddUserInfoController.setUserBirthDate(calendarBirthDate);
         return calendarBirthDate;
-    }
-
-    public void getUserMovementDisorders() {
-        for(int i=0; i < listViewMovementDisorders.getCount(); i++) {
-            if (listViewMovementDisorders.isItemChecked(i)) {
-                String movementDisorder = listViewMovementDisorders.getItemAtPosition(i).toString();
-                addUserInfoController.addUserMovementDisorder(movementDisorder);
-            }
-        }
     }
 
     public void openHomeActivity() {
