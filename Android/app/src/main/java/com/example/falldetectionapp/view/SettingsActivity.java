@@ -2,6 +2,7 @@ package com.example.falldetectionapp.view;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Build;
@@ -86,6 +87,7 @@ public class SettingsActivity extends AppCompatActivity {
         for (int i = 0; i < settingsController.currentUserEmContactNames.size(); i++) {
             if (i == 0) {
                 buttonEC1.setText("View EC1:\n"+settingsController.currentUserEmContactNames.get(i));
+                buttonEC1.setTextColor(ContextCompat.getColor(this, R.color.standard_orange));
                 int finalI = i;
                 buttonEC1.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -96,6 +98,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
             if (i == 1) {
                 buttonEC2.setText("View EC2:\n"+settingsController.currentUserEmContactNames.get(i));
+                buttonEC2.setTextColor(ContextCompat.getColor(this, R.color.standard_orange));
                 int finalI1 = i;
                 buttonEC2.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -106,6 +109,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
             if (i == 2) {
                 buttonEC3.setText("View EC3:\n"+settingsController.currentUserEmContactNames.get(i));
+                buttonEC3.setTextColor(ContextCompat.getColor(this, R.color.standard_orange));
                 int finalI2 = i;
                 buttonEC3.setOnClickListener(new View.OnClickListener() {
                     @Override

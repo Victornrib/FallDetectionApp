@@ -107,7 +107,7 @@ public class PersonalReportActivity extends AppCompatActivity {
         public RecordedFallAdapter(Context context, ArrayList<PersonalReportController.RecordedFallItem> recordedFalls) {
             this.context = context;
             this.recordedFalls = recordedFalls;
-            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         @Override
