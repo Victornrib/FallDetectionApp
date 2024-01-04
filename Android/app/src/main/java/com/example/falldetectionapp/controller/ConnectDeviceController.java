@@ -24,7 +24,7 @@ public class ConnectDeviceController {
     private static final String TAG = "Error";
 
     //this is a unique address which identifies a Bluetooth device
-    public static String macAddress = null;
+    public String deviceMacAddress = null;
     //Universal Unique Identifier which is used for uniquely identifying information
     public UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
 
@@ -43,25 +43,19 @@ public class ConnectDeviceController {
         return bluetoothAdapter != null;
     }
 
-    public boolean getDevice(Intent data) {
-        macAddress = data.getExtras().getString("MAC_ADDRESS");
-        bluetoothDevice = bluetoothAdapter.getRemoteDevice(macAddress);
-        return bluetoothDevice != null;
-    }
+    public void connectDevice(String deviceName, String deviceMacAddress) throws IOException {
 
-    public void connectDevice(Intent data) throws IOException {
-        if (getDevice(data)) {
-            //if the correct permissions are given...
+        bluetoothDevice = bluetoothAdapter.getRemoteDevice(deviceMacAddress);
+        this.deviceMacAddress = deviceMacAddress;
+
+        if (bluetoothDevice != null) {
             if (ActivityCompat.checkSelfPermission(this.context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
                 //a socket can then be created and connected.
                 bluetoothSocket = bluetoothDevice.createRfcommSocketToServiceRecord(uuid);
                 bluetoothSocket.connect();
                 connected = true;
 
-                //gets the name of the device being connected
-                String deviceName = data.getExtras().getString("DEVICE_NAME");
-
-                Device newDevice = new Device(deviceName, macAddress);
+                Device newDevice = new Device(deviceName, deviceMacAddress);
 
                 Program program = Program.getInstance();
                 program.getCurrentUser().addDevice(newDevice);

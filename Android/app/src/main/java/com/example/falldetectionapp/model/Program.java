@@ -43,6 +43,7 @@ public class Program {
     private boolean fallDetected = false;
     private boolean sendingMessage = false;
     private boolean deviceConnected = false;
+    private int connectedPairedDevicePosition = -1;
     private boolean screenVisibility = false;
     private LocalDateTime fallDateTime;
     private LatLng fallLatLng;
@@ -214,6 +215,14 @@ public class Program {
         catch (SecurityException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setConnectedPairedDevicePosition(int position) {
+        connectedPairedDevicePosition = position;
+    }
+
+    public int getConnectedPairedDevicePosition() {
+        return connectedPairedDevicePosition;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

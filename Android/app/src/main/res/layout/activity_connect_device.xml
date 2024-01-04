@@ -7,45 +7,37 @@
     tools:context=".view.ConnectDeviceActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#93D0EC"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/StandardLayout">
 
-        <Button
-            android:id="@+id/buttonBack"
-            android:layout_width="150dp"
-            android:layout_height="0dp"
-            android:layout_weight="0.15"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="Back"
-            android:textSize="20sp" />
+        <ImageButton
+            android:id="@+id/buttonBackToHomeFromConnectDevice"
+            style="@style/CornerButton.BackImageButton"
+            android:contentDescription="Button back"
+            android:text="Back" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.25" />
+            android:layout_weight="0.10" />
 
         <TextView
             android:id="@+id/textViewConnectDevice"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2"
-            android:text="Connect Device"
+            android:layout_height="100dp"
+            android:fontFamily="@font/josefin_sans_bold"
+            android:text="Choose a device\nto connect"
             android:textAlignment="center"
-            android:textSize="40sp"
-            android:textStyle="bold" />
+            android:textColor="@color/standard_blue"
+            android:textSize="35sp" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.2" />
+            android:layout_weight="0.1" />
 
         <ListView
             android:id="@+id/listViewPairedDevices"
@@ -54,30 +46,13 @@
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.8" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2" />
-
-        <Button
-            android:id="@+id/buttonConnectDevice"
-            android:layout_width="200dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.15"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="Connect"
-            android:textSize="20sp" />
-
-        <Button
+<!--        <Button
             android:id="@+id/buttonTestConnection"
-            android:layout_width="200dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.15"
-            android:text="Test Connection"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:text="Test"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            tools:ignore="" />-->
 
         <Space
             android:layout_width="match_parent"

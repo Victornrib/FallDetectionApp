@@ -2,16 +2,20 @@ package com.example.falldetectionapp.view;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,20 +29,32 @@ import java.util.ArrayList;
 public class PersonalReportActivity extends AppCompatActivity {
     private ListView listViewReportedFalls;
     private PersonalReportController personalReportController;
+    private ImageButton buttonBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_personal_report);
+
+        buttonBack = (ImageButton) findViewById(R.id.buttonBackToHomeFromReportedFalls);
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openHomeActivity();
+            }
+        });
 
         personalReportController = new PersonalReportController();
 
-        setContentView(R.layout.activity_personal_report);
-
         listViewReportedFalls = findViewById(R.id.listViewReportedFalls);
-
         ArrayList<PersonalReportController.RecordedFallItem> recordedFalls = personalReportController.getRecordedFallsFromProgram();
-        RecordedFallAdapter adapter = new RecordedFallAdapter(this, recordedFalls);
-        listViewReportedFalls.setAdapter(adapter);
+
+        if (recordedFalls.size() > 0) {
+            RecordedFallAdapter adapter = new RecordedFallAdapter(this, recordedFalls);
+            listViewReportedFalls.setAdapter(adapter);
+        }
+        else
+            showNoRecordedFallsMessage();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -59,6 +75,30 @@ public class PersonalReportActivity extends AppCompatActivity {
         Program.getInstance().setScreenVisibility(false);
     }
 
+    private void showNoRecordedFallsMessage() {
+        listViewReportedFalls.setVisibility(View.GONE);
+        LinearLayout linearLayout = findViewById(R.id.linearLayoutReportedFalls);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+        );
+
+        TextView textView = new TextView(this);
+        Typeface customFont = ResourcesCompat.getFont(this, R.font.josefin_sans_semibold);
+        textView.setTypeface(customFont);
+        textView.setTextColor(getResources().getColor(R.color.standard_orange));
+        textView.setTextSize(20);
+        textView.setGravity(Gravity.CENTER);
+        textView.setText("No falls have been recorded");
+
+        linearLayout.addView(textView, layoutParams);
+    }
+
+    private void openHomeActivity() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
+
     private class RecordedFallAdapter extends BaseAdapter {
         private Context context;
         private ArrayList<PersonalReportController.RecordedFallItem> recordedFalls;
@@ -67,7 +107,7 @@ public class PersonalReportActivity extends AppCompatActivity {
         public RecordedFallAdapter(Context context, ArrayList<PersonalReportController.RecordedFallItem> recordedFalls) {
             this.context = context;
             this.recordedFalls = recordedFalls;
-            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         @Override

@@ -53,7 +53,7 @@ void setup() {
  
 void loop() {
 
-  checkForManualAlert();
+  //checkForManualAlert();
   /*
    * Ideally it would only start measure when it receives the signal from the app, but for now it still not works properly
   if (SerialBT.available()) {
@@ -149,7 +149,8 @@ void startMeasure() {
   if (fall == true) { //in event of a fall detection
      Serial.println("FALL DETECTED");
      //Comment next line and uncomment the other after
-     initiateAlertCountdown();  
+     //initiateAlertCountdown();
+     sendAlert();
      fall = false;   
   }   
    
@@ -199,7 +200,7 @@ void sendAlert() {
   //Send alert to app
   Serial.println("Alert sent");
   SerialBT.write(0);
-  waitingState();
+  //waitingState();
 }
 
 void waitingState() {

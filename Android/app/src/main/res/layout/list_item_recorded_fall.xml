@@ -16,7 +16,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginBottom="5dp"
             android:gravity="center_vertical">
 
@@ -27,11 +27,10 @@
 
             <TextView
                 android:id="@+id/textViewFallDateTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:text="Fall Date Time"
-                android:textSize="14sp" />
+                style="@style/StandardTextView"
+                android:layout_width="200dp"
+                android:textSize="15sp"
+                android:text="Fall Date Time" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -42,6 +41,8 @@
                 android:id="@+id/buttonFallCoordinates"
                 android:layout_width="50sp"
                 android:layout_height="50sp"
+                android:scaleX="0.6"
+                android:scaleY="0.6"
                 android:background="@null"
                 android:contentDescription="Teste"
                 android:gravity="center"
@@ -49,7 +50,7 @@
                 android:src="@drawable/map_icon" />
 
             <Space
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 

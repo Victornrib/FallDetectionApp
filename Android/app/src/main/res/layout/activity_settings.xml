@@ -5,30 +5,21 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#93D0EC"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/StandardLayout">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.09"
+            android:layout_height="70dp"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/buttonBackFromSettings"
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:text="Back"
-                android:textSize="20sp" />
+            <ImageButton
+                android:id="@+id/buttonBackToHomeFromSettings"
+                style="@style/CornerButton.BackImageButton"
+                android:contentDescription="Button back" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -37,44 +28,41 @@
 
             <Switch
                 android:id="@+id/switchAlertMode"
-                android:layout_width="wrap_content"
+                android:layout_width="180dp"
+                android:layout_marginEnd="10dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0"
                 android:text="Alert Mode"
-                android:textColor="#505050"
+                android:textColor="@color/standard_blue"
+                android:fontFamily="@font/josefin_sans_bold_italic"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:thumb="@drawable/alert_mode_switch_call_icon" />
         </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.12" />
+            android:layout_weight="0.10" />
 
         <TextView
             android:id="@+id/textViewSettings"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:text="@string/settings"
+            android:layout_height="60dp"
+            android:fontFamily="@font/josefin_sans_bold_italic"
+            android:text="Contacts"
             android:textAlignment="center"
-            android:textSize="50sp"
-            android:textStyle="bold" />
+            android:textColor="@color/standard_blue"
+            android:textSize="40sp" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.15" />
+            android:layout_weight="0.10" />
 
         <Button
             android:id="@+id/buttonEC1"
-            android:layout_width="250dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.12"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
             android:text="@string/add_emergency_contact_1"
-            android:textSize="20sp" />
+            style="@style/EmergencyContactButton" />
 
         <Space
             android:layout_width="match_parent"
@@ -83,14 +71,8 @@
 
         <Button
             android:id="@+id/buttonEC2"
-            android:layout_width="250dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.12"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
             android:text="@string/add_emergency_contact_2"
-            android:textSize="20sp" />
+            style="@style/EmergencyContactButton" />
 
         <Space
             android:layout_width="match_parent"
@@ -99,30 +81,13 @@
 
         <Button
             android:id="@+id/buttonEC3"
-            android:layout_width="250dp"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.12"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="Add Emergency Contact 3"
-            android:textSize="20sp" />
+            android:text="@string/add_emergency_contact_3"
+            style="@style/EmergencyContactButton" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.20" />
-
-        <Button
-            android:id="@+id/buttonSignOut"
-            android:layout_width="150dp"
-            android:layout_height="0dp"
-            android:layout_gravity="end"
-            android:layout_weight="0.09"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="Sign Out"
-            android:textSize="20sp" />
+            android:layout_weight="0.17" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

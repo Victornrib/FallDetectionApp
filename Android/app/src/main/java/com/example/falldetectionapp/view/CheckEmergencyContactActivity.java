@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.falldetectionapp.R;
@@ -16,7 +17,7 @@ import com.example.falldetectionapp.model.Program;
 
 public class CheckEmergencyContactActivity extends AppCompatActivity {
 
-    private Button buttonBackToSettings;
+    private ImageButton buttonBackToSettings;
     private Button buttonDeleteEmergencyContact;
 
     private TextView textViewEmergencyContactName;
@@ -39,7 +40,7 @@ public class CheckEmergencyContactActivity extends AppCompatActivity {
 
         checkEmergencyContactController = new CheckEmergencyContactController(buttonIndex);
 
-        buttonBackToSettings = (Button) findViewById(R.id.buttonBackToSettings);
+        buttonBackToSettings = (ImageButton) findViewById(R.id.buttonBackToSettingsFromCheckEmContact);
         buttonBackToSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

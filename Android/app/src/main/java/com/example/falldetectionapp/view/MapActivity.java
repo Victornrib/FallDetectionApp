@@ -62,6 +62,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         this.gMap = googleMap;
         LatLng coords = new LatLng(latitude, longitude);
         this.gMap.addMarker(new MarkerOptions().position(coords).title("Fall"));
-        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(coords));
+        float zoomLevel = 16.0f;
+        this.gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coords,zoomLevel));
     }
 }

@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.falldetectionapp.R;
 import com.example.falldetectionapp.model.Program;
@@ -15,6 +16,7 @@ import com.example.falldetectionapp.model.Program;
 public class HomeActivity extends AppCompatActivity {
     private Button buttonSignOut;
     private Button buttonSettings;
+    private ImageButton imageButtonAddDevice;
     private Button buttonAddDevice;
     private Button buttonPersonalReport;
     private Button buttonStatistics;
@@ -49,6 +51,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        imageButtonAddDevice = (ImageButton) findViewById(R.id.imageButtonAddDevice);
+        imageButtonAddDevice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openConnectDeviceActivity();
+            }
+        });
+
         buttonPersonalReport = (Button) findViewById(R.id.buttonPersonalReport);
         buttonPersonalReport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,13 +67,13 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        buttonStatistics = (Button) findViewById(R.id.buttonStatistics);
+/*        buttonStatistics = (Button) findViewById(R.id.buttonStatistics);
         buttonStatistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openStatisticsActivity();
             }
-        });
+        });*/
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
