@@ -4,6 +4,29 @@ from collections import OrderedDict
 class UsersService:
 
     @classmethod
+    def login(cls, email, password, db):
+        users = db.child("Users").get()
+        users_dict = OrderedDict(users.val()).values()
+        if users_dict != None:
+            for user in users_dict:
+                if user.get("email") == email:
+                    if user.get("password") == password:
+                        return user
+        return None
+    
+
+    @classmethod
+    def get_user_by_id(cls, db, user_id):
+        users = db.child("Users").get()
+        users_dict = OrderedDict(users.val()).values()
+        if users_dict != None:
+            for user in users_dict:
+                if user.get("userID") == user_id:
+                    return user
+        return None
+
+
+    @classmethod
     def get_users_info_dict(cls, db):
         users = db.child("Users").get()
         users_dict = OrderedDict(users.val()).values()

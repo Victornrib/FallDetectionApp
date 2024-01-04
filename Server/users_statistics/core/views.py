@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from core.services.users_service import UsersService
+from django.shortcuts import redirect
 import json
 
 import pyrebase
@@ -20,15 +21,37 @@ firebaseConfig = {
 firebase = pyrebase.initialize_app(firebaseConfig)
 db = firebase.database()
 
-# Create your views here.
-def index(request):
+
+def login_page(request):
+    #TODO Lembrar de gerar IDs unicos para os usuarios
+
+    if request.method == "POST":
+        email = request.POST["email"]
+        password = request.POST["password"]
+        user = UsersService.login(email, password, db)
+        if user != None:
+            return redirect(user_page, user_id=user.get("userID"))
+        else:
+            return render(request, "login_page.html", {'errors': True})
+    else:
+        return render(request, 'login_page.html')
+
+
+def user_page(request, user_id):
+    user = UsersService.get_user_by_id(db, user_id)
+    return render(request, "user_page.html", {
+        'user': user
+    })
+
+
+def admin_page(request):
     if request.method == "POST":
         # user = request.POST['user123']
         # result = db.child("user").push({"field": user})
         pass
     else:
         users_info_dict = UsersService.get_users_info_dict(db)
-        return render(request, 'index.html', context={
+        return render(request, 'admin_page.html', context={
             "users": users_info_dict,
         })
     
